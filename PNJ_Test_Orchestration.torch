@@ -1,4 +1,4 @@
-[orchestration type="OScript" load_steps=5 format=3 uid="uid://dxoyb7dycpww5"]
+[orchestration type="OScript" load_steps=7 format=3 uid="uid://dxoyb7dycpww5"]
 
 [obj type="OScriptFunction" id="OScriptFunction_naecw"]
 guid = "0A3A3326-4178-481D-BC02-13D9C6C09809"
@@ -10,10 +10,10 @@ id = 1
 
 [obj type="OScriptGraph" id="OScriptGraph_naecw"]
 graph_name = &"EventGraph"
-offset = Vector2(-136.499755859375, 0)
-zoom = 0.8831767439842224
+offset = Vector2(-435.7675476074219, -34.521636962890625)
+zoom = 0.5483831763267517
 flags = 8
-nodes = Array[int]([1, 2])
+nodes = Array[int]([1, 2, 3, 4])
 functions = Array[int]([1])
 
 [obj type="OScriptNodeEvent" id="OScriptNodeEvent_pvmdn"]
@@ -54,14 +54,92 @@ pin_data = Array[Dictionary]([{
 "hint": 13,
 "hint_string": "*.scn,*.tscn; Scene Files"
 }, {
+"pin_name": &"temp_0",
+"dir": 1,
+"flags": 36
+}, {
+"pin_name": &"temp_1",
+"dir": 1,
+"flags": 36
+}, {
+"pin_name": &"temp_2",
+"dir": 1,
+"flags": 36
+}, {
+"pin_name": &"temp_3",
+"dir": 1,
+"flags": 36
+}, {
+"pin_name": &"choice_0",
+"type": 24,
+"flags": 10,
+"target_class": "OScriptNodeDialogueChoice",
+"dv": null
+}, {
+"pin_name": &"choice_0_out",
+"dir": 1,
+"flags": 4
+}])
+
+[obj type="OScriptNodeDialogueMessage" id="OScriptNodeDialogueMessage_e0sfr"]
+id = 3
+position = Vector2(700, 400)
+pin_data = Array[Dictionary]([{
+"pin_name": &"ExecIn",
+"flags": 4
+}, {
+"pin_name": &"name",
+"type": 4,
+"flags": 16777218,
+"label": "Speaker",
+"dv": "PNJ Test",
+"hint": 18
+}, {
+"pin_name": &"text",
+"type": 4,
+"flags": 16777218,
+"label": "Message",
+"dv": "Je suis toujours là le matin mais jamais la nuit, qui suis-je ?",
+"hint": 18
+}, {
+"pin_name": &"scene",
+"type": 4,
+"flags": 8388610,
+"dv": "",
+"hint": 13,
+"hint_string": "*.scn,*.tscn; Scene Files"
+}, {
 "pin_name": &"ExecOut",
 "dir": 1,
 "flags": 4
 }])
 
+[obj type="OScriptNodeDialogueChoice" id="OScriptNodeDialogueChoice_njptv"]
+id = 4
+position = Vector2(-320, 400)
+pin_data = Array[Dictionary]([{
+"pin_name": &"text",
+"type": 4,
+"flags": 16777218,
+"dv": "Devinette",
+"hint": 18
+}, {
+"pin_name": &"visible",
+"type": 1,
+"flags": 2,
+"dv": true
+}, {
+"pin_name": &"choice",
+"type": 24,
+"dir": 1,
+"flags": 2,
+"target_class": "OScriptNodeDialogueChoice",
+"dv": null
+}])
+
 [resource]
 base_type = &"Sprite2D"
 functions = Array[OScriptFunction]([SubResource("OScriptFunction_naecw")])
-connections = Array[int]([1, 0, 2, 0])
-nodes = Array[OScriptNode]([SubResource("OScriptNodeEvent_pvmdn"), SubResource("OScriptNodeDialogueMessage_8a2st")])
+connections = Array[int]([1, 0, 2, 0, 2, 0, 3, 0, 4, 0, 2, 4])
+nodes = Array[OScriptNode]([SubResource("OScriptNodeEvent_pvmdn"), SubResource("OScriptNodeDialogueMessage_8a2st"), SubResource("OScriptNodeDialogueMessage_e0sfr"), SubResource("OScriptNodeDialogueChoice_njptv")])
 graphs = Array[OScriptGraph]([SubResource("OScriptGraph_naecw")])
