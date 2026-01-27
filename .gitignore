@@ -1,3 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+_bmad/_config
+_bmad/cis
+_bmad/bmb
+_bmad/core
+_bmad/**/*translation

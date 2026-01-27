@@ -110,7 +110,7 @@
 
 ### Architecture Pattern
 ```
-GameManager (Autoload)
+Game_Manager (Autoload)
 ├── RunState (persistent)
 │   ├── night: int
 │   ├── player_alive: bool
@@ -124,7 +124,7 @@ GameManager (Autoload)
 ### Scene Structure
 ```
 Main.tscn
-├── GameManager.gd (autoload)
+├── Game_Manager.gd (autoload)
 ├── Player.tscn
 ├── UI_HUD.tscn (joysticks, timer, gloire display)
 ├── Day_Phase
@@ -139,11 +139,11 @@ Main.tscn
 ```gdscript
 # project.godot - Add autoload
 [autoload]
-GameManager="res://systems/game_manager.gd"
+Game_Manager="res://systems/game_manager.gd"
 
 # Persist RunState between scenes
 extends Node
-class_name GameManager
+class_name Game_Manager
 
 var run_state: RunState
 var wave_manager: WaveManager
@@ -158,7 +158,7 @@ func _ready():
 ## ⚙️ IMPLEMENTATION CHECKLIST
 
 ### Phase 1: Game Manager (GDD-001)
-- [ ] GameManager.gd created
+- [ ] Game_Manager.gd created
 - [ ] RunState class defined
 - [ ] Autoload configured in project.godot
 - [ ] Player scene linked to Game Manager

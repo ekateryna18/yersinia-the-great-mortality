@@ -189,7 +189,7 @@ bool FSuspendResumeTest::RunTest(const FString& Parameters)
 public IEnumerator ControllerDisconnect_ShowsPauseMenu()
 {
     // Simulate gameplay
-    GameManager.Instance.StartGame();
+    Game_Manager.Instance.StartGame();
     yield return new WaitForSeconds(1f);
 
     // Simulate controller disconnect

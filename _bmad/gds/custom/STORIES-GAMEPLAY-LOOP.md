@@ -46,7 +46,7 @@ Créer le Game Manager global qui gère le state de chaque run. Initialisation r
 - [ ] AC6: Jour→Nuit transition callable (button ou delay), state persist
 
 #### Technical Notes
-- **Pattern:** Godot GameManager (autoload singleton)
+- **Pattern:** Godot Game_Manager (autoload singleton)
 - **State structure:**
   ```gdscript
   class RunState:
@@ -60,10 +60,10 @@ Créer le Game Manager global qui gère le state de chaque run. Initialisation r
       var night_elapsed_sec: float = 0.0
   ```
 - **Autoload setup:** 
-  - Add to project.godot: `autoload/GameManager="res://game_manager.gd"`
+  - Add to project.godot: `autoload/Game_Manager="res://game_manager.gd"`
 - **Performance:** Keep RunState lean, avoid heavy data each frame
 - **Scene structure:** 
-  - Main scene = GameManager + Player + UI layer
+  - Main scene = Game_Manager + Player + UI layer
   - Day scene = Map + PNJ nodes
   - Night scene = Map + Wave spawner
 

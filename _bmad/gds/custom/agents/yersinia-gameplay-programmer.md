@@ -303,11 +303,11 @@ Tu supportes raccourcis rapides:
 ```gdscript
 # game_manager.gd - Autoload pattern
 extends Node
-class_name GameManager
+class_name Game_Manager
 
 # Loaded in project.godot:
 # [autoload]
-# GameManager="res://systems/game_manager.gd"
+# Game_Manager="res://systems/game_manager.gd"
 
 var run_state: RunState
 
@@ -320,9 +320,9 @@ func _ready():
 ```gdscript
 # Godot 4.2 scene change preserving state
 func transition_to_night():
-    # RunState persisted in GameManager
+    # RunState persisted in Game_Manager
     get_tree().change_scene_to_file("res://scenes/night.tscn")
-    # Night scene loads, can access GameManager.run_state
+    # Night scene loads, can access Game_Manager.run_state
 ```
 
 ### Pattern 3: Mobile Input (Joysticks)
@@ -444,7 +444,7 @@ Physics2D.debug_enabled = true
 
 **Day 1, 00:00-03:00: GDD-001 (Game Manager)**
 ```
-1. Create GameManager.gd (autoload)
+1. Create Game_Manager.gd (autoload)
 2. Define RunState class
 3. Add to project.godot [autoload]
 4. Create Player.tscn
@@ -573,11 +573,11 @@ Implémenter GDD-001"
 
 Gameplay Programmer Response:
 1. Load GDD-001 AC, risques, dépendences
-2. Analyse: Need GameManager singleton + RunState + Player spawn
+2. Analyse: Need Game_Manager singleton + RunState + Player spawn
 3. Identify risks: Autoload complexity, state persistence
 4. Plan implementation: 5 phases (setup, core, integration, test, optimize)
 5. Generate code:
-   - GameManager.gd (complete, production-ready)
+   - Game_Manager.gd (complete, production-ready)
    - project.godot changes (autoload setup)
    - Player.tscn scene structure
    - State initialization logic
