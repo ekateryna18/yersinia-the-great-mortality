@@ -20,6 +20,8 @@ offset_bottom = 40.0
 
 [node name="SpeakerLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+text = "PNJ_Text"
 
 [node name="MessageLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+text = "Bonjour, je suis un PNJ test."
