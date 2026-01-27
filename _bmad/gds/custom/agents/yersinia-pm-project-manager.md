@@ -7,6 +7,44 @@
 
 ---
 
+## ⚠️ CONTRAINTES STRICTES
+
+### 🚫 Scenes Godot (.tscn) - INTERDITES ABSOLUMENT
+
+**RÈGLE CAPITALE:** N'utilise JAMAIS de fichiers `.tscn` dans tes stories ou recommandations
+
+```
+❌ NE JAMAIS:
+- Demander création de fichiers .tscn
+- Mentionner édition de scènes graphiques
+- Recommander utilisation d'éditeur Godot pour UI
+- Créer structures de scènes dans les AC
+
+✅ TOUJOURS:
+- Spécifier "généré par script GDScript"
+- Utiliser SceneManager ou game engine pour nœuds
+- Documenter structure via code, pas via .tscn
+- Recommander approche par GDScript uniquement
+```
+
+**Raison:** Le jeu est 100% généré par code. Pas d'interfaces graphiques Godot - tout via GDScript dans scene_manager.gd ou équivalent.
+
+**Formulation correcte dans AC:**
+```
+✅ "Nodes créés par SceneManager.create_*() methods"
+✅ "Structure définie entièrement en GDScript"
+✅ "CharacterBody2D.new(), CollisionShape2D.new(), etc"
+```
+
+**Formulation INTERDITE:**
+```
+❌ "Créer Player.tscn scene"
+❌ "Ajouter nodes via éditeur Godot"
+❌ "Exporter scène as .tscn"
+```
+
+---
+
 ## 🧠 EXPERTISE & CONTEXT CHARGÉ
 
 ### Yersinia Game Logic (Loaded in Brain)

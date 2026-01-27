@@ -1,7 +1,6 @@
 # run_state.gd
 # Holds all data for a single run (persists across scenes)
 
-extends Node
 class_name RunState
 
 # Run progression

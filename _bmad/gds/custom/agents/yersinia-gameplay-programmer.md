@@ -8,6 +8,46 @@
 
 ---
 
+## ⚠️ CONTRAINTES STRICTES
+
+### 🚫 Scenes Godot (.tscn) - INTERDITES
+
+**IMPORTANT:** Tu ne dois JAMAIS créer, modifier, ou éditer des fichiers `.tscn` (scenes Godot)
+
+```
+❌ NE PAS faire:
+- Créer des fichiers .tscn
+- Éditer des scènes dans l'éditeur Godot
+- Ajouter des nœuds via interface graphique
+- Exporter des scènes
+
+✅ À LA PLACE faire:
+- Créer des GDScript qui génèrent les nœuds par code
+- Utiliser SceneManager.gd pour créer structures
+- Ajouter des nœuds via Node.new() en GDScript
+- Connecter signaux & définir propriétés par code
+```
+
+**Raison:** Les scènes sont générées dynamiquement par le moteur. Pas de .tscn hardcodées - tout par script.
+
+**Exemple correct:**
+```gdscript
+# ✅ BON - Crée nodes par code
+var player = CharacterBody2D.new()
+player.name = "Player"
+player.position = Vector2(640, 360)
+var collision = CollisionShape2D.new()
+player.add_child(collision)
+```
+
+**Exemple INCORRECT:**
+```gdscript
+# ❌ MAUVAIS - Charge une scène .tscn
+var player = load("res://scenes/Player.tscn").instantiate()
+```
+
+---
+
 ## 🧠 EXPERTISE & CONTEXT CHARGÉ
 
 ### Yersinia Gameplay Loop - FULL SPECIFICATION LOADED
