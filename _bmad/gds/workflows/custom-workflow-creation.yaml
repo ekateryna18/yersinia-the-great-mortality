@@ -1,0 +1,171 @@
+name: "custom-workflow-creation"
+title: "Créer un Workflow pour Agent"
+description: "Workflow pour générer un fichier workflow YAML dédié à un agent"
+phase: "custom-workflow-creation"
+
+steps:
+  - step: 1
+    name: "Sélectionner agent"
+    action: "input-collect"
+    fields:
+      - field: "agent_name"
+        type: "select"
+        options_from: "manifest.agents"
+        required: true
+      - field: "agent_type"
+        type: "enum"
+        options: ["generation", "implementation", "testing", "optimization", "documentation"]
+        required: true
+    description: "Choisir agent et type workflow"
+
+  - step: 2
+    name: "Charger agent"
+    action: "file-load"
+    path: "custom/agents/${agent_name}.md"
+    extract:
+      - "menu items"
+      - "specialization"
+      - "phase information"
+    description: "Charger agent pour extraire structure"
+
+  - step: 3
+    name: "Collecter specs workflow"
+    action: "input-collect"
+    fields:
+      - field: "workflow_name"
+        type: "string"
+        placeholder: "Ex: audio-implementation"
+        required: true
+      - field: "workflow_description"
+        type: "text"
+        placeholder: "Description du workflow"
+        required: true
+      - field: "required_contexts"
+        type: "list"
+        placeholder: "Contextes nécessaires"
+        required: false
+      - field: "success_criteria"
+        type: "list"
+        placeholder: "Critères de succès"
+        required: true
+    description: "Recueillir spécifications workflow"
+
+  - step: 4
+    name: "Mapper menu items à steps"
+    action: "mapping"
+    from: "agent menu items"
+    to: "workflow steps"
+    mapping_type: "one-to-one"
+    description: "Créer step pour chaque menu item"
+
+  - step: 5
+    name: "Générer structure workflow"
+    action: "yaml-generate"
+    template: "workflow-template"
+    fields:
+      - name: "${workflow_name}"
+      - title: "${agent_name} - ${workflow_name}"
+      - description: "${workflow_description}"
+      - phase: "${agent_type}-phase"
+    description: "Créer structure YAML de base"
+
+  - step: 6
+    name: "Ajouter steps du workflow"
+    action: "steps-generate"
+    for_each: "mapped menu items"
+    step_template:
+      - step: "${sequence_number}"
+      - name: "${menu_item_name}"
+      - action: "map to appropriate action"
+      - description: "${menu_item_description}"
+      - validation: "include validation if applicable"
+    description: "Remplir steps workflow"
+
+  - step: 7
+    name: "Configurer contexts requis"
+    action: "yaml-edit"
+    section: "steps"
+    inject:
+      - "context-load steps pour contextes requis"
+      - "placer context-load en premier (ordre: GDD, autres)"
+    description: "Ajouter chargement contextes au workflow"
+
+  - step: 8
+    name: "Ajouter validations"
+    action: "yaml-edit"
+    section: "rules"
+    add:
+      - "Validations spécifiques au domaine agent"
+      - "Checks compatibilité roguelike si applicable"
+      - "Checks performance si applicable"
+    description: "Ajouter rules de validation"
+
+  - step: 9
+    name: "Définir outputs"
+    action: "yaml-edit"
+    section: "outputs"
+    add:
+      - "Fichiers générés"
+      - "Code produit"
+      - "Documentation créée"
+    description: "Définir outputs attendus"
+
+  - step: 10
+    name: "Formater YAML"
+    action: "formatting"
+    format: "yaml"
+    requirements:
+      - "Indentation 2 spaces"
+      - "Clés en snake_case"
+      - "Valeurs des listes sur lignes séparées"
+      - "Comments pour sections complexes"
+    description: "Appliquer standards YAML"
+
+  - step: 11
+    name: "Créer fichier workflow"
+    action: "file-create"
+    path: "workflows/${workflow_name}.yaml"
+    format: "yaml"
+    description: "Sauvegarder workflow YAML"
+
+  - step: 12
+    name: "Mettre à jour manifest"
+    action: "manifest-update"
+    manifest: "CUSTOM-AGENTS-MANIFEST.md"
+    add_reference:
+      section: "workflows"
+      agent: "${agent_name}"
+      workflow: "${workflow_name}"
+      path: "workflows/${workflow_name}.yaml"
+    description: "Référencer workflow dans manifest"
+
+  - step: 13
+    name: "Tester workflow"
+    action: "workflow-test"
+    test:
+      - "Vérifier YAML syntax valide"
+      - "Vérifier all steps valides"
+      - "Vérifier contexts existent"
+    description: "Tester workflow créé"
+
+outputs:
+  - output: "Workflow YAML créé"
+    path: "workflows/${workflow_name}.yaml"
+    format: "yaml"
+  - output: "Manifest mis à jour"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    section: "workflows"
+
+rules:
+  - "Workflow minimum 5 steps"
+  - "Doit charger GDD comme premier context"
+  - "Chaque step doit avoir action valide"
+  - "Outputs doivent être clairement définis"
+  - "Rules et success_criteria obligatoires"
+
+success_criteria:
+  - "Fichier workflow créé avec YAML valide"
+  - "Tous menu items mappés à steps"
+  - "Contexts requis correctement ordonnés (GDD first)"
+  - "Validations appropriées incluses"
+  - "Manifest updated avec référence workflow"

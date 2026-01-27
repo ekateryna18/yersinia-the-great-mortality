@@ -1,0 +1,120 @@
+name: "custom-agent-generation"
+title: "Générer un Agent Spécialisé"
+description: "Workflow pour créer un nouvel agent BMAD personnalisé basé sur le template"
+phase: "custom-agent-creation"
+
+steps:
+  - step: 1
+    name: "Charger le template"
+    action: "context-load"
+    context: "agent-template"
+    description: "Charger AGENT-TEMPLATE-context.md pour structure de base"
+
+  - step: 2
+    name: "Charger le GDD"
+    action: "context-load"
+    context: "yersinia-gdd"
+    description: "Référence GDD pour contraintes + mécaniques"
+
+  - step: 3
+    name: "Collecter spécification"
+    action: "input-collect"
+    fields:
+      - field: "agent_name"
+        type: "string"
+        placeholder: "Ex: Audio Systems Designer"
+        required: true
+      - field: "agent_specialization"
+        type: "string"
+        placeholder: "Ex: Design audio, SFX, musique, accessibility"
+        required: true
+      - field: "agent_persona"
+        type: "string"
+        placeholder: "Ex: Jean-Pierre Composeur"
+        required: true
+      - field: "agent_emoji"
+        type: "string"
+        placeholder: "Ex: 🎵"
+        required: true
+      - field: "menu_items"
+        type: "list"
+        placeholder: "Ex: Créer stratégie audio, Implémenter SFX système"
+        required: true
+    description: "Recueillir spécifications pour nouvel agent"
+
+  - step: 4
+    name: "Générer structure agent"
+    action: "agent-generate"
+    template: "agent-template"
+    inputs:
+      - name: "${agent_name}"
+      - persona: "${agent_persona}"
+      - emoji: "${agent_emoji}"
+      - specialization: "${agent_specialization}"
+      - menu_items: "${menu_items}"
+    description: "Créer fichier agent avec activation steps + menu handlers"
+
+  - step: 5
+    name: "Créer workflow dédié"
+    action: "workflow-generate"
+    for_agent: "${agent_name}"
+    description: "Générer workflow YAML pour actions de l'agent"
+
+  - step: 6
+    name: "Valider structure"
+    action: "validation"
+    checks:
+      - "Agent fichier créé dans custom/agents/"
+      - "YAML frontmatter valide (name, title, description, phase)"
+      - "XML activation présent avec activation steps"
+      - "Menu handlers présents (count = ${menu_items.count})"
+      - "Rules section présent"
+      - "Documentation complète"
+    description: "Vérifier structure agent complète"
+
+  - step: 7
+    name: "Mettre à jour manifest"
+    action: "manifest-update"
+    manifest: "CUSTOM-AGENTS-MANIFEST.md"
+    add_agent:
+      id: "${agent_name.kebab-case}"
+      name: "${agent_name}"
+      file: "custom/agents/${agent_name.kebab-case}.md"
+      description: "${agent_specialization}"
+    description: "Ajouter nouvel agent au manifest de découverte"
+
+  - step: 8
+    name: "Tester agent"
+    action: "agent-test"
+    test_commands:
+      - "@agent yersinia-${agent_name.kebab-case}"
+      - "Teste: Charge config.yaml"
+      - "Teste: Affiche menu items"
+    description: "Tester intégration agent en Copilot"
+
+outputs:
+  - output: "Agent créé"
+    path: "custom/agents/${agent_name.kebab-case}.md"
+    format: "markdown"
+  - output: "Workflow agent"
+    path: "workflows/${agent_name.kebab-case}.yaml"
+    format: "yaml"
+  - output: "Manifest mis à jour"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    format: "markdown"
+
+rules:
+  - "Agent doit charger config.yaml"
+  - "Menu items minimum = 1, maximum = 7"
+  - "Persona doit être unique"
+  - "Specialization doit être distincte des 9 agents existants"
+  - "Chaque agent = nouvel ID kebab-case unique"
+  - "Documentation en français"
+  - "Valider compatibilité roguelike"
+
+success_criteria:
+  - "Agent fichier créé avec structure valide"
+  - "Agent loadable via @agent yersinia-[id]"
+  - "Manifest mis à jour automatiquement"
+  - "Workflow dédié généré pour actions agent"
+  - "Toutes validations passées"

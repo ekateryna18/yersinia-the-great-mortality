@@ -1,0 +1,134 @@
+name: "custom-context-creation"
+title: "Créer un Contexte Personnalisé"
+description: "Workflow pour créer un contexte réutilisable pour les agents"
+phase: "custom-context-creation"
+
+steps:
+  - step: 1
+    name: "Charger template contexte"
+    action: "context-load"
+    context: "agent-template"
+    description: "Charger AGENT-TEMPLATE-context.md pour comprendre structure contexts"
+
+  - step: 2
+    name: "Collecter spécifications contexte"
+    action: "input-collect"
+    fields:
+      - field: "context_name"
+        type: "string"
+        placeholder: "Ex: Audio-Implementation-Guide"
+        required: true
+      - field: "context_domain"
+        type: "string"
+        placeholder: "Ex: Audio systems, SFX, music, sound design"
+        required: true
+      - field: "target_agents"
+        type: "list"
+        placeholder: "Ex: agent-creator, gameplay-programmer"
+        required: true
+      - field: "criticality"
+        type: "enum"
+        options: ["obligatoire", "important", "optionnel"]
+        required: true
+      - field: "content_outline"
+        type: "text"
+        placeholder: "Points clés à couvrir..."
+        required: true
+    description: "Recueillir spécifications contexte"
+
+  - step: 3
+    name: "Valider domaine contexte"
+    action: "validation"
+    checks:
+      - "Domaine distinct des 5 contextes existants"
+      - "Agents cibles valides (existent dans manifest)"
+      - "Outline contient minimum 5 points clés"
+    description: "Vérifier contexte n'existe pas déjà"
+
+  - step: 4
+    name: "Générer structure contexte"
+    action: "content-generate"
+    template: "context-structure"
+    inputs:
+      - name: "${context_name}"
+      - domain: "${context_domain}"
+      - target_agents: "${target_agents}"
+      - outline: "${content_outline}"
+    description: "Créer structure contexte avec headers + sections"
+
+  - step: 5
+    name: "Développer contenu contexte"
+    action: "content-develop"
+    sections:
+      - "Vue d'ensemble du domaine"
+      - "Concepts clés et terminologie"
+      - "Patterns validés"
+      - "Code examples (pseudocode/GDScript)"
+      - "Checklist validation"
+      - "Points d'intégration Yersinia"
+      - "Références et ressources"
+    description: "Remplir contenu détaillé du contexte"
+
+  - step: 6
+    name: "Formater contexte"
+    action: "formatting"
+    format: "markdown"
+    requirements:
+      - "Frontmatter YAML (name, domain, criticality, target_agents)"
+      - "Headers structurés (H1, H2, H3)"
+      - "Code blocks avec language tags"
+      - "Tables où applicable"
+      - "Checklists pour validations"
+    description: "Appliquer format markdown standard"
+
+  - step: 7
+    name: "Créer fichier contexte"
+    action: "file-create"
+    path: "custom/contexts/${context_name}-context.md"
+    format: "markdown"
+    description: "Sauvegarder contexte dans répertoire contexts"
+
+  - step: 8
+    name: "Mettre à jour manifest contexts"
+    action: "manifest-update"
+    manifest: "CUSTOM-AGENTS-MANIFEST.md"
+    section: "contexts"
+    add_context:
+      name: "${context_name}"
+      availability: "${target_agents}"
+      criticality: "${criticality}"
+      path: "custom/contexts/${context_name}-context.md"
+    description: "Ajouter contexte à section contexts du manifest"
+
+  - step: 9
+    name: "Tester contexte"
+    action: "context-test"
+    test_commands:
+      - "@context yersinia-${context_name.kebab-case}"
+      - "Vérifie contenu chargé"
+      - "Vérifie agents peuvent accéder"
+    description: "Valider contexte loadable en Copilot"
+
+outputs:
+  - output: "Contexte créé"
+    path: "custom/contexts/${context_name}-context.md"
+    format: "markdown"
+  - output: "Manifest contexts mis à jour"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    section: "contexts"
+    format: "markdown"
+
+rules:
+  - "Contexte minimum 500 lignes"
+  - "Doit avoir minimum 3 sections principales"
+  - "Doit inclure code examples"
+  - "Doit lister agents cibles"
+  - "Criticality évalue si obligatoire pour tous agents"
+  - "Documentation en français"
+
+success_criteria:
+  - "Contexte fichier créé avec contenu valide"
+  - "Contexte loadable via @context yersinia-[name]"
+  - "Manifest contexts mis à jour"
+  - "Minimum 500 lignes contenu"
+  - "Code examples inclus et formatés"

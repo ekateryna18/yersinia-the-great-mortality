@@ -1,0 +1,153 @@
+name: "custom-context-template-creation"
+title: "Créer Template Contexte"
+description: "Workflow pour générer des templates réutilisables pour contextes"
+phase: "custom-context-template"
+
+steps:
+  - step: 1
+    name: "Charger contextes existants"
+    action: "file-scan"
+    path: "custom/contexts/"
+    pattern: "*-context.md"
+    description: "Scanner tous contextes existants pour patterns"
+
+  - step: 2
+    name: "Analyser patterns"
+    action: "analysis"
+    analyze:
+      - "Structure sections communes"
+      - "Patterns code examples"
+      - "Formats tables/listes"
+      - "Checklist patterns"
+    description: "Identifier patterns et standards"
+
+  - step: 3
+    name: "Collecter specs template"
+    action: "input-collect"
+    fields:
+      - field: "template_domain"
+        type: "string"
+        placeholder: "Ex: Technical Implementation Guide"
+        required: true
+      - field: "template_description"
+        type: "text"
+        placeholder: "Quand utiliser ce template?"
+        required: true
+      - field: "sections"
+        type: "list"
+        placeholder: "Sections principales du template"
+        required: true
+      - field: "required_elements"
+        type: "list"
+        placeholder: "Éléments obligatoires (code examples, tables, etc)"
+        required: true
+    description: "Définir template"
+
+  - step: 4
+    name: "Valider domaine template"
+    action: "validation"
+    checks:
+      - "Template domain distinct des contexts existants"
+      - "Template ne duplique pas contexte existant"
+      - "Sections clairement nommées"
+    description: "Vérifier template n'existe pas"
+
+  - step: 5
+    name: "Générer structure template"
+    action: "yaml-generate"
+    sections:
+      - "YAML Frontmatter"
+      - "Template Header (H1)"
+      - "Usage Guide"
+      - "Section placeholders"
+      - "Code example sections"
+      - "Checklist template"
+    description: "Créer structure template"
+
+  - step: 6
+    name: "Ajouter instructions"
+    action: "content-add"
+    for_each: "sections"
+    add:
+      - "Section header"
+      - "Placeholder text explaining purpose"
+      - "Example format"
+      - "Minimum requirements"
+    description: "Remplir instructions pour chaque section"
+
+  - step: 7
+    name: "Créer template placeholder"
+    action: "file-create"
+    path: "custom/contexts/TEMPLATE-${template_domain.kebab-case}.md"
+    format: "markdown"
+    content:
+      - "YAML frontmatter template"
+      - "Section headers avec examples"
+      - "Code blocks avec language hints"
+      - "Checklist items"
+      - "Inline comments [INSTRUCTIONS]"
+    description: "Créer fichier template placeholder"
+
+  - step: 8
+    name: "Ajouter usage guide"
+    action: "content-add"
+    path: "custom/contexts/TEMPLATE-${template_domain.kebab-case}.md"
+    section: "top"
+    content:
+      - "# [INSTRUCTIONS] Template: ${template_domain}"
+      - "## How to Use This Template"
+      - "1. Copy this file"
+      - "2. Rename to: ${template_domain}-[YOUR-CONTEXT].md"
+      - "3. Replace [INSTRUCTIONS] blocks with actual content"
+      - "4. Minimum [N] sections"
+      - "5. Include minimum [N] code examples"
+      - "6. Validate via custom-agent-audit workflow"
+    description: "Ajouter guide utilisation"
+
+  - step: 9
+    name: "Documenter template"
+    action: "documentation-generate"
+    sections:
+      - "Template name et domaine"
+      - "When to use"
+      - "Sections incluses"
+      - "Required elements"
+      - "Code examples format"
+      - "Typical usage scenario"
+    description: "Générer documentation template"
+
+  - step: 10
+    name: "Ajouter template au manifest"
+    action: "manifest-update"
+    manifest: "CUSTOM-AGENTS-MANIFEST.md"
+    section: "context_templates"
+    add:
+      - domain: "${template_domain}"
+      - path: "custom/contexts/TEMPLATE-${template_domain.kebab-case}.md"
+      - description: "${template_description}"
+      - target_use: "For creating new contexts in this domain"
+    description: "Référencer template dans manifest"
+
+outputs:
+  - output: "Template contexte créé"
+    path: "custom/contexts/TEMPLATE-${template_domain.kebab-case}.md"
+    format: "markdown"
+  - output: "Documentation template"
+    path: "custom/contexts/README-TEMPLATES.md"
+    format: "markdown"
+  - output: "Manifest mis à jour"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+
+rules:
+  - "Template doit avoir minimum 5 sections"
+  - "Doit inclure minimum 3 code examples"
+  - "Doit avoir usage guide clair"
+  - "[INSTRUCTIONS] comments partout"
+  - "Placeholder text doit être explicite"
+
+success_criteria:
+  - "Template file créé avec [INSTRUCTIONS] clairs"
+  - "Usage guide explique comment remplir"
+  - "Tous required elements inclus"
+  - "Template référencé dans manifest"
+  - "Documentation accessible"

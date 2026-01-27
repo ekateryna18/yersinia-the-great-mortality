@@ -1,0 +1,132 @@
+name: "custom-agent-audit"
+title: "Auditer un Agent Existant"
+description: "Workflow pour vérifier conformité et qualité d'un agent BMAD"
+phase: "custom-agent-audit"
+
+steps:
+  - step: 1
+    name: "Sélectionner agent à auditer"
+    action: "input-collect"
+    fields:
+      - field: "agent_to_audit"
+        type: "select"
+        options_from: "manifest.agents"
+        required: true
+      - field: "audit_scope"
+        type: "enum"
+        options: ["complet", "structure", "contenu", "intégration"]
+        default: "complet"
+        required: true
+    description: "Choisir agent et scope d'audit"
+
+  - step: 2
+    name: "Charger agent pour audit"
+    action: "file-load"
+    path: "custom/agents/${agent_to_audit}.md"
+    description: "Charger fichier agent"
+
+  - step: 3
+    name: "Audit structure"
+    action: "validation"
+    checks:
+      - "YAML frontmatter présent et valide"
+      - "name: défini"
+      - "title: défini (avec emoji)"
+      - "description: défini"
+      - "phase: défini"
+      - "XML activation element présent"
+      - "menu-handler elements présent"
+      - "rules section présent"
+      - "documentation section présent"
+    fail_if_missing: true
+    description: "Vérifier structure BMAD complète"
+
+  - step: 4
+    name: "Audit activation steps"
+    action: "validation"
+    checks:
+      - "Minimum 3 activation steps"
+      - "Chaque step a id, name, action"
+      - "Pas d'actions invalides"
+      - "context-reference pointe vers contexts existants"
+      - "config-reference pointe vers config.yaml"
+    description: "Vérifier activation steps valides"
+
+  - step: 5
+    name: "Audit menu handlers"
+    action: "validation"
+    checks:
+      - "Minimum 1 menu handler"
+      - "Maximum 7 menu handlers"
+      - "Chaque handler a step-reference valide"
+      - "Pas de step-reference orpheline"
+      - "menu-label unique dans agent"
+    description: "Vérifier menu handlers correctement configurés"
+
+  - step: 6
+    name: "Audit contenu"
+    action: "content-check"
+    checks:
+      - "Specialization clairement définie"
+      - "Persona a nom + rôle"
+      - "Tous menu items expliqués"
+      - "Français correcte (pas anglais mélangé)"
+      - "Aucune typo majeure"
+    description: "Vérifier qualité contenu"
+
+  - step: 7
+    name: "Audit intégration"
+    action: "integration-check"
+    checks:
+      - "Agent chargeable via @agent yersinia-[id]"
+      - "config.yaml accessible"
+      - "Contexts référencés existent"
+      - "Pas de chemins cassés"
+      - "Manifest le liste correctement"
+    description: "Tester intégration Copilot"
+
+  - step: 8
+    name: "Audit compatibilité roguelike"
+    action: "validation"
+    checks:
+      - "Agent respecte constraintes GDD"
+      - "Aucune violation permadeath"
+      - "Aucune violation jour/nuit"
+      - "Aucune violation traîtres système"
+    description: "Vérifier compatibilité avec invariants roguelike"
+
+  - step: 9
+    name: "Générer rapport audit"
+    action: "report-generate"
+    format: "markdown"
+    sections:
+      - "Score conformité BMAD"
+      - "Issues trouvées (critique/warning/info)"
+      - "Recommendations"
+      - "Actions correctives"
+    description: "Créer rapport audit détaillé"
+
+  - step: 10
+    name: "Proposer fixes"
+    action: "fix-suggest"
+    if_issues: true
+    description: "Suggérer corrections pour issues trouvées"
+
+outputs:
+  - output: "Rapport audit"
+    format: "markdown"
+    content: "Score conformité + issues + recommendations"
+
+rules:
+  - "Audit critique: Structure BMAD doit être 100% valide"
+  - "Audit warning: Contenu doit être 90% complet"
+  - "Audit info: Recommendations d'optimisation"
+  - "Si critiques trouvées: Agent non chargeable"
+  - "Si warnings: Agent fonctionnel mais incomplet"
+
+success_criteria:
+  - "Rapport audit généré"
+  - "Score conformité >= 90%"
+  - "Aucune critiques non résolues"
+  - "Recommendations documentées"
+  - "Actions correctives identifiées si needed"

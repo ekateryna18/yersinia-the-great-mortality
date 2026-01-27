@@ -1,0 +1,149 @@
+name: "custom-manifest-generation"
+title: "Régénérer le Manifest des Agents"
+description: "Workflow pour scanner et régénérer le CUSTOM-AGENTS-MANIFEST.md"
+phase: "custom-manifest-generation"
+
+steps:
+  - step: 1
+    name: "Scanner répertoire agents"
+    action: "file-scan"
+    path: "custom/agents/"
+    pattern: "*.md"
+    description: "Trouver tous fichiers agents"
+
+  - step: 2
+    name: "Parser chaque agent"
+    action: "file-parse"
+    for_each: "agents/*.md"
+    extract:
+      - "name from YAML frontmatter"
+      - "title from YAML frontmatter"
+      - "description from YAML frontmatter"
+      - "emoji from title"
+      - "specialization from description or content"
+    description: "Extraire metadata de chaque agent"
+
+  - step: 3
+    name: "Scanner répertoire contexts"
+    action: "file-scan"
+    path: "custom/contexts/"
+    pattern: "*.md"
+    description: "Trouver tous fichiers contextes"
+
+  - step: 4
+    name: "Parser chaque contexte"
+    action: "file-parse"
+    for_each: "contexts/*-context.md"
+    extract:
+      - "name from filename or YAML"
+      - "domain from YAML or content"
+      - "criticality from YAML"
+      - "target_agents from YAML or content"
+    description: "Extraire metadata de chaque contexte"
+
+  - step: 5
+    name: "Valider intégrité"
+    action: "validation"
+    checks:
+      - "Tous agents ont fichier valide"
+      - "Tous contextes ont fichier valide"
+      - "Pas de doublons agents"
+      - "Pas de doublons contextes"
+      - "Agents croisés dans manifest existent"
+    description: "Vérifier intégrité données"
+
+  - step: 6
+    name: "Compter statistiques"
+    action: "statistics-collect"
+    collect:
+      - "Nombre total agents"
+      - "Nombre total contextes"
+      - "Agents par domaine"
+      - "Contextes par criticality"
+      - "Agent avec plus workflows"
+    description: "Collecter statistiques pour rapport"
+
+  - step: 7
+    name: "Générer table agents"
+    action: "table-generate"
+    table_type: "agents"
+    columns:
+      - "ID"
+      - "Emoji + Name"
+      - "File"
+      - "Specialization"
+    sort_by: "id"
+    description: "Créer table agents formatée"
+
+  - step: 8
+    name: "Générer table contextes"
+    action: "table-generate"
+    table_type: "contexts"
+    columns:
+      - "Contexte"
+      - "Domain"
+      - "Target Agents"
+      - "Criticality"
+      - "Path"
+    sort_by: "criticality"
+    description: "Créer table contextes formatée"
+
+  - step: 9
+    name: "Générer usage patterns"
+    action: "documentation-generate"
+    sections:
+      - "Common workflows (@agent + @context combinations)"
+      - "Agent relationships (qui dépend de qui)"
+      - "Context dependencies (contextes obligatoires)"
+    description: "Générer patterns d'utilisation"
+
+  - step: 10
+    name: "Mettre à jour manifest"
+    action: "file-update"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    sections:
+      - "agents table (générée)"
+      - "contexts table (générée)"
+      - "usage patterns (générée)"
+      - "statistics section (nouveaux chiffres)"
+      - "last-updated timestamp"
+    preserve_sections:
+      - "introduction"
+      - "core principles"
+      - "error handling section"
+    description: "Remplacer sections générées du manifest"
+
+  - step: 11
+    name: "Valider manifest révisé"
+    action: "validation"
+    checks:
+      - "Fichier markdown valide"
+      - "Tables bien formatées"
+      - "Tous agents listés"
+      - "Tous contextes listés"
+      - "IDs kebab-case valides"
+    description: "Vérifier manifest révisé"
+
+outputs:
+  - output: "Manifest régénéré"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    format: "markdown"
+    sections_updated:
+      - "agents table"
+      - "contexts table"
+      - "usage patterns"
+      - "statistics"
+
+rules:
+  - "Ne jamais supprimer sections non-générées"
+  - "Toujours préserver intro + principes"
+  - "Garder cohérence naming (kebab-case)"
+  - "Tables doivent être triées consistent"
+  - "Timestamp updated automatiquement"
+
+success_criteria:
+  - "Manifest régénéré avec données à jour"
+  - "Tous agents et contextes listés"
+  - "Tables bien formatées et triées"
+  - "Aucune données perdues"
+  - "Manifest reste valide markdown"

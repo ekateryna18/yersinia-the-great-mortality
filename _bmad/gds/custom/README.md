@@ -1,294 +1,262 @@
-# 🤖 CUSTOM AGENTS - Yersinia Project
+# 🤖 Yersinia Custom Agents System - Documentation
 
-Bienvenue dans le système de Custom Agents BMAD pour Yersinia: The Great Mortality!
+## 📖 Vue d'ensemble
 
-## 🚀 Quick Start
+Le système custom d'agents BMAD permet de générer, gérer et orchestrer des agents spécialisés pour le développement de Yersinia.
 
-```bash
-# Charger Agent Creator
-@agent yersinia-creator
-
-# Charger contextes projet
-@context project-overview
-@context contraintes-mvp
-
-# Créer agent personnalisé
-@agent yersinia-creator
-→ Menu item 1: Créer un nouvel agent custom
+**Architecture:**
+```
+_bmad/gds/custom/
+├── CUSTOM-AGENTS-MANIFEST.md      # Index + documentation agents
+├── agents/                         # Agents spécialisés
+│   └── agent-creator.md           # Générateur d'agents
+└── contexts/                       # Contextes pour agents
+    ├── YERSINIA-GDD-context.md
+    ├── GAME-JAM-TIMELINE-context.md
+    ├── ROGUELIKE-PATTERNS-context.md
+    ├── GODOT-SETUP-context.md
+    └── AGENT-TEMPLATE-context.md
 ```
 
-## 📁 Structure
+## 🚀 UTILISATION RAPIDE
+
+### 1️⃣ Appeler un agent spécialisé
 
 ```
-custom/
-├── README.md                           # Ce fichier
-├── manifest.yaml                       # 📋 Index agents & contexts
-├── DOCUMENTATION.md                    # 📚 Guide complet
-├── TEMPLATE-AGENT-CUSTOM.md            # 🎨 Template réutilisable
-│
-├── agents/
-│   ├── yersinia-agent-creator.md       # 🤖 Agent Creator (crée agents)
-│   └── [future-custom-agents]
-│
-└── contexts/
-    ├── YERSINIA-PROJECT-CONTEXT.md     # 📖 Vue projet complète
-    ├── CONTRAINTES-MVP.md              # ⚠️ Limites PO (OBLIGATOIRE)
-    ├── GAMEPLAY-MECHANICS-context.md   # 🎮 Jour/nuit, vagues, combat
-    ├── NPC-TRAITOR-SYSTEM-context.md   # 🧑‍🤝‍🧑 PNJ, traîtres, énigmes
-    ├── UI-MOBILE-DESIGN-context.md     # 📱 Interfaces tactiles
-    ├── PROGRESSION-ECONOMY-context.md  # 📈 Gloire, stats persist
-    ├── PERFORMANCE-CONSTRAINTS-context.md # ⚡ 30 FPS, <5s chargement
-    ├── ASSET-PIPELINE-context.md       # 🎨 Sprites, organisation
-    ├── NARRATIVE-LORE-context.md       # 📖 Univers, dialogues
-    ├── MONETIZATION-STRATEGY-context.md # 💰 IAP, business model
-    └── ERREURS-COURANTES-context.md    # 🆘 SOS troubleshooting
+@agent yersinia-gameplay
+
+Besoin: Implémenter le système de vagues d'ennemis
 ```
 
-## 🎯 Agents disponibles
+**Agents disponibles:**
+- `@agent yersinia-agent-creator` - Créer nouveaux agents
+- `@agent yersinia-gameplay` - Programmeur gameplay
+- `@agent yersinia-npc` - Architécte système PNJ
+- `@agent yersinia-ui` - Spécialiste interfaces mobiles
+- Etc... (voir CUSTOM-AGENTS-MANIFEST.md pour liste complète)
 
-### Custom Agents
-| Agent | ID | Description |
-|-------|----|----|
-| 🤖 Agent Creator | `yersinia-creator` | Crée et configure agents BMAD custom |
+### 2️⃣ Charger un contexte
 
-### GDS Standards (intégrés)
-| Agent | ID | Description |
-|-------|----|----|
-| 🎮 Gameplay Programmer | `gameplay-programmer` | Boucles jeu, vagues, IA |
-| 🧑‍🤝‍🧑 NPC System Architect | `npc-system-architect` | PNJ, traîtres, énigmes |
-| 📱 UI Systems Specialist | `ui-systems-specialist` | Interfaces mobiles |
-| 📈 Progression & Economy | `progression-economy` | Gloire, stats persist |
-| ⚡ Mobile Performance | `mobile-performance` | 30 FPS, memory, loading |
-| ✅ QA Testing Lead | `qa-testing-lead` | Tests, balance, edge cases |
-| 🎨 Art & Asset Director | `art-asset-director` | Sprites isométriques |
-| 📖 Narrative Designer | `narrative-designer` | Univers, dialogues, lore |
-
-## 📋 Contexts clés
-
-### À charger OBLIGATOIREMENT
 ```
-@context project-overview      # Vue projet complète
-@context contraintes-mvp       # Limites PO - OBLIGATOIRE
+@context yersinia-gdd
+
+Pour avoir la référence complète du GDD
 ```
 
-### Par feature
-```
-Gameplay      → @context gameplay-mechanics
-PNJ/Traître   → @context npc-traitor-system
-UI Mobile     → @context ui-mobile-design
-Progression   → @context progression-economy
-Performance   → @context performance-constraints
-Assets        → @context asset-pipeline
-Narrative     → @context narrative-lore
-Monetization  → @context monetization-strategy
-Error         → @context erreurs-courantes
-```
+**Contexts disponibles:**
+- `@context yersinia-gdd` - 📖 Game Design Document complet (OBLIGATOIRE)
+- `@context game-jam-timeline` - ⏱️ Timeline MVP 5 jours
+- `@context roguelike-patterns` - 🔄 Patterns roguelike éprouvés
+- `@context godot-setup` - 🛠️ Architecture Godot 4.2
+- `@context agent-template` - 🤖 Template créer agents
 
-## 🔄 Workflows
+### 3️⃣ Combiner agents + contexts
 
-### Feature: Implémentation jour/nuit
 ```
-1. @context project-overview           # Orienter
-2. @context contraintes-mvp            # Limites temps
-3. @agent gameplay-programmer          # Développer
-4. @context gameplay-mechanics         # Référence
-5. @agent qa-testing-lead              # Tester
+@context yersinia-gdd
+@context roguelike-patterns
+@agent yersinia-gameplay
+
+Besoin: Implémenter le système traîtres aléatoires de manière roguelike-compliant
 ```
 
-### Feature: Système traître
-```
-1. @context project-overview
-2. @context contraintes-mvp
-3. @agent npc-system-architect         # Architecture
-4. @context npc-traitor-system         # Détails
-5. @agent qa-testing-lead              # Tests
-```
+## 📋 WORKFLOWS COURANTS
 
-### Feature: Créer agent custom
+### Workflow 1: Implémenter Une Feature
+
+1. Charger le GDD
 ```
-1. @agent yersinia-creator             # Lance création
-   (Pose questions → Génère structure → Crée contexts)
-2. @agent [new-agent-id]               # Utilise nouvel agent
-3. Agent ajouté manifest automatiquement
+@context yersinia-gdd
 ```
 
-## ✅ Checklist utilisation
-
-### Avant chaque intervention
-- [ ] Charger `@context project-overview`
-- [ ] Charger `@context contraintes-mvp`
-- [ ] Charger contexte feature spécifique
-- [ ] Charger agent approprié
-- [ ] Implémenter
-- [ ] Tester avec QA agent
-
-### Créer agent custom
-- [ ] `@agent yersinia-creator`
-- [ ] Menu → Créer agent
-- [ ] Répondre questions
-- [ ] Agent généré + context créé
-- [ ] Manifest mis à jour automatiquement
-- [ ] Test: `@agent [new-id]`
-
-### Créer context feature
-- [ ] Identifier besoin context
-- [ ] `@agent yersinia-creator`
-- [ ] Menu → Générer context
-- [ ] Spécifier feature
-- [ ] Context créé
-- [ ] Documenté avec examples
-- [ ] Réutilisable
-
-## 🎨 Templates
-
-### Créer agent custom rapidement
+2. Charger l'agent spécialisé
 ```
-Copie: _bmad/gds/custom/TEMPLATE-AGENT-CUSTOM.md
-Remplace placeholders [ENTRE_CROCHETS]
-Ajoute via `@agent yersinia-creator`
+@agent yersinia-gameplay
 ```
 
-## 🔐 Agent Creator features
-
-Agent Creator (`@agent yersinia-creator`) propose:
-
-1. **Créer nouvel agent**
-   - Questions spécialisation
-   - Génère structure YAML
-   - Crée menu + handlers
-   - Valide syntax
-
-2. **Générer context support**
-   - Pour feature spécifique
-   - Sections organisées
-   - Examples documentés
-   - Réutilisable
-
-3. **Ajouter agent au manifest**
-   - Mise à jour automatique
-   - Validation références
-   - Cohérence maintenue
-
-4. **Lister agents disponibles**
-   - Vue complète ecosystem
-   - ID, descriptions
-   - Usages recommandés
-
-5. **Configurer Copilot**
-   - Setup recherche agents
-   - @agent et @context autocomplétion
-   - Manifest integration
-
-## 📚 Documentation
-
-- **Manifest:** `manifest.yaml` - Index agents & contexts
-- **Guide complet:** `DOCUMENTATION.md` - Usage patterns, FAQ
-- **Template agent:** `TEMPLATE-AGENT-CUSTOM.md` - Copier-coller
-- **This file:** `README.md` - Quick start & structure
-
-## 🚨 Important
-
-### ⚠️ CHARGER TOUJOURS OBLIGATOIREMENT
+3. Décrire la feature
 ```
-@context project-overview
-@context contraintes-mvp
+Besoin: Système de knockback pour ennemis avec gravité
 ```
 
-Ces contextes définissent:
-- Architecture projet
-- Limites MVP 4 jours
-- Constraints non-négotiables
-- Success metrics
+### Workflow 2: Déboguer Un Bug
 
-### ❌ Contraintes MVP
-- ❌ Pas de scope creep (4 jours!)
-- ❌ Pas de features post-MVP
-- ❌ Pas de complexité gratuite
-- ❌ Pas d'IAP paywall
-
-### ✅ Patterns validés
-- ✅ Jour/nuit cycle
-- ✅ Random traitor system
-- ✅ Object pooling ennemis
-- ✅ Virtual joystick mobile
-- ✅ Persistent progression
-
-## 🔗 Intégration Copilot
-
-Pour activer custom agents dans Copilot:
-
-```yaml
-# .copilot/copilot.yaml (ou config Copilot)
-custom_agents_manifest: _bmad/gds/custom/manifest.yaml
-
-agent_search_paths:
-  - _bmad/gds/agents/
-  - _bmad/gds/custom/agents/
-
-context_search_paths:
-  - _bmad/gds/custom/contexts/
+1. Charger contexte Godot
+```
+@context godot-setup
 ```
 
-Puis utiliser:
+2. Charger agent performance
 ```
-@agent yersinia-creator
-@agent gameplay-programmer
-@context project-overview
-@context npc-traitor-system
+@agent yersinia-performance
 ```
 
-## 🎯 Cas d'usage
+3. Décrire le bug
+```
+Bug: Crash au changement jour/nuit, FPS drope à 5
+```
 
-### Je veux...
+### Workflow 3: Créer Un Agent Nouveau
 
-**...comprendre le projet**
-→ `@context project-overview`
+1. Charger le template
+```
+@context agent-template
+```
 
-**...implémenter jour/nuit**
-→ `@context gameplay-mechanics` + `@agent gameplay-programmer`
+2. Utiliser le créateur
+```
+@agent yersinia-agent-creator
+Crée un agent pour: Audio systems design
+```
 
-**...créer système traître**
-→ `@context npc-traitor-system` + `@agent npc-system-architect`
+3. L'agent généré sera dans `custom/agents/`
 
-**...créer agent custom**
-→ `@agent yersinia-creator` (menu item 1)
+## 🎯 PRINCIPES CLÉS
 
-**...tester équilibre**
-→ `@agent qa-testing-lead`
+### ✅ À FAIRE
+- ✅ Toujours charger `@context yersinia-gdd` d'abord
+- ✅ Combiner contexts + agents pour precision
+- ✅ Respecter invariants roguelike (permadeath, traîtres, etc)
+- ✅ Tester sur mobile (30 FPS baseline)
+- ✅ Implémenter dans timeline 5 jours
 
-**...optimiser mobile**
-→ `@agent mobile-performance`
+### ❌ À NE PAS FAIRE
+- ❌ Charger un agent sans contexte GDD
+- ❌ Modifier invariants (permadeath, jour/nuit, etc)
+- ❌ Sacrifier performance pour features
+- ❌ Élargir scope MVP sans accord team
+- ❌ Oublier progression permanente (gloire system)
 
-**...documenter projet**
-→ `@context project-overview` + générateur doc
+## 📊 MATRICE AGENT-FEATURE
 
-## 📞 Support
+Quelle agent appeler pour quelle feature:
 
-**Q: Quel agent pour [feature]?**
-→ Consulte manifest.yaml ou `@agent yersinia-creator` (menu: Lister agents)
+| Feature | Agent | Context |
+|---------|-------|---------|
+| Joueur déplacement | gameplay | godot-setup |
+| Ennemi IA | gameplay | roguelike-patterns |
+| Système vagues | gameplay | game-jam-timeline |
+| PNJ dialogue | npc | yersinia-gdd |
+| Traîtres aléatoires | npc | roguelike-patterns |
+| UI shop | ui | godot-setup |
+| Stats permanentes | progression | yersinia-gdd |
+| Optimisation 30 FPS | performance | godot-setup |
+| Tests permadeath | qa | roguelike-patterns |
+| Art sprites isometrique | art | yersinia-gdd |
+| Lore + énigmes | narrative | yersinia-gdd |
+| IAP/Monétisation | business | yersinia-gdd |
 
-**Q: Comment créer agent custom?**
-→ `@agent yersinia-creator` (menu: Créer nouvel agent)
+## 🔐 CONTRAINTES À TOUJOURS RESPECTER
 
-**Q: Erreur [description]?**
-→ `@context erreurs-courantes` (troubleshooting rapide)
+Ces contraintes sont dans GDD - JAMAIS à violer:
 
-**Q: Timeline MVP?**
-→ `@context contraintes-mvp` (limites PO)
+1. **Permadeath Inviolable**
+   - Mort = fin run, stats permanentes sauvées seulement
+   - Jamais de save mid-run
+
+2. **Jour/Nuit Distinct**
+   - Jour: Pas d'ennemis, PNJ accessible
+   - Nuit: Ennemis spawn, PNJ pas accessible
+   - Jamais de mix
+
+3. **Traîtres Aléatoires**
+   - 2 traîtres par run, 6 PNJ total
+   - Impact sur boss Nuit 5
+   - Découverte via énigmes seulement
+
+4. **5 Nuits Exactes**
+   - Pas d'extension, pas de shortcut
+   - Nuit 5 = boss final + traîtres vivants
+
+5. **Performance Mobile (30 FPS)**
+   - Baseline: Android Snapdragon 680+
+   - 5 sec load time max
+   - <200 MB memory
+
+## 📞 EN CAS DE PROBLÈME
+
+### "Comment créer un nouvel agent?"
+```
+@context agent-template
+@agent yersinia-agent-creator
+Crée agent pour: [cas d'usage]
+```
+
+### "Quel agent pour [feature]?"
+Consulter la matrice agent-feature au-dessus
+
+### "Je viole une contrainte?"
+1. Relire YERSINIA-GDD-context.md
+2. Charger l'agent spécialisé pour la feature
+3. Demander: "Comment implémenter [feature] en respectant [contrainte]?"
+
+### "Performance bloquée?"
+```
+@context godot-setup
+@agent yersinia-performance
+Problème: [description du lag]
+```
+
+## 🎮 EXEMPLE D'UTILISATION COMPLÈTE
+
+**Scénario:** Vous devez implémenter le système de traîtres
+
+**Commandes Copilot:**
+```
+@context yersinia-gdd
+@context roguelike-patterns
+@agent yersinia-npc-system
+
+Besoin complet: 
+1. Générer 2 traîtres aléatoires par run
+2. Impléter énigmes pour les découvrir
+3. Assurer traîtres vivants deviennent boss Nuit 5
+4. Tests de regression: Permadeath + traîtres
+```
+
+**Agent va:**
+1. ✅ Charger GDD + patterns roguelike
+2. ✅ Générer code architecture traîtres
+3. ✅ Implémenter énigmes système
+4. ✅ Intégrer au boss final Nuit 5
+5. ✅ Proposer tests QA
+
+## 🔄 MISE À JOUR DU MANIFEST
+
+Après créer un nouvel agent:
+
+1. **Sauvegarder le fichier agent** dans `custom/agents/`
+2. **Mettre à jour** `CUSTOM-AGENTS-MANIFEST.md`
+```markdown
+| yersinia-[domain] | [Name] | custom/agents/[file].md | [Description] |
+```
+3. **Ajouter contexte** si applicable dans `custom/contexts/`
+4. **Commit + push** pour team
+
+## 📚 DOCUMENTATION ADDITIONNELLE
+
+- **CUSTOM-AGENTS-MANIFEST.md** - Index complet agents + contexts
+- **AGENT-TEMPLATE-context.md** - Template créer agents
+- **YERSINIA-GDD-context.md** - Référence complète du jeu
+- **GAME-JAM-TIMELINE-context.md** - Timeline critique MVP
+- **ROGUELIKE-PATTERNS-context.md** - Patterns éprouvés
+- **GODOT-SETUP-context.md** - Architecture technique Godot
+
+## 🚨 AIDE RAPIDE
+
+```
+Besoin rapide?
+@agent yersinia-gameplay
+/bmad-help comment implémenter [X]?
+
+Bloqué?
+@context yersinia-gdd
+@context erreurs-courantes (si créé)
+@agent [spécialiste]
+Je suis bloqué par [problème]
+```
 
 ---
 
-**🎮 Ready?**
-
-```bash
-# Démarre par:
-@agent yersinia-creator
-
-# Ou charge projet:
-@context project-overview
-@context contraintes-mvp
-
-# Puis utilise agents/contexts comme besoin
-```
-
-Bon développement! 🚀
+**🎮 Yersinia: The Great Mortality - Custom Agents System**
+**MVP Timeline: 4-5 jours | Godot 4.2 LTS | Mobile (Android/iOS)**

@@ -1,0 +1,177 @@
+name: "custom-architecture-audit"
+title: "Auditer Architecture Complète BMAD Custom"
+description: "Workflow complet pour auditer santé architecture BMAD personnalisée"
+phase: "custom-architecture-audit"
+
+steps:
+  - step: 1
+    name: "Charger manifest"
+    action: "file-load"
+    path: "CUSTOM-AGENTS-MANIFEST.md"
+    extract:
+      - "Agents listés"
+      - "Contexts listés"
+      - "Workflows référencés"
+    description: "Charger manifest comme source de vérité"
+
+  - step: 2
+    name: "Auditer répertoire agents"
+    action: "directory-audit"
+    path: "custom/agents/"
+    checks:
+      - "Tous agents du manifest existent"
+      - "Tous fichiers agents listés dans manifest"
+      - "Pas de fichiers orphelins"
+      - "Fichiers suivent naming convention (kebab-case)"
+    description: "Vérifier cohérence répertoire agents"
+
+  - step: 3
+    name: "Auditer répertoire contexts"
+    action: "directory-audit"
+    path: "custom/contexts/"
+    checks:
+      - "Tous contexts du manifest existent"
+      - "Tous fichiers contexts listés dans manifest"
+      - "Pas de fichiers orphelins"
+      - "Fichiers suivent naming convention (*-context.md)"
+    description: "Vérifier cohérence répertoire contexts"
+
+  - step: 4
+    name: "Auditer répertoire workflows"
+    action: "directory-audit"
+    path: "workflows/"
+    checks:
+      - "Tous workflows YAML valides"
+      - "Chaque workflow a phase valide"
+      - "Pas de workflows cassés"
+    description: "Vérifier répertoire workflows"
+
+  - step: 5
+    name: "Auditer chaque agent"
+    action: "agent-audit-each"
+    for_each: "manifest.agents"
+    run_workflow: "custom-agent-audit"
+    collect_results: true
+    description: "Lancer audit pour chaque agent"
+
+  - step: 6
+    name: "Auditer références contextes"
+    action: "reference-audit"
+    checks:
+      - "Tous contexts référencés existent"
+      - "Contexts chargés dans bon ordre (GDD first)"
+      - "Pas de circular dependencies"
+      - "Contexte obligatoire chargé partout"
+    description: "Vérifier références entre agents et contexts"
+
+  - step: 7
+    name: "Auditer workflows"
+    action: "workflow-audit-each"
+    for_each: "workflows/*.yaml"
+    checks:
+      - "YAML syntax valide"
+      - "Steps référencent actions valides"
+      - "Contexts chargés existent"
+      - "Outputs définis"
+    description: "Vérifier chaque workflow YAML"
+
+  - step: 8
+    name: "Tester intégration Copilot"
+    action: "copilot-test"
+    tests:
+      - "@agent yersinia-agent-creator - charge"
+      - "@context yersinia-gdd - charge"
+      - "@context game-jam-timeline - charge"
+      - "Agent menu items affichés"
+      - "Contexts accessibles"
+    collect_results: true
+    description: "Tester intégration Copilot complète"
+
+  - step: 9
+    name: "Vérifier permissions"
+    action: "permission-check"
+    checks:
+      - "Tous fichiers markdown lisibles"
+      - "Tous fichiers YAML lisibles"
+      - "Répertoires accessibles"
+    description: "Vérifier permissions fichiers"
+
+  - step: 10
+    name: "Compter statistiques"
+    action: "statistics-collect"
+    collect:
+      - "Total agents fonctionnels"
+      - "Total contexts opérationnels"
+      - "Total workflows valides"
+      - "Taux conformité agent BMAD"
+      - "Taux couverture contexts"
+      - "Taux succès Copilot"
+    description: "Collecter statistiques complètes"
+
+  - step: 11
+    name: "Identifier issues"
+    action: "issue-collect"
+    categorize:
+      - level: "critique"
+        examples: "Agent cassé, context manquant, Copilot ne charge pas"
+      - level: "warning"
+        examples: "Contexte incomplet, workflow orphelin"
+      - level: "info"
+        examples: "Recommendations optimisation"
+    collect_all: true
+    description: "Lister toutes issues trouvées"
+
+  - step: 12
+    name: "Générer rapport audit"
+    action: "report-generate"
+    format: "markdown"
+    path: "ARCHITECTURE-AUDIT-REPORT.md"
+    sections:
+      - "Executive Summary"
+      - "Architecture Health Score"
+      - "Agent Conformity Report"
+      - "Context Coverage Report"
+      - "Workflow Validation Report"
+      - "Copilot Integration Status"
+      - "Issues Found (by severity)"
+      - "Recommendations"
+      - "Action Items"
+    include_stats: true
+    include_timestamp: true
+    description: "Créer rapport audit complet"
+
+  - step: 13
+    name: "Proposer remediation plan"
+    action: "remediation-plan"
+    prioritize_by: "severity"
+    for_each: "critical_issues"
+    suggest:
+      - "Cause probable"
+      - "Fix step-by-step"
+      - "Workflow to use"
+    description: "Plan remédiation issues"
+
+outputs:
+  - output: "Rapport audit architecture"
+    path: "ARCHITECTURE-AUDIT-REPORT.md"
+    format: "markdown"
+  - output: "Remediation plan"
+    included_in: "ARCHITECTURE-AUDIT-REPORT.md"
+  - output: "Statistics dashboard"
+    included_in: "ARCHITECTURE-AUDIT-REPORT.md"
+
+rules:
+  - "Audit lancé sur toute architecture"
+  - "Issues triées par sévérité (critique/warning/info)"
+  - "Recommendations basées sur best practices"
+  - "Plan remédiation proposé pour critiques"
+  - "Timestamp du rapport enregistré"
+
+success_criteria:
+  - "Rapport complet généré"
+  - "Architecture health score calculé"
+  - "Tous agents auditées"
+  - "Tous contexts vérifiées"
+  - "Copilot integration testée"
+  - "Issues documentées avec solutions"
+  - "Plan remédiation si critiques trouvées"
