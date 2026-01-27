@@ -47,7 +47,7 @@ This agent can:
 @agent yersinia-gameplay-programmer
 Implémenter GDD-001
 
-→ Returns: Complete GameManager.gd, project.godot changes, validation steps
+→ Returns: Complete Game_Manager.gd, project.godot changes, validation steps
 ```
 
 ### 2. Generate Code Patterns
@@ -199,7 +199,7 @@ UI Specialist: Polish HUD, joysticks, menus
 @agent yersinia-gameplay-programmer
 Implémenter GDD-001 (Game Manager)
 
-→ Spend 3 hours coding GameManager.gd
+→ Spend 3 hours coding Game_Manager.gd
 → Test AC: RunState persists, player spawned, Day 1 starts
 ```
 

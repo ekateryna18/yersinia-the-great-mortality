@@ -50,7 +50,7 @@
 ✅ Survivor Roguelike 2D isométrique (Hack'Slash avec vagues)
 ✅ Boucle [Jour] → [Nuit 45-90s] × 5 cycles
 ✅ Mobile platform (Android/iOS)
-✅ Godot 4.2 LTS engine
+✅ Godot 4.6 LTS engine
 ✅ 4 jours timeline (FIXED)
 
 ### Systèmes (8 majeurs)

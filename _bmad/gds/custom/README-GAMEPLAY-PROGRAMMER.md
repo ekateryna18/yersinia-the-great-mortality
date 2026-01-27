@@ -86,7 +86,7 @@ Agent delivers:
 
 ### Example: GDD-001 Deliverable
 ```
-✅ GameManager.gd (complete singleton)
+✅ Game_Manager.gd (complete singleton)
 ✅ RunState class definition
 ✅ Player spawn logic
 ✅ Joystick initialization
@@ -145,10 +145,10 @@ Implémenter GDD-001
 ### 3. Agent Delivers Code
 ```gdscript
 # Example output
-## GameManager.gd - Production ready
+## Game_Manager.gd - Production ready
 
 extends Node
-class_name GameManager
+class_name Game_Manager
 
 var run_state: RunState
 
@@ -212,10 +212,10 @@ Each story has **Acceptance Criteria** (AC). Your job:
 **Example AC check (GDD-001):**
 ```
 ✅ AC1: Game Manager singleton created, persists between scenes
-   → Test: Load scene A, load scene B, GameManager still exists
+   → Test: Load scene A, load scene B, Game_Manager still exists
    
 ✅ AC2: RunState initialized (night=1, player_alive=true, gloire=0)
-   → Test: Check GameManager.run_state.night == 1
+   → Test: Check Game_Manager.run_state.night == 1
    
 ✅ AC3: Player spawned at scene center
    → Test: Player position == scene center
@@ -232,15 +232,15 @@ Each story has **Acceptance Criteria** (AC). Your job:
 ```gdscript
 # In project.godot:
 [autoload]
-GameManager="res://systems/game_manager.gd"
+Game_Manager="res://systems/game_manager.gd"
 
 # Usage anywhere in project:
-GameManager.run_state.night = 2
+Game_Manager.run_state.night = 2
 ```
 
 ### 2. Scene Transitions (Keeping State)
 ```gdscript
-# State persists because GameManager is autoload
+# State persists because Game_Manager is autoload
 get_tree().change_scene_to_file("res://scenes/night.tscn")
 ```
 

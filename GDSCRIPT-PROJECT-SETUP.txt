@@ -1,0 +1,36 @@
+# project.godot configuration changes for GDD-001
+
+# ADD TO [autoload] SECTION:
+[autoload]
+Game_Manager="res://systems/game_manager.gd"
+
+# ADD/UPDATE INPUT MAP [input] SECTION:
+[input]
+ui_left={
+"deadzone": 0.5,
+"events": [Key( keycode=65 ), JoypadButton( device=0, button=14 )]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [Key( keycode=68 ), JoypadButton( device=0, button=15 )]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [Key( keycode=87 ), JoypadButton( device=0, button=12 )]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [Key( keycode=83 ), JoypadButton( device=0, button=13 )]
+}
+
+# DISPLAY SETTINGS:
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/handheld/orientation="landscape"
+
+# PHYSICS:
+[physics]
+2d/physics_engine="GodotPhysics2D"
+2d/default_gravity=0
+2d/default_gravity_vector=Vector2(0, 0)

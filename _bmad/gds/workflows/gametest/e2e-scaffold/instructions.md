@@ -49,7 +49,7 @@ Locate and document:
 
 1. **Game State Manager**
    - Primary class that holds game state
-   - Look for: `GameManager`, `GameStateManager`, `GameController`, `GameMode`
+   - Look for: `Game_Manager`, `GameStateManager`, `GameController`, `GameMode`
    - Note: initialization method, ready state property, save/load methods
 
 2. **Input Handling**
