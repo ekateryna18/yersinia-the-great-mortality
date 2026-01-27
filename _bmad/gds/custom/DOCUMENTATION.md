@@ -64,6 +64,7 @@ _bmad/gds/
 
 ### Custom Agents (new!)
 1. **Agent Creator** → `@agent yersinia-creator`
+2. **🎯 PM Project Manager** → `@agent yersinia-pm` ← **NEW: Décompose en stories!**
 
 ---
 
@@ -87,6 +88,15 @@ _bmad/gds/
 ---
 
 ## Workflows recommandés par feature
+
+### 🎯 WORKFLOW: Planifier le travail + créer stories
+```
+1. @agent yersinia-pm                     ← START HERE
+   → "Créer les stories pour [système]"
+   → Output: Epic + stories prêtes-à-dev
+2. @agent [agent-spécialisé]              ← Dispatch par PM
+   → Implémente story avec acceptance criteria
+```
 
 ### Feature: Implémentation jour/nuit
 1. `@context project-overview` - Comprendre scope
@@ -120,6 +130,7 @@ _bmad/gds/
 ## Best practices utilisation
 
 ### ✅ DO
+- ✅ **Charger PM FIRST** → `@agent yersinia-pm` (décompose en stories)
 - ✅ Charger PROJECT-OVERVIEW en premier (orienter contexte)
 - ✅ Charger CONTRAINTES-MVP avant implémentation (respecter scope)
 - ✅ Charger context spécifique feature (références détails)
@@ -131,10 +142,11 @@ _bmad/gds/
 ### ❌ DON'T
 - ❌ Ignorer contraintes MVP (scope creep)
 - ❌ Développer sans contexte spécifique (erreurs d'implémentation)
-- ❌ Passer l'étape teste (buggy release)
+- ❌ Passer l'étape test (buggy release)
 - ❌ Créer agent pour simple demande (utiliser existants)
 - ❌ Modifie manifest manuellement (utiliser Agent Creator)
 - ❌ Oublier charge @context + @agent (manque de contexte)
+- ❌ **Ignorer PM agent** (stories mal décomposées)
 
 ---
 
@@ -142,11 +154,17 @@ _bmad/gds/
 
 ### Pattern: Gameplay feature complète
 ```
-1. @context project-overview       # Comprendre scope général
-2. @context contraintes-mvp         # Limites de temps
-3. @context gameplay-mechanics      # Détails de la feature
-4. @agent gameplay-programmer       # Développement
+1. @agent yersinia-pm                   # Créer stories
+   → Décompose système en épics
+   → Output: Stories prêtes-à-dev + dependencies
+   
+2. @context project-overview            # Comprendre scope général
+3. @context contraintes-mvp             # Limites de temps
+4. @context gameplay-mechanics          # Détails de la feature
+5. @agent gameplay-programmer           # Développement
+   → Implémente selon stories du PM
    → Pose questions clarification
+
    → Génère architecture
    → Code implémentation
 5. @agent qa-testing-lead          # Test complet

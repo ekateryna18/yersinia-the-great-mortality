@@ -4,17 +4,25 @@ Bienvenue dans le système de Custom Agents BMAD pour Yersinia: The Great Mortal
 
 ## 🚀 Quick Start
 
+### 🎯 NOUVEAU: Agent PM pour Planifier le Travail
 ```bash
-# Charger Agent Creator
+# 1. Charge PM Agent (décompose en stories)
+@agent yersinia-pm
+
+# 2. Demande les stories pour un système
+Créer les stories pour le système [gameplay-loop | npc-system | ui-mobile | progression]
+
+# 3. Reçois: Stories prêtes-à-dev + épics + risques + agents recommandés
+```
+
+### Autres utilisation:
+```bash
+# Charger Agent Creator (crée nouveaux agents)
 @agent yersinia-creator
 
 # Charger contextes projet
 @context project-overview
 @context contraintes-mvp
-
-# Créer agent personnalisé
-@agent yersinia-creator
-→ Menu item 1: Créer un nouvel agent custom
 ```
 
 ## 📁 Structure
@@ -22,12 +30,15 @@ Bienvenue dans le système de Custom Agents BMAD pour Yersinia: The Great Mortal
 ```
 custom/
 ├── README.md                           # Ce fichier
+├── README-PM-AGENT.md                  # 🎯 NOUVEAU: Guide PM Agent
+├── GUIDE-PM-AGENT.md                   # 🎯 NOUVEAU: PM Documentation complète
 ├── manifest.yaml                       # 📋 Index agents & contexts
 ├── DOCUMENTATION.md                    # 📚 Guide complet
 ├── TEMPLATE-AGENT-CUSTOM.md            # 🎨 Template réutilisable
 │
 ├── agents/
 │   ├── yersinia-agent-creator.md       # 🤖 Agent Creator (crée agents)
+│   ├── yersinia-pm-project-manager.md  # 🎯 NOUVEAU: PM (décompose en stories)
 │   └── [future-custom-agents]
 │
 └── contexts/
@@ -49,6 +60,7 @@ custom/
 ### Custom Agents
 | Agent | ID | Description |
 |-------|----|----|
+| 🎯 **PM Project Manager** | **`yersinia-pm`** | **🆕 Décompose en stories, sprint planning, risk management** |
 | 🤖 Agent Creator | `yersinia-creator` | Crée et configure agents BMAD custom |
 
 ### GDS Standards (intégrés)
@@ -86,22 +98,55 @@ Error         → @context erreurs-courantes
 
 ## 🔄 Workflows
 
+### 🎯 WORKFLOW RECOMMANDÉ: Planner le travail avec PM
+```
+1. @agent yersinia-pm                     ← Charge PM + contexts
+   "Créer les stories pour [système]"
+   
+2. Reçois: Épics + stories prêtes-à-dev
+   - Acceptance Criteria testables
+   - Context Yersinia chargé
+   - Agent spécialisé recommandé
+   - Dépendences + risques identifiées
+   
+3. @agent [agent-spécialisé]              ← Dispatch par PM
+   Implémente story selon AC du PM
+   
+4. @agent qa-testing-lead                 ← Valide
+```
+
+**Avantage:** Stories bien décomposées, dépendences claires, rien oublié!
+
 ### Feature: Implémentation jour/nuit
 ```
-1. @context project-overview           # Orienter
-2. @context contraintes-mvp            # Limites temps
-3. @agent gameplay-programmer          # Développer
-4. @context gameplay-mechanics         # Référence
-5. @agent qa-testing-lead              # Tester
+1. @agent yersinia-pm
+   "Créer les stories pour gameplay-loop"
+   
+2. @agent gameplay-programmer
+   (avec stories déjà créées par PM)
+   
+3. @context gameplay-mechanics            # Référence détails
+4. @agent qa-testing-lead                 # Tester
 ```
 
 ### Feature: Système traître
 ```
-1. @context project-overview
-2. @context contraintes-mvp
-3. @agent npc-system-architect         # Architecture
-4. @context npc-traitor-system         # Détails
-5. @agent qa-testing-lead              # Tests
+1. @agent yersinia-pm
+   "Créer les stories pour npc-system"
+   
+2. @agent npc-system-architect            # Architecture
+3. @context npc-traitor-system            # Détails
+4. @agent qa-testing-lead                 # Tests
+```
+
+### Feature: UI mobile
+```
+1. @agent yersinia-pm
+   "Créer les stories pour ui-mobile"
+   
+2. @agent ui-systems-specialist           # Implémentation
+3. @context ui-mobile-design              # Référence
+4. @agent mobile-performance              # Optimisation
 ```
 
 ### Feature: Créer agent custom
@@ -113,6 +158,14 @@ Error         → @context erreurs-courantes
 ```
 
 ## ✅ Checklist utilisation
+
+### Workflow PM (RECOMMANDÉ)
+- [ ] `@agent yersinia-pm`
+- [ ] Demander décomposition système
+- [ ] Recevoir stories + épics + risques
+- [ ] Valider AC testables
+- [ ] Assigner à agents spécialisés
+- [ ] Daily burn-down `@pm burn-down sprint-1`
 
 ### Avant chaque intervention
 - [ ] Charger `@context project-overview`
@@ -136,6 +189,7 @@ Error         → @context erreurs-courantes
 - [ ] Menu → Générer context
 - [ ] Spécifier feature
 - [ ] Context créé
+
 - [ ] Documenté avec examples
 - [ ] Réutilisable
 

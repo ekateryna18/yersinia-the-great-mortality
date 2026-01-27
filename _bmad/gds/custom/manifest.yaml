@@ -5,6 +5,7 @@
 | ID                    | Nom                      | Fichier                          | Description                                              |
 | --------------------- | ------------------------ | -------------------------------- | -------------------------------------------------------- |
 | **yersinia-creator**  | **Agent Creator**        | agents/yersinia-agent-creator.md | Crée et configure des agents BMAD custom pour Yersinia   |
+| **yersinia-pm**       | **🎯 PM Project Manager** | agents/yersinia-pm-project-manager.md | **Décompose en stories, sprint planning, risk management** |
 | gameplay-programmer   | Gameplay Programmer      | agents/gameplay-programmer.md    | Boucles de jeu, vagues, IA ennemis, jour/nuit           |
 | npc-system-architect  | NPC System Architect     | agents/npc-system-architect.md   | PNJ, traîtres, dialogues, énigmes                        |
 | ui-systems-specialist | UI Systems Specialist    | agents/ui-systems-specialist.md  | Interfaces mobiles adaptatives, HUD, dialogues           |

@@ -3,7 +3,7 @@
 ## Vue d'ensemble du projet
 
 **Nom:** Yersinia: The Great Mortality  
-**Genre:** Roguelike 2D Isométrique - Tower Defense Hybride  
+**Genre:** Survivor Roguelike 2D Isométrique (Hack'Slash avec vagues, style Vampire Survivors)
 **Plateforme:** Mobile (Android/iOS)  
 **Moteur:** Godot 4.2 LTS  
 **Timeline MVP:** 4 jours  
@@ -12,7 +12,7 @@
 
 ## 🎯 Concept Core
 
-Un roguelike où le joueur défend une ville contre des vagues de rats mutants durant la nuit (5 nuits = 1 run) tout en explorant et interagissant avec des PNJ le jour.
+Un survivor roguelike où le joueur survit à des vagues continues de rats mutants la nuit en combattant (hack'slash direct), puis explore et interagit avec des PNJ le jour (5 jours/nuits = 1 run). Le joueur se déplace et combats librement, avec upgrades progressifs entre les runs.
 
 ### Méchaniques clés
 - **Jour:** Explorer map, parler PNJ, acheter/améliorer équipement
@@ -24,31 +24,33 @@ Un roguelike où le joueur défend une ville contre des vagues de rats mutants d
 
 ### Boucle gameplay principal
 ```
-Run Start → Jour 1 → Nuit 1 → Jour 2 → Nuit 2 → ... → Nuit 5 (Boss) → Run End
+Run Start → Jour 1 (exploration/PNJ) → Nuit 1 (vagues 45-90s) → Jour 2 → ... → Nuit 5 (Boss) → Run End
 ```
 
 ### Systèmes majeurs
-1. **Gameplay Loop** - Jour/nuit, vagues, combat
-2. **NPC System** - 6 PNJ, 2 traîtres aléatoires, énigmes
-3. **UI Mobile** - Interfaces tactiles adaptatives
-4. **Progression** - Gloire, stats permanentes, difficultée persistante
-5. **Performance** - 30 FPS stable mobile
-6. **Assets** - Pipeline sprites isométrique
-7. **Narrative** - Univers, dialogues, traitor mystery
-8. **Monetization** - Cooldown optionnel, pas paywall MVP
+1. **Gameplay Loop** - Jour/nuit, vagues continues, combat direct (hack'slash)
+2. **Combat Joueur** - Faux melee, attaques zone, knockback, dash, crit
+3. **Enemy Waves** - 4 types d'ennemis, spawn continu+progressif par nuit
+4. **NPC System** - 6 PNJ, 2 traîtres aléatoires, énigmes
+5. **Progression** - Gloire, stats permanentes entre runs
+6. **UI Mobile** - Joysticks (déplacement+attaque), HUD adaptatif
+7. **Performance** - 30 FPS stable mobile
+8. **Assets** - Sprites isométrique jour/nuit
 
 ## 👤 Personnage Joueur
 
-**Arme:** Faux (scythe)  
-**Attaque:** Zone devant joueur (cone ~90°)  
-**Contrôles mobiles:** Joystick déplacement + auto attaque
+**Arme:** Faux (scythe) - Combat melee direct  
+**Attaque:** Zone autour joueur (omnidirectionnel ou selon direction déplacement)
+**Contrôles mobiles:** Joystick gauche (déplacement), Joystick droit (orientation+attaque) ou Bouton attaque unique
+**Méchaniques:** Knockback sur ennemis, dash possible (cooldown), crit possible
 
 **Stats évolutives:**
 - HP (points de vie)
 - Dégâts (base + arme + enchantements)
 - Vitesse déplacement
 - Crit (chance coup critique)
-- Knockback (force repoussement ennemis)
+- Knockback (force repoussement)
+- Armure (réduction dégâts)
 
 ## 👹 Systèmes ennemis
 
