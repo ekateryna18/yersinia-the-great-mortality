@@ -3,7 +3,7 @@
 **Date:** 2026-01-27  
 **Status:** ✅ COMPLETE & READY-TO-USE  
 **Agent:** yersinia-gameplay-programmer  
-**Specialty:** Godot 4.2 gameplay implementation, performance optimization, mobile dev  
+**Specialty:** Godot 4.6 gameplay implementation, performance optimization, mobile dev  
 
 ---
 
@@ -15,7 +15,7 @@
 **Content:**
 - ✅ Full Yersinia game loop context (loaded from PM)
 - ✅ 4 stories (GDD-001 to GDD-004) with all AC
-- ✅ Godot 4.2 patterns (autoloads, pooling, transitions)
+- ✅ Godot 4.6 patterns (autoloads, pooling, transitions)
 - ✅ Performance optimization strategies
 - ✅ Debug toolkit (FPS monitor, memory checker)
 - ✅ Risk mitigation (identified by PM)
@@ -31,7 +31,7 @@
 - ✅ Stories overview (each story explained)
 - ✅ Typical workflow
 - ✅ Risk registry
-- ✅ Godot 4.2 essentials
+- ✅ Godot 4.6 essentials
 - ✅ Daily checklist
 - ✅ Troubleshooting ("If something breaks")
 - ✅ When to escalate to PM
@@ -108,7 +108,7 @@ Revoir ce code: [your GDScript]
 - ✅ Gloire persistence system
 
 ### Technical Requirements
-- ✅ Godot 4.2 LTS
+- ✅ Godot 4.6 LTS
 - ✅ FPS target: ≥30 night, ≥60 day
 - ✅ Memory: <200MB
 - ✅ Load time: <2s

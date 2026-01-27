@@ -2,8 +2,25 @@
 .godot/
 /android/
 
-_bmad/_config
-_bmad/cis
-_bmad/bmb
-_bmad/core
+# Godot 4.x
+.godot/
+.import/
+
+# Godot 3.x
+.import/
+*.translation
+
+# Your specific _bmad folders
+_bmad/_config/
+_bmad/cis/
+_bmad/bmb/
+_bmad/core/
 _bmad/**/*translation
+_bmad/**/*.translation
+
+# Additional common Godot ignores
+*.import
+.mono/
+data_*/
+mono_crash.*.json
+export_presets.cfg
