@@ -5,15 +5,15 @@
 | ID                      | Nom                          | Fichier                            | Description                                    |
 | ----------------------- | ---------------------------- | ---------------------------------- | ---------------------------------------------- |
 | yersinia-agent-creator  | Yersinia Agent Creator       | custom/agents/agent-creator.md    | Générateur d'agents BMAD spécialisés           |
-| yersinia-gameplay       | Gameplay Programmer          | agents/gameplay-programmer.md      | Boucles de jeu, vagues, IA, jour/nuit         |
-| yersinia-npc            | NPC System Architect         | agents/npc-system-architect.md    | PNJ, traîtres, dialogues, énigmes             |
-| yersinia-ui             | UI Systems Specialist        | agents/ui-systems-specialist.md   | Interfaces mobiles adaptatives                |
-| yersinia-progression    | Progression & Economy        | agents/progression-economy-specialist.md | Gloire, stats permanentes, balance |
-| yersinia-performance    | Mobile Performance Engineer  | agents/mobile-performance-engineer.md | Optimisation Android/iOS, 30 FPS |
-| yersinia-qa             | QA Testing Lead              | agents/qa-testing-lead.md         | Tests roguelike, permadeath, balance           |
-| yersinia-art            | Art & Asset Director         | agents/art-asset-director.md      | Direction artistique isométrique 2D           |
-| yersinia-narrative      | Narrative Designer           | agents/narrative-designer.md      | Univers, dialogues, lore, traitor mystery     |
-| yersinia-business       | Business & Monetization      | agents/business-monetization-advisor.md | Modèle économique, IAP, KPI |
+| yersinia-gameplay       | Gameplay Programmer          | custom/agents/yersinia-gameplay-programmer.md      | Boucles de jeu, vagues, IA, jour/nuit         |
+| yersinia-npc            | NPC System Architect         | custom/agents/yersinia-npc-system-architect.md    | PNJ, traîtres, dialogues, énigmes             |
+| yersinia-ui             | UI Systems Specialist        | custom/agents/yersinia-ui-systems-specialist.md   | Interfaces mobiles adaptatives                |
+| yersinia-progression    | Progression & Economy        | custom/agents/yersinia-progression-economy-specialist.md | Gloire, stats permanentes, balance |
+| yersinia-performance    | Mobile Performance Engineer  | custom/agents/yersinia-mobile-performance-engineer.md | Optimisation Android/iOS, 30 FPS |
+| yersinia-qa             | QA Testing Lead              | custom/agents/yersinia-qa-testing-lead.md         | Tests roguelike, permadeath, balance           |
+| yersinia-art            | Art & Asset Director         | custom/agents/yersinia-art-asset-director.md      | Direction artistique isométrique 2D           |
+| yersinia-narrative      | Narrative Designer           | custom/agents/yersinia-narrative-designer.md      | Univers, dialogues, lore, traitor mystery     |
+| yersinia-business       | Business & Monetization      | custom/agents/yersinia-business-monetization-advisor.md | Modèle économique, IAP, KPI |
 
 ## 📋 Contexts Disponibles
 
@@ -127,6 +127,50 @@ Crée un agent pour: [cas d'usage spécifique]
 # 3. L'agent généré sera créé dans custom/agents/
 ```
 
+## � Documentation des Scopes & Limitations
+
+**⚠️ IMPORTANT:** Chaque agent a un domaine spécialisé ET des limitations claires.
+
+### Consulter les Guides de Scope:
+
+1. **[AGENT-SCOPES-LIMITATIONS.md](./AGENT-SCOPES-LIMITATIONS.md)** 
+   - Référence détaillée des 10 agents
+   - Domaines valides vs limitations critiques
+   - Pour chaque agent: ✅ Peut faire | ❌ Ne peut pas faire
+
+2. **[AGENT-DEPLOYMENT-GUIDE.md](./AGENT-DEPLOYMENT-GUIDE.md)**
+   - Guide complet d'implémentation
+   - Appels corrects vs incorrects
+   - Decision matrix (quel agent pour quel besoin?)
+   - Common mistakes & fixes
+
+3. **[AGENT-PROFILE-CARDS.md](./AGENT-PROFILE-CARDS.md)**
+   - Quick reference cards (1 par agent)
+   - Format compact avec checkboxes
+   - Parfait pour consultation rapide
+
+4. **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)**
+   - Vue d'ensemble de tous les fichiers
+   - Résumé des 10 agents
+   - Patterns d'utilisation
+
+### ⚠️ RED FLAGS - Appels Invalides Courants
+
+❌ **"@agent yersinia-gameplay - créer une boutique IAP"**
+   - Boutique = NPC agent, IAP = business agent
+
+❌ **"@agent yersinia-art - optimiser les 30 FPS"**
+   - Performance = performance agent, pas art
+
+❌ **"@agent yersinia-ui - implémenter le système de traîtres"**
+   - Traîtres = NPC agent, UI agent = layout seulement
+
+❌ **"@agent yersinia-progression - ajouter un bouton Acheter"**
+   - Progression = math seulement, bouton = UI/NPC agent
+
+❌ **"@agent yersinia-narrative - créer un dialogue ramifié à 5 branches"**
+   - MVP = dialogues linéaires simples (NPC agent), pas arborescence
+
 ## 🔗 Relations Entre Agents
 
 ```
@@ -146,6 +190,8 @@ Crée un agent pour: [cas d'usage spécifique]
 ```
 
 Tous les agents peuvent être appelés indépendamment pour focus spécialisé.
+
+**Mais respectez leurs scopes!** → Consultez les documents ci-dessus.
 
 ---
 

@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://player_main_scene"]
+
+[ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_player_script"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player_hitbox"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_player_attack"]
+radius = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player_attack_area"]
+radius = 40.0
+height = 80.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player_script")
+base_hp = 100
+base_damage = 10
+base_speed = 150.0
+base_crit_chance = 0.1
+base_knockback = 100.0
+permanent_hp_bonus = 0
+permanent_damage_bonus = 0
+permanent_speed_bonus = 0.0
+permanent_crit_bonus = 0.0
+permanent_knockback_bonus = 0.0
+attack_range = 50.0
+attack_arc = 1.5707963
+attack_cooldown = 0.5
+attack_radius = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+texture = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_player_hitbox")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="." groups=["player_attack_area"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_player_attack")

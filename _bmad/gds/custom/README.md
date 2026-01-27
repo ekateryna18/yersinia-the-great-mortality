@@ -48,6 +48,56 @@ Pour avoir la référence complète du GDD
 - `@context game-jam-timeline` - ⏱️ Timeline MVP 5 jours
 - `@context roguelike-patterns` - 🔄 Patterns roguelike éprouvés
 - `@context godot-setup` - 🛠️ Architecture Godot 4.2
+
+---
+
+## 📚 DOCUMENTATION DES SCOPES & LIMITATIONS
+
+**⚠️ IMPORTANT:** Chaque agent a un domaine spécialisé ET des limitations claires.
+
+### Consulter avant d'appeler un agent:
+
+| Document | Contenu | Usage |
+|----------|---------|-------|
+| **[QUICK-REFERENCE.md](./QUICK-REFERENCE.md)** | 1 page - Decision tree + 5 erreurs courantes | Pour commencer rapidement |
+| **[AGENT-SCOPES-LIMITATIONS.md](./AGENT-SCOPES-LIMITATIONS.md)** | Détails complets de chaque agent | Comprendre les limitations |
+| **[AGENT-DEPLOYMENT-GUIDE.md](./AGENT-DEPLOYMENT-GUIDE.md)** | Guide complet + exemples corrects/incorrects | Formation équipe |
+| **[AGENT-PROFILE-CARDS.md](./AGENT-PROFILE-CARDS.md)** | Fiches rapides avec checkboxes | Lookup rapide en ligne |
+| **[INDEX.md](./INDEX.md)** | Navigation complète de tous les fichiers | Se retrouver dans la documentation |
+
+### 🚨 RED FLAGS - Appels Invalides
+
+❌ **"@agent yersinia-gameplay - créer une boutique IAP"**
+- Boutique = NPC agent | IAP = business agent
+
+❌ **"@agent yersinia-ui - implémenter le système de traîtres"**
+- Traîtres = NPC agent | UI agent = layout seulement
+
+❌ **"@agent yersinia-narrative - créer un dialogue branché à 5 choix"**
+- MVP = dialogues linéaires simples (NPC agent), pas d'arborescence
+
+❌ **"@agent yersinia-progression - ajouter un bouton Acheter"**
+- Progression = math seulement | Bouton = UI agent + NPC agent
+
+❌ **"@agent yersinia-art - optimiser les 30 FPS"**
+- Performance = performance agent | Art agent = sprites/style seulement
+
+---
+
+## 📋 Les 10 Agents (Résumé Rapide)
+
+1. **🎮 yersinia-gameplay** - Boucles jeu, vagues, IA, combats
+2. **🧑 yersinia-npc** - PNJ, traîtres, dialogues, commerce
+3. **💻 yersinia-ui** - Interfaces, joysticks, adaptive design
+4. **📊 yersinia-progression** - Gloire, économie, balance
+5. **⚡ yersinia-performance** - Optimisation, 30 FPS
+6. **🎨 yersinia-art** - Sprites, style, direction artistique
+7. **📖 yersinia-narrative** - Lore, univers, dialogue narratif
+8. **🧪 yersinia-qa** - Testing, validation, balance
+9. **💰 yersinia-business** - IAP, KPI, monétisation
+10. **🤖 yersinia-agent-creator** - Créer agents spécialisés
+
+**→ [Voir les détails complets](./AGENT-SCOPES-LIMITATIONS.md)**
 - `@context agent-template` - 🤖 Template créer agents
 
 ### 3️⃣ Combiner agents + contexts
