@@ -10,8 +10,8 @@ id = 1
 
 [obj type="OScriptGraph" id="OScriptGraph_naecw"]
 graph_name = &"EventGraph"
-offset = Vector2(-435.7675476074219, -34.521636962890625)
-zoom = 0.5483831763267517
+offset = Vector2(-412.34033203125, -50.452392578125)
+zoom = 0.6032215356826782
 flags = 8
 nodes = Array[int]([1, 2, 3, 4])
 functions = Array[int]([1])
@@ -44,7 +44,7 @@ pin_data = Array[Dictionary]([{
 "type": 4,
 "flags": 16777218,
 "label": "Message",
-"dv": "Bonjour, je suis un PNJ Test",
+"dv": "Test dialogue",
 "hint": 18
 }, {
 "pin_name": &"scene",
@@ -116,7 +116,7 @@ pin_data = Array[Dictionary]([{
 
 [obj type="OScriptNodeDialogueChoice" id="OScriptNodeDialogueChoice_njptv"]
 id = 4
-position = Vector2(-320, 400)
+position = Vector2(-420, 380)
 pin_data = Array[Dictionary]([{
 "pin_name": &"text",
 "type": 4,

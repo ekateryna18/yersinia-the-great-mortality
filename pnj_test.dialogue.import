@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://druvmthty00md"
+path="res://.godot/imported/pnj_test.dialogue-9cfb0327f1014078ddec2d986fcc7f32.tres"
+
+[deps]
+
+source_file="res://pnj_test.dialogue"
+dest_files=["res://.godot/imported/pnj_test.dialogue-9cfb0327f1014078ddec2d986fcc7f32.tres"]
+
+[params]
+
+defaults=true
