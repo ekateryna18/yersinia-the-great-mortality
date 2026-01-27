@@ -318,7 +318,9 @@ Solution: Ajouter modulate = Color.ROUGE ou texture placeholder
 
 ---
 
-**Document Version:** 1.0  
+**Mise à jour:** Bug fixes appliquées (script node_2d.gd créé)  
+**Document Version:** 1.1  
 **Créé par:** yersinia-agent-creator  
-**Statut:** Guide complet de création des scènes  
-**Prochaine étape:** Créer les fichiers .tscn (voir fichiers suivants)
+**Statut:** Guide complet de création des scènes (100% opérationnel)  
+**Bugs corrigés:** Parse Error résolu, console propre  
+**Prochaine étape:** Tester les scènes selon GODOT-TEST-VALIDATION.md

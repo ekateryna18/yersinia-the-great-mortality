@@ -26,6 +26,7 @@
 - [x] npc.gd exists
 - [x] enemy.gd exists
 - [x] base_character.gd exists
+- [x] node_2d.gd exists ✅ (CREATED - bug fix)
 
 ---
 
