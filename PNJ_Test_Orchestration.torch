@@ -1,0 +1,67 @@
+[orchestration type="OScript" load_steps=5 format=3 uid="uid://dxoyb7dycpww5"]
+
+[obj type="OScriptFunction" id="OScriptFunction_naecw"]
+guid = "0A3A3326-4178-481D-BC02-13D9C6C09809"
+method = {
+"name": &"_ready",
+"flags": 8
+}
+id = 1
+
+[obj type="OScriptGraph" id="OScriptGraph_naecw"]
+graph_name = &"EventGraph"
+offset = Vector2(-136.499755859375, 0)
+zoom = 0.8831767439842224
+flags = 8
+nodes = Array[int]([1, 2])
+functions = Array[int]([1])
+
+[obj type="OScriptNodeEvent" id="OScriptNodeEvent_pvmdn"]
+function_id = "0A3A3326-4178-481D-BC02-13D9C6C09809"
+id = 1
+position = Vector2(-160, 220)
+pin_data = Array[Dictionary]([{
+"pin_name": &"ExecOut",
+"dir": 1,
+"flags": 4
+}])
+
+[obj type="OScriptNodeDialogueMessage" id="OScriptNodeDialogueMessage_8a2st"]
+id = 2
+position = Vector2(160, 120)
+pin_data = Array[Dictionary]([{
+"pin_name": &"ExecIn",
+"flags": 4
+}, {
+"pin_name": &"name",
+"type": 4,
+"flags": 16777218,
+"label": "Speaker",
+"dv": "PNJ Test",
+"hint": 18
+}, {
+"pin_name": &"text",
+"type": 4,
+"flags": 16777218,
+"label": "Message",
+"dv": "Bonjour, je suis un PNJ Test",
+"hint": 18
+}, {
+"pin_name": &"scene",
+"type": 4,
+"flags": 8388610,
+"dv": "res://dialogue_ui.tscn",
+"hint": 13,
+"hint_string": "*.scn,*.tscn; Scene Files"
+}, {
+"pin_name": &"ExecOut",
+"dir": 1,
+"flags": 4
+}])
+
+[resource]
+base_type = &"Sprite2D"
+functions = Array[OScriptFunction]([SubResource("OScriptFunction_naecw")])
+connections = Array[int]([1, 0, 2, 0])
+nodes = Array[OScriptNode]([SubResource("OScriptNodeEvent_pvmdn"), SubResource("OScriptNodeDialogueMessage_8a2st")])
+graphs = Array[OScriptGraph]([SubResource("OScriptGraph_naecw")])
