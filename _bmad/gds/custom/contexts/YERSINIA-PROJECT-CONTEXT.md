@@ -5,7 +5,7 @@
 **Nom:** Yersinia: The Great Mortality  
 **Genre:** Survivor Roguelike 2D Isométrique (Hack'Slash avec vagues, style Vampire Survivors)
 **Plateforme:** Mobile (Android/iOS)  
-**Moteur:** Godot 4.2 LTS  
+**Moteur:** Godot 4.6 LTS  
 **Timeline MVP:** 4 jours  
 **Équipe:** 2 graphistes + 2 développeurs  
 **Assets:** Sprites perso + free assets modifiés  

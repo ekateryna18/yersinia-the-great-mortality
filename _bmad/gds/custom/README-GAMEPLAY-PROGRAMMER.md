@@ -9,7 +9,7 @@
 
 ## ⚡ 30-SECOND OVERVIEW
 
-This agent is a **Godot 4.2 expert** who implements the 4 core gameplay loop stories planned by the PM:
+This agent is a **Godot 4.6 expert** who implements the 4 core gameplay loop stories planned by the PM:
 
 1. **GDD-001** - Game Manager setup (3h)
 2. **GDD-002** - Day phase exploration (4h)
@@ -226,7 +226,7 @@ Each story has **Acceptance Criteria** (AC). Your job:
 
 ---
 
-## 🔧 GODOT 4.2 ESSENTIALS
+## 🔧 GODOT 4.6 ESSENTIALS
 
 ### 1. Autoload (Global Singletons)
 ```gdscript
@@ -274,7 +274,7 @@ func _process(delta):
 ## ✅ DAILY CHECKLIST
 
 ### Before Starting Day 1
-- [ ] Godot 4.2 project created
+- [ ] Godot 4.6 project created
 - [ ] Git repository initialized (version control)
 - [ ] Ready-to-dev from GDD-001 story
 - [ ] Art team sprites available (or placeholder ready)
@@ -355,14 +355,14 @@ After implementing all 4 stories with AC passing:
 - [YERSINIA-PROJECT-CONTEXT.md](YERSINIA-PROJECT-CONTEXT.md) - Game architecture overview
 
 **Useful References:**
-- [Godot 4.2 Official Docs](https://docs.godotengine.org/en/stable/) - Language reference
+- [Godot 4.6 Official Docs](https://docs.godotengine.org/en/stable/) - Language reference
 - [Godot Performance Profiling](https://docs.godotengine.org/en/stable/tutorials/performance/index.html) - Optimization guide
 
 ---
 
 ## 🎓 LEARNING RESOURCES
 
-If you're new to Godot 4.2:
+If you're new to Godot 4.6:
 1. **Autoloads:** Search "Godot 4 autoload singleton"
 2. **Physics:** Use `CharacterBody2D.move_and_slide()` (not raw position)
 3. **Scenes:** Each .tscn is a scene; use `get_tree().change_scene_to_file()`
@@ -401,7 +401,7 @@ Donne-moi le pattern pour object pooling (enemies)
 
 - [ ] Agent loaded (`@agent yersinia-gameplay-programmer`)
 - [ ] Story picked (GDD-001, GDD-002, GDD-003, or GDD-004)
-- [ ] Godot 4.2 project ready
+- [ ] Godot 4.6 project ready
 - [ ] Ready to copy code into project
 - [ ] Know the 4 AC you need to pass
 - [ ] FPS target in mind (≥30 night, ≥60 day)
@@ -410,7 +410,7 @@ Donne-moi le pattern pour object pooling (enemies)
 
 ---
 
-*Gameplay Programmer Agent - Godot 4.2 Expert*  
+*Gameplay Programmer Agent - Godot 4.6 Expert*  
 *Implement stories, deliver production code, debug issues*  
 *Follow PM specs, meet FPS targets, no memory leaks*
 

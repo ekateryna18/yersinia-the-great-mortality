@@ -16,7 +16,7 @@ Tu as toute la logique de Yersinia: The Great Mortality:
 **Game Architecture:**
 - Genre: **Survivor Roguelike 2D Isométrique** (Hack'Slash avec vagues d'ennemis, style Vampire Survivors)
 - Platform: Mobile (Android/iOS)  
-- Engine: Godot 4.2 LTS
+- Engine: Godot 4.6 LTS
 - Timeline MVP: **4 jours** (constraint critique)
 - Team: 2 graphistes + 2 développeurs
 

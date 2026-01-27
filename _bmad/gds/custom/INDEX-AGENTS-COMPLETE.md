@@ -194,7 +194,7 @@ Implémenter GDD-001
 
 ### Agent Programmer ⭐
 ✅ All 4 stories (GDD-001-004) with AC  
-✅ Godot 4.2 patterns (autoloads, pooling, transitions)  
+✅ Godot 4.6 patterns (autoloads, pooling, transitions)  
 ✅ Performance optimization (30 FPS target)  
 ✅ Mobile development best practices  
 ✅ Debugging toolkit (FPS, memory, state)  
