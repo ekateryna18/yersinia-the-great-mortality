@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://drx67qgnndds1"]
+
+[ext_resource type="Script" uid="uid://bf0a76dxv7hpw" path="res://scripts/enemies/rat.gd" id="1_4agul"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uhrhc"]
+size = Vector2(24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4agul"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qn0ow"]
+radius = 30.0
+
+[node name="Rat" type="CharacterBody2D" unique_id=1933121601]
+platform_floor_layers = 4294967040
+script = ExtResource("1_4agul")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2109432511]
+modulate = Color(0.41231292, 0.4195902, 0.4087322, 1)
+texture = SubResource("PlaceholderTexture2D_uhrhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=101272594]
+shape = SubResource("CircleShape2D_4agul")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=904351855]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1038742841]
+shape = SubResource("CircleShape2D_qn0ow")

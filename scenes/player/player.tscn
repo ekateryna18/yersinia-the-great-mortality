@@ -8,6 +8,12 @@ size = Vector2(32, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8afob"]
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
+radius = 70.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8afob"]
+size = Vector2(160, 160)
+
 [node name="Player" type="CharacterBody2D" unique_id=169526855]
 script = ExtResource("1_8afob")
 
@@ -20,3 +26,13 @@ shape = SubResource("CircleShape2D_8afob")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=744076470]
 position_smoothing_enabled = true
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1053788025]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1413973150]
+shape = SubResource("CircleShape2D_dovo2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=332876004]
+visible = false
+modulate = Color(0.73599994, 0.96, 0, 0.8627451)
+texture = SubResource("PlaceholderTexture2D_8afob")
