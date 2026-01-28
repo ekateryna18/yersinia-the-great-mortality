@@ -8,6 +8,9 @@ size = Vector2(24, 24)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4agul"]
 radius = 12.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qn0ow"]
+radius = 30.0
+
 [node name="Rat" type="CharacterBody2D" unique_id=1933121601]
 platform_floor_layers = 4294967040
 script = ExtResource("1_4agul")
@@ -18,3 +21,8 @@ texture = SubResource("PlaceholderTexture2D_uhrhc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=101272594]
 shape = SubResource("CircleShape2D_4agul")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=904351855]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1038742841]
+shape = SubResource("CircleShape2D_qn0ow")

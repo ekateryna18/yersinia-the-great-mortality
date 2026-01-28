@@ -20,6 +20,7 @@ var max_enemies: int = 8
 var spawn_delay: float = 5.0
 var last_spawn_time: float = 0.0
 var is_spawning: bool = false
+var boss_spawned: bool = false
 
 # Références
 var enemy_container: Node2D = null
@@ -35,20 +36,24 @@ func initialize(night: int, container: Node2D, player: CharacterBody2D) -> void:
 	current_night = night
 	enemy_container = container
 	player_ref = player
+	boss_spawned = false  # ← AJOUTER
 	
 	# Charger la config de la nuit
 	if wave_config.has(current_night):
 		max_enemies = wave_config[current_night]["max_enemies"]
 		spawn_delay = wave_config[current_night]["spawn_delay"]
 	else:
-		# Par défaut (nuit 5+)
 		max_enemies = 50
 		spawn_delay = 3.0
 	
 	print("Wave Manager initialized for Night ", current_night)
 	print("Max enemies: ", max_enemies, " | Spawn delay: ", spawn_delay, "s")
 	
-	# Démarrer le spawn
+	# Spawner le boss immédiatement en Nuit 5
+	if current_night == 5:
+		spawn_boss()
+	
+	# Démarrer le spawn normal
 	is_spawning = true
 	last_spawn_time = Time.get_ticks_msec() / 1000.0
 
@@ -167,3 +172,26 @@ func clear_all_enemies() -> void:
 	
 	alive_enemies = 0
 	print("All enemies cleared")
+
+func spawn_boss() -> void:
+	if boss_spawned or not enemy_container or not player_ref:
+		return
+	
+	print("🔥 SPAWNING BOSS! 🔥")
+	
+	# Créer le boss
+	var boss = rat_scene.instantiate()
+	boss.enemy_type = 2  # RAT_BOSS
+	
+	# Position: En face du joueur, à distance
+	var spawn_pos = player_ref.global_position + Vector2(0, -400)
+	spawn_pos = GameManager.clamp_to_bounds(spawn_pos)
+	boss.global_position = spawn_pos
+	
+	# Ajouter à la scène
+	enemy_container.add_child(boss)
+	
+	boss_spawned = true
+	alive_enemies += 1
+	
+	print("Boss spawned at: ", spawn_pos)

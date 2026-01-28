@@ -28,17 +28,24 @@ func spawn_player() -> void:
 	print("Player spawned at: ", player_spawn.global_position)
 
 func initialize_wave_manager() -> void:
-	# Créer le Wave Manager
 	var WaveManagerScript = preload("res://scripts/systems/wave_manager.gd")
 	wave_manager = WaveManagerScript.new()
 	add_child(wave_manager)
 	
-	# Initialiser avec la nuit courante
-	var current_night = GameManager.get_current_night()
+	var current_night = GameManager.current_run.night if GameManager.current_run else 1
 	wave_manager.initialize(current_night, enemy_container, player_instance)
 
 func _exit_tree() -> void:
-	# Nettoyer quand on quitte la scène
-	if wave_manager:
+	print("=== Night Map Cleanup ===")
+	
+	# Arrêter le spawn
+	if wave_manager and is_instance_valid(wave_manager):
 		wave_manager.stop_spawning()
-		wave_manager.clear_all_enemies()
+	
+	# Nettoyer tous les ennemis
+	if enemy_container and is_instance_valid(enemy_container):
+		var enemies = enemy_container.get_children()
+		for enemy in enemies:
+			if is_instance_valid(enemy):
+				enemy.queue_free()
+		print("All enemies cleaned up")

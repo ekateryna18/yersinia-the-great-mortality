@@ -6,6 +6,8 @@ extends CanvasLayer
 @onready var debug_button: Button = $VBoxContainer/DebugButton
 @onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
 @onready var enemy_count_label: Label = $VBoxContainer/EnemyCountLabel
+@onready var transition_label: Label = $TransitionLabel
+@onready var transition_overlay: ColorRect = $TransitionOverlay 
 
 var player: CharacterBody2D = null
 
@@ -13,10 +15,18 @@ func _ready() -> void:
 	# Connecter aux signaux du GameManager
 	GameManager.phase_changed.connect(_on_phase_changed)
 	GameManager.night_changed.connect(_on_night_changed)
+	GameManager.player_died.connect(_on_player_died)
+	GameManager.run_completed.connect(_on_run_completed)
 	
 	# Connecter les boutons
 	debug_button.pressed.connect(_on_debug_button_pressed)
-	start_night_button.pressed.connect(_on_start_night_button_pressed)  # ← NOUVEAU
+	start_night_button.pressed.connect(_on_start_night_button_pressed)
+	
+	# Cacher la transition au début
+	if transition_label:
+		transition_label.visible = false
+	if transition_overlay:
+		transition_overlay.visible = false
 	
 	# Premier affichage
 	update_display()
@@ -63,8 +73,9 @@ func update_display() -> void:
 		var hp = int(player.current_health)
 		var max_hp = int(player.max_health)
 		var hp_percent = player.get_health_percent() * 100
+		var dmg = int(player.damage)  # ← NOUVEAU
 		
-		player_stats_label.text = "HP: %d/%d (%.0f%%)" % [hp, max_hp, hp_percent]
+		player_stats_label.text = "HP: %d/%d | DMG: %d" % [hp, max_hp, dmg]  # ← MODIFIÉ
 		
 		if hp_percent > 60:
 			player_stats_label.add_theme_color_override("font_color", Color.GREEN)
@@ -73,7 +84,7 @@ func update_display() -> void:
 		else:
 			player_stats_label.add_theme_color_override("font_color", Color.RED)
 	else:
-		player_stats_label.text = "HP: -- / --"
+		player_stats_label.text = "HP: -- / -- | DMG: --"
 	# === COMPTEUR ENNEMIS ===
 	if GameManager.is_night():
 		var enemies = get_tree().get_nodes_in_group("enemies")
@@ -111,3 +122,85 @@ func _on_start_night_button_pressed() -> void:
 	if GameManager.is_day():
 		print(">>> Joueur démarre la nuit manuellement! <<<")
 		GameManager.transition_to_night()
+
+# ============================================
+# VICTOIRE / DÉFAITE
+# ============================================
+func _on_player_died() -> void:
+	var current_night = GameManager.current_run.night if GameManager.current_run else 0
+	
+	if current_night == 5:
+		show_defeat_night5()
+	else:
+		show_game_over()
+
+func _on_run_completed() -> void:
+	show_victory()
+
+func show_victory() -> void:
+	print("HUD: Showing victory screen")
+	
+	# Activer l'overlay noir
+	if transition_overlay:
+		transition_overlay.visible = true
+	
+	# Afficher le texte de victoire
+	if transition_label:
+		var total_gloire = 0
+		if GameManager.current_run:
+			total_gloire = GameManager.current_run.gloire
+		
+		transition_label.text = "🎉 VICTOIRE! 🎉\n\nVous avez survécu aux 5 nuits!\nGloire totale: %d" % total_gloire
+		transition_label.add_theme_color_override("font_color", Color.GOLD)
+		transition_label.visible = true
+	
+	# Attendre 3 secondes
+	await get_tree().create_timer(3.0).timeout
+	
+	# Cacher la transition
+	hide_transition()
+
+func show_defeat_night5() -> void:
+	print("HUD: Showing defeat screen (Night 5)")
+	
+	# Activer l'overlay noir
+	if transition_overlay:
+		transition_overlay.visible = true
+	
+	# Afficher le texte de défaite
+	if transition_label:
+		transition_label.text = "💀 DÉFAITE 💀\n\nVous n'avez pas survécu à la Nuit 5...\nRetour au Jour 5"
+		transition_label.add_theme_color_override("font_color", Color.RED)
+		transition_label.visible = true
+	
+	# Attendre 2 secondes
+	await get_tree().create_timer(2.0).timeout
+	
+	# Cacher la transition
+	hide_transition()
+
+func show_game_over() -> void:
+	print("HUD: Showing game over screen")
+	
+	# Activer l'overlay noir
+	if transition_overlay:
+		transition_overlay.visible = true
+	
+	# Afficher le texte de game over
+	if transition_label:
+		var current_night = GameManager.current_run.night if GameManager.current_run else 0
+		transition_label.text = "💀 GAME OVER 💀\n\nMort durant Nuit %d\nRedémarrage..." % current_night
+		transition_label.add_theme_color_override("font_color", Color.RED)
+		transition_label.visible = true
+	
+	# Attendre 2 secondes
+	await get_tree().create_timer(2.0).timeout
+	
+	# Cacher la transition
+	hide_transition()
+
+func hide_transition() -> void:
+	if transition_overlay:
+		transition_overlay.visible = false
+	if transition_label:
+		transition_label.visible = false
