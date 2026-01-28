@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://pbuaw38ob0uh"]
 
 [ext_resource type="Script" uid="uid://b2qvjee6altly" path="res://scripts/player/player.gd" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://0gaki7cmt5e2" path="res://assets/sprites/player/player.png" id="2_dovo2"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x7p2l"]
-size = Vector2(32, 32)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8afob"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
+radius = 11.0
+height = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 70.0
@@ -19,10 +18,12 @@ script = ExtResource("1_8afob")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
 modulate = Color(0.687105, 0.39554548, 0.5341942, 1)
-texture = SubResource("PlaceholderTexture2D_x7p2l")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
-shape = SubResource("CircleShape2D_8afob")
+position = Vector2(-8, 17)
+shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=744076470]
 position_smoothing_enabled = true
@@ -30,6 +31,7 @@ position_smoothing_enabled = true
 [node name="AttackArea" type="Area2D" parent="." unique_id=1053788025]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1413973150]
+visible = false
 shape = SubResource("CircleShape2D_dovo2")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=332876004]

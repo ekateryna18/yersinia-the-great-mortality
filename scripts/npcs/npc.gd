@@ -10,6 +10,17 @@ enum NPCType {
 	GENERIC_3
 }
 
+# Dictionnaire des sprites par type
+const NPC_SPRITES = {
+	#NPCType.MERCHANT: "res://assets/sprites/npcs/merchant.png",
+	NPCType.BLACKSMITH: "res://assets/sprites/npcs/blacksmith.png",
+	NPCType.WIZARD: "res://assets/sprites/npcs/wizard.png",
+	#NPCType.SICK: "res://assets/sprites/npcs/sick.png",
+	#NPCType.GENERIC_1: "res://assets/sprites/npcs/villager.png",
+	#NPCType.GENERIC_2: "res://assets/sprites/npcs/villager.png",
+	#NPCType.GENERIC_3: "res://assets/sprites/npcs/villager.png",
+}
+
 @export var npc_type: NPCType = NPCType.MERCHANT
 @export var npc_name: String = "PNJ"
 @export var is_traitor: bool = false
@@ -17,7 +28,7 @@ enum NPCType {
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var label: Label = $Label
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var interaction_icon: Sprite2D = $InteractionIcon  # ← NOUVEAU
+@onready var interaction_icon: Sprite2D = $InteractionIcon
 
 var player_in_range: bool = false
 var player_ref: CharacterBody2D = null
@@ -26,24 +37,52 @@ func _ready() -> void:
 	label.text = npc_name
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	set_sprite_color()
 	
-	# Cacher l'icône au début
+	# Charger le sprite selon le type
+	load_sprite()
+	
 	if interaction_icon:
 		interaction_icon.visible = false
 	
 	print("NPC ready: ", npc_name, " (Type: ", NPCType.keys()[npc_type], ")")
 
-func set_sprite_color() -> void:
+func load_sprite() -> void:
+	if NPC_SPRITES.has(npc_type):
+		var sprite_path = NPC_SPRITES[npc_type]
+		
+		if ResourceLoader.exists(sprite_path):
+			var texture = load(sprite_path)
+			sprite.texture = texture
+			
+			# Échelle selon le type
+			match npc_type:
+				NPCType.MERCHANT:
+					sprite.scale = Vector2(0.2, 0.2)  # Si 144x233
+				NPCType.BLACKSMITH:
+					sprite.scale = Vector2(0.25, 0.25)  # Si plus petit
+				NPCType.WIZARD:
+					sprite.scale = Vector2(0.18, 0.18)  # Si plus grand
+				_:
+					sprite.scale = Vector2(0.2, 0.2)  # Par défaut
+			
+			print("Sprite loaded: ", sprite_path)
+		else:
+			print("⚠️ Sprite not found: ", sprite_path)
+			set_fallback_color()
+	else:
+		set_fallback_color()
+
+func set_fallback_color() -> void:
+	# Couleurs de fallback si pas de sprite
 	match npc_type:
-		NPCType.MERCHANT:
-			sprite.modulate = Color.YELLOW
+		#NPCType.MERCHANT:
+			#sprite.modulate = Color.YELLOW
 		NPCType.BLACKSMITH:
 			sprite.modulate = Color.ORANGE
 		NPCType.WIZARD:
 			sprite.modulate = Color.PURPLE
-		NPCType.SICK:
-			sprite.modulate = Color.GREEN
+		#NPCType.SICK:
+			#sprite.modulate = Color.GREEN
 		_:
 			sprite.modulate = Color.CYAN
 
@@ -75,3 +114,4 @@ func _on_body_exited(body: Node2D) -> void:
 		player_in_range = false
 		player_ref = null
 		print(npc_name, " - Joueur hors de portée")
+		

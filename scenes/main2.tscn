@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://df8lya7i63cyl"]
+
+[ext_resource type="PackedScene" uid="uid://crroonlpuuqyn" path="res://scenes/maps/map_jour.tscn" id="1_kejo5"]
+[ext_resource type="PackedScene" uid="uid://pbuaw38ob0uh" path="res://scenes/player/player.tscn" id="2_7tr0j"]
+[ext_resource type="PackedScene" uid="uid://b0rido6lw0ori" path="res://scenes/maps/Asset_map_jour/pillier_pierre.tscn" id="3_bbnhl"]
+[ext_resource type="PackedScene" uid="uid://d2i3pfjqbkg4q" path="res://scenes/maps/Asset_map_jour/caillou.tscn" id="5_kxs5y"]
+[ext_resource type="PackedScene" uid="uid://26is2yhvr8kw" path="res://scenes/maps/Asset_map_jour/trucmaron.tscn" id="6_f31b2"]
+[ext_resource type="PackedScene" uid="uid://12ho6i21c2vi" path="res://scenes/maps/Asset_map_jour/centrePrierre.tscn" id="7_7tr0j"]
+[ext_resource type="PackedScene" uid="uid://fs8bb7gjql5f" path="res://scenes/maps/Asset_map_jour/maison.tscn" id="7_bbnhl"]
+
+[node name="Main" type="Node2D" unique_id=1400985472]
+
+[node name="map_jour" parent="." unique_id=615072872 instance=ExtResource("1_kejo5")]
+collision_layer = 2
+
+[node name="Player2" parent="." unique_id=169526855 instance=ExtResource("2_7tr0j")]
+position = Vector2(-77, -31)
+scale = Vector2(2, 2)
+collision_mask = 2
+
+[node name="PillierPierre" parent="." unique_id=1465816809 instance=ExtResource("3_bbnhl")]
+position = Vector2(-1078, 651)
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+
+[node name="caillou" parent="." unique_id=1592953389 instance=ExtResource("5_kxs5y")]
+position = Vector2(-726, 97.00001)
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+
+[node name="trucMaron" parent="." unique_id=448974212 instance=ExtResource("6_f31b2")]
+position = Vector2(-587, -112)
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+
+[node name="centre" parent="." unique_id=1102993048 instance=ExtResource("7_7tr0j")]
+position = Vector2(-191, 207)
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+
+[node name="maison" parent="." unique_id=1049899658 instance=ExtResource("7_bbnhl")]
+position = Vector2(528, 602)
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
