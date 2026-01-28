@@ -33,6 +33,12 @@ theme_override_colors/font_color = Color(0.4708926, 0.9834097, 0.34041822, 1)
 theme_override_font_sizes/font_size = 20
 text = "HP: 100/100"
 
+[node name="EnemyCountLabel" type="Label" parent="VBoxContainer" unique_id=758589528]
+modulate = Color(1, 0.53333336, 0, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Ennemis: 0/8"
+
 [node name="StartNightButton" type="Button" parent="." unique_id=2078896820]
 anchors_preset = 12
 anchor_top = 1.0

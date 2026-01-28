@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var player_stats_label: Label = $VBoxContainer/PlayerStatsLabel
 @onready var debug_button: Button = $VBoxContainer/DebugButton
 @onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
+@onready var enemy_count_label: Label = $VBoxContainer/EnemyCountLabel
 
 var player: CharacterBody2D = null
 
@@ -73,7 +74,18 @@ func update_display() -> void:
 			player_stats_label.add_theme_color_override("font_color", Color.RED)
 	else:
 		player_stats_label.text = "HP: -- / --"
-	
+	# === COMPTEUR ENNEMIS ===
+	if GameManager.is_night():
+		var enemies = get_tree().get_nodes_in_group("enemies")
+		var enemy_count = enemies.size()
+		var kills = 0
+		if GameManager.current_run:
+			kills = GameManager.current_run.stats_run.get("kills", 0)
+		
+		enemy_count_label.text = "Ennemis: %d | Kills: %d" % [enemy_count, kills]
+		enemy_count_label.visible = true
+	else:
+		enemy_count_label.visible = false
 	# === BOUTON START NIGHT ===
 	# Visible uniquement en JOUR
 	start_night_button.visible = GameManager.is_day()

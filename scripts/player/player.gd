@@ -45,6 +45,13 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print("Player died!")
+	
+	# Désactiver immédiatement le joueur
+	set_physics_process(false)
+	set_process_input(false)
+	visible = false
+	
+	# Notifier le GameManager immédiatement
 	GameManager.on_player_death()
 
 # Getters pour le HUD

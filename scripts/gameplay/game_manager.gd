@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 		
 		# Check si la nuit est terminée (2min30)
 		if current_run.night_elapsed_sec >= NIGHT_DURATION:
-			transition_to_day()
+			end_night()  # ← Changer de transition_to_day() à end_night()
 
 # ============================================
 # RUN MANAGEMENT
@@ -70,9 +70,15 @@ func start_new_run() -> void:
 	current_run.night = 1
 	current_run.player_alive = true
 	current_run.gloire = 0
+	current_run.stats_run = { "kills": 0 }  # ← AJOUTER l'initialisation des stats
+	current_run.pnj_list = []
+	current_run.enemies_wave = []
+	current_run.day_elapsed_sec = 0.0
+	current_run.night_elapsed_sec = 0.0
 	
 	# Démarrer en Jour 1
 	set_phase(GamePhase.DAY)
+	
 	print("Run initialized: Night ", current_run.night)
 
 func initialize_npcs(npc_nodes: Array) -> void:
@@ -130,6 +136,38 @@ func transition_to_day() -> void:
 		set_phase(GamePhase.DAY)
 		night_changed.emit(current_run.night)
 
+func end_night() -> void:
+	if current_phase != GamePhase.NIGHT:
+		return
+	
+	print("=== NIGHT ", current_run.night, " ENDED ===")
+	
+	# Afficher les stats de la nuit
+	display_night_stats()
+	
+	# Passer au jour suivant
+	transition_to_day()
+
+func display_night_stats() -> void:
+	print("--- NIGHT ", current_run.night, " STATS ---")
+	
+	var kills = current_run.stats_run.get("kills", 0)
+	var time_survived = current_run.night_elapsed_sec
+	var minutes = int(time_survived) / 60
+	var seconds = int(time_survived) % 60
+	
+	print("Kills: ", kills)
+	print("Time survived: %d:%02d" % [minutes, seconds])
+	print("Gloire earned: ", kills * 10)  # 10 gloire par kill
+	
+	# Ajouter la gloire
+	current_run.gloire += kills * 10
+	
+	# Reset les stats de run pour la prochaine nuit
+	current_run.stats_run["kills"] = 0
+	
+	print("Total Gloire: ", current_run.gloire)
+	print("-------------------------")
 # ============================================
 # UTILITY
 # ============================================
@@ -202,7 +240,15 @@ func on_player_death() -> void:
 	print("=== PLAYER DIED ===")
 	current_run.player_alive = false
 	
-	# TODO: Afficher écran Game Over
-	# Pour l'instant, on relance un nouveau run après 2 secondes
-	await get_tree().create_timer(2.0).timeout
+	# Transition immédiate vers nouveau run
+	print("Restarting run in 1 second...")
+	await get_tree().create_timer(1.0).timeout
 	start_new_run()
+	
+	# ============================================
+# GETTERS
+# ============================================
+func get_current_night() -> int:
+	if current_run:
+		return current_run.night
+	return 1  # Par défaut nuit 1
