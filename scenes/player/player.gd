@@ -23,6 +23,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Déplacer le personnage
 	move_and_slide()
+	
+	# Limiter à la map (optionnel)
+	if GameManager.is_within_bounds(global_position) == false:
+		global_position = GameManager.clamp_to_bounds(global_position)
 
 func take_damage(amount: float) -> void:
 	current_health -= amount

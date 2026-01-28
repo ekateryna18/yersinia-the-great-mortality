@@ -14,3 +14,11 @@ config/name="Yersinia: The Great Mortality"
 run/main_scene="uid://bfa4kbt5hp61j"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/gameplay/game_manager.gd"
+
+[rendering]
+
+renderer/rendering_method="mobile"
