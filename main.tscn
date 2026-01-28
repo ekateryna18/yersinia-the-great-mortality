@@ -27,8 +27,14 @@ shape = SubResource("CircleShape2D_h2yge")
 [node name="DialogLayer" type="CanvasLayer" parent="." groups=["dialog_layer"]]
 script = ExtResource("1_ig7tw")
 
+[node name="TalkButton" type="Button" parent="DialogLayer"]
+offset_left = 1026.0
+offset_top = 459.0
+offset_right = 1081.0
+offset_bottom = 490.0
+text = "Parler"
+
 [node name="DialogBox" type="ColorRect" parent="DialogLayer"]
-visible = false
 anchors_preset = -1
 anchor_top = -0.08179013
 anchor_right = 0.9626736
@@ -46,9 +52,54 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Bonjour, je m'appelle Aline. Tu veux savoir qui sont les traitres ?"
 
-[node name="TalkButton" type="Button" parent="DialogLayer"]
-offset_left = 1026.0
-offset_top = 459.0
-offset_right = 1081.0
-offset_bottom = 490.0
-text = "Parler"
+[node name="CloseButton" type="Button" parent="DialogLayer/DialogBox"]
+layout_mode = 0
+offset_left = 1065.0
+offset_top = 10.0
+offset_right = 1073.0
+offset_bottom = 18.0
+
+[node name="Reponse1Button" type="Button" parent="DialogLayer"]
+offset_left = 52.0
+offset_top = 542.0
+offset_right = 115.0
+offset_bottom = 563.0
+
+[node name="Reponse2Button" type="Button" parent="DialogLayer"]
+offset_left = 52.0
+offset_top = 570.0
+offset_right = 113.0
+offset_bottom = 590.0
+
+[node name="Reponse3Button" type="Button" parent="DialogLayer"]
+offset_left = 52.0
+offset_top = 510.0
+offset_right = 115.0
+offset_bottom = 529.0
+
+[node name="Reponse4Button" type="Button" parent="DialogLayer"]
+offset_left = 52.0
+offset_top = 477.0
+offset_right = 116.0
+offset_bottom = 497.0
+
+[node name="ChoixDevinetteButton" type="Button" parent="DialogLayer"]
+offset_left = 39.0
+offset_top = 483.0
+offset_right = 47.0
+offset_bottom = 491.0
+
+[node name="ChoixAttaquerButton" type="Button" parent="DialogLayer"]
+offset_left = 39.0
+offset_top = 511.0
+offset_right = 47.0
+offset_bottom = 519.0
+
+[node name="Content" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Content"]
+layout_mode = 2
+
+[connection signal="pressed" from="DialogLayer/TalkButton" to="DialogLayer" method="_on_talk_button_pressed"]
