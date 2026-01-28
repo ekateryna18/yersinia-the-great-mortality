@@ -4,8 +4,8 @@ extends CanvasLayer
 @onready var timer_label: Label = $VBoxContainer/TimerLabel
 @onready var player_stats_label: Label = $VBoxContainer/PlayerStatsLabel
 @onready var debug_button: Button = $VBoxContainer/DebugButton
+@onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
 
-# Référence au joueur (trouvée dynamiquement)
 var player: CharacterBody2D = null
 
 func _ready() -> void:
@@ -13,22 +13,20 @@ func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
 	GameManager.night_changed.connect(_on_night_changed)
 	
-	# Connecter le bouton
+	# Connecter les boutons
 	debug_button.pressed.connect(_on_debug_button_pressed)
+	start_night_button.pressed.connect(_on_start_night_button_pressed)  # ← NOUVEAU
 	
 	# Premier affichage
 	update_display()
 
 func _process(_delta: float) -> void:
-	# Chercher le joueur si on ne l'a pas encore
 	if player == null or not is_instance_valid(player):
 		find_player()
 	
-	# Mettre à jour l'affichage
 	update_display()
 
 func find_player() -> void:
-	# Chercher le joueur dans la scène
 	if GameManager.current_map_scene:
 		player = GameManager.current_map_scene.get_node_or_null("Player")
 
@@ -37,6 +35,7 @@ func update_display() -> void:
 		phase_label.text = "Pas de run actif"
 		timer_label.text = ""
 		player_stats_label.text = ""
+		start_night_button.visible = false
 		return
 	
 	# === PHASE ET NUIT ===
@@ -52,7 +51,6 @@ func update_display() -> void:
 		timer_label.text = "Temps: %d:%02d" % [minutes, seconds]
 		timer_label.visible = true
 	else:
-		# En journée, afficher temps écoulé
 		var time_elapsed = GameManager.get_day_time_elapsed()
 		var minutes = int(time_elapsed) / 60
 		var seconds = int(time_elapsed) % 60
@@ -67,7 +65,6 @@ func update_display() -> void:
 		
 		player_stats_label.text = "HP: %d/%d (%.0f%%)" % [hp, max_hp, hp_percent]
 		
-		# Changer couleur selon HP
 		if hp_percent > 60:
 			player_stats_label.add_theme_color_override("font_color", Color.GREEN)
 		elif hp_percent > 30:
@@ -76,11 +73,14 @@ func update_display() -> void:
 			player_stats_label.add_theme_color_override("font_color", Color.RED)
 	else:
 		player_stats_label.text = "HP: -- / --"
+	
+	# === BOUTON START NIGHT ===
+	# Visible uniquement en JOUR
+	start_night_button.visible = GameManager.is_day()
 
 func _on_phase_changed(_new_phase) -> void:
 	update_display()
 	
-	# Message de transition
 	if GameManager.is_night():
 		print(">>> LA NUIT COMMENCE! Survivez 2min30! <<<")
 
@@ -93,3 +93,9 @@ func _on_debug_button_pressed() -> void:
 		GameManager.transition_to_night()
 	else:
 		GameManager.transition_to_day()
+
+func _on_start_night_button_pressed() -> void:
+	# Démarrer la nuit uniquement si on est en JOUR
+	if GameManager.is_day():
+		print(">>> Joueur démarre la nuit manuellement! <<<")
+		GameManager.transition_to_night()

@@ -10,6 +10,7 @@ var current_health: float
 
 func _ready() -> void:
 	current_health = max_health
+	add_to_group("player")  # ← AJOUTER CETTE LIGNE
 	print("Player ready - HP: %d/%d" % [current_health, max_health])
 
 func _physics_process(delta: float) -> void:
@@ -24,13 +25,12 @@ func _physics_process(delta: float) -> void:
 	# Appliquer le mouvement
 	velocity = input_vector * speed
 	
-	# Déplacer le personnage
-	move_and_slide()
+	# Déplacer le personnage (gère automatiquement les collisions)
+	move_and_slide()  # ← Cette fonction gère les collisions automatiquement
 	
 	# Limiter à la map
 	if GameManager.is_within_bounds(global_position) == false:
 		global_position = GameManager.clamp_to_bounds(global_position)
-
 func take_damage(amount: float) -> void:
 	var actual_damage = max(0, amount - armor)
 	current_health -= actual_damage

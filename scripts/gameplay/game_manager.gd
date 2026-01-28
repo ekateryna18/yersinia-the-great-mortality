@@ -75,6 +75,28 @@ func start_new_run() -> void:
 	set_phase(GamePhase.DAY)
 	print("Run initialized: Night ", current_run.night)
 
+func initialize_npcs(npc_nodes: Array) -> void:
+	print("=== Initializing NPCs ===")
+	
+	# Sauvegarder la référence aux PNJ
+	current_run.pnj_list = npc_nodes
+	
+	# Choisir 2 traîtres aléatoires
+	var traitor_indices = []
+	while traitor_indices.size() < 2:
+		var random_index = randi() % npc_nodes.size()
+		if random_index not in traitor_indices:
+			traitor_indices.append(random_index)
+	
+	# Marquer les traîtres
+	for i in range(npc_nodes.size()):
+		var npc = npc_nodes[i]
+		if i in traitor_indices:
+			npc.is_traitor = true
+			print("⚠️ ", npc.npc_name, " est un TRAÎTRE!")
+		else:
+			npc.is_traitor = false
+			print("✅ ", npc.npc_name, " est innocent")
 # ============================================
 # PHASE MANAGEMENT
 # ============================================
