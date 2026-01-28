@@ -10,8 +10,8 @@ id = 1
 
 [obj type="OScriptGraph" id="OScriptGraph_naecw"]
 graph_name = &"EventGraph"
-offset = Vector2(-412.34033203125, -50.452392578125)
-zoom = 0.6032215356826782
+offset = Vector2(-425.8324890136719, -94.74908447265625)
+zoom = 0.4532092213630676
 flags = 8
 nodes = Array[int]([1, 2, 3, 4])
 functions = Array[int]([1])
@@ -73,8 +73,7 @@ pin_data = Array[Dictionary]([{
 "pin_name": &"choice_0",
 "type": 24,
 "flags": 10,
-"target_class": "OScriptNodeDialogueChoice",
-"dv": null
+"target_class": "OScriptNodeDialogueChoice"
 }, {
 "pin_name": &"choice_0_out",
 "dir": 1,
@@ -133,8 +132,7 @@ pin_data = Array[Dictionary]([{
 "type": 24,
 "dir": 1,
 "flags": 2,
-"target_class": "OScriptNodeDialogueChoice",
-"dv": null
+"target_class": "OScriptNodeDialogueChoice"
 }])
 
 [resource]
