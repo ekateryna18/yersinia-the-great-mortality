@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Yersinia: The Great Mortality"
-run/main_scene="uid://bfa4kbt5hp61j"
+run/main_scene="uid://df8lya7i63cyl"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
