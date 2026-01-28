@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cd3kg5crg0bp3"]
+
+[ext_resource type="Script" uid="uid://cd6ylfdcvpw5k" path="res://scripts/maps/day_map.gd" id="1_lj3rd"]
+
+[node name="DayMap" type="Node2D" unique_id=2097946091]
+script = ExtResource("1_lj3rd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=811684941]
+offset_left = -1000.0
+offset_top = -1000.0
+offset_right = 1000.0
+offset_bottom = 1000.0
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
+modulate = Color(1, 0.03529412, 1, 1)

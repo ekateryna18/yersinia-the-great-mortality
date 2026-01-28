@@ -3,11 +3,14 @@ extends CharacterBody2D
 # Stats du joueur
 @export var speed: float = 300.0
 @export var max_health: float = 100.0
+@export var damage: float = 10.0
+@export var armor: float = 0.0
 
 var current_health: float
 
 func _ready() -> void:
 	current_health = max_health
+	print("Player ready - HP: %d/%d" % [current_health, max_health])
 
 func _physics_process(delta: float) -> void:
 	# Récupérer l'input (ZQSD ou flèches)
@@ -24,16 +27,26 @@ func _physics_process(delta: float) -> void:
 	# Déplacer le personnage
 	move_and_slide()
 	
-	# Limiter à la map (optionnel)
+	# Limiter à la map
 	if GameManager.is_within_bounds(global_position) == false:
 		global_position = GameManager.clamp_to_bounds(global_position)
 
 func take_damage(amount: float) -> void:
-	current_health -= amount
+	var actual_damage = max(0, amount - armor)
+	current_health -= actual_damage
+	print("Player took %d damage (%.1f blocked by armor)" % [actual_damage, armor])
+	
 	if current_health <= 0:
 		die()
 
+func heal(amount: float) -> void:
+	current_health = min(max_health, current_health + amount)
+	print("Player healed for %d HP" % amount)
+
 func die() -> void:
 	print("Player died!")
-	# TODO: Game Over logic
-	queue_free()
+	GameManager.on_player_death()
+
+# Getters pour le HUD
+func get_health_percent() -> float:
+	return current_health / max_health
