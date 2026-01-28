@@ -57,11 +57,11 @@ func load_sprite() -> void:
 			# Échelle selon le type
 			match npc_type:
 				NPCType.MERCHANT:
-					sprite.scale = Vector2(0.2, 0.2)  # Si 144x233
+					sprite.scale = Vector2(0.4, 0.4)  # Si 144x233
 				NPCType.BLACKSMITH:
-					sprite.scale = Vector2(0.25, 0.25)  # Si plus petit
+					sprite.scale = Vector2(0.5, 0.5)  # Si plus petit
 				NPCType.WIZARD:
-					sprite.scale = Vector2(0.18, 0.18)  # Si plus grand
+					sprite.scale = Vector2(0.4, 0.4)  # Si plus grand
 				_:
 					sprite.scale = Vector2(0.2, 0.2)  # Par défaut
 			
