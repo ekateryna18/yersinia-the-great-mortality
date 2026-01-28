@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://pbuaw38ob0uh"]
+
+[ext_resource type="Script" uid="uid://b2qvjee6altly" path="res://scenes/player/player.gd" id="1_8afob"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x7p2l"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8afob"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D" unique_id=169526855]
+script = ExtResource("1_8afob")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
+modulate = Color(0.687105, 0.39554548, 0.5341942, 1)
+texture = SubResource("PlaceholderTexture2D_x7p2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
+shape = SubResource("CircleShape2D_8afob")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=744076470]
+position_smoothing_enabled = true
