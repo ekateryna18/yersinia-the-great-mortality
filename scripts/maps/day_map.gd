@@ -26,3 +26,4 @@ func initialize_npcs() -> void:
 		GameManager.initialize_npcs(npc_list)
 	else:
 		print("⚠️ No NPCs found in day map!")
+		
