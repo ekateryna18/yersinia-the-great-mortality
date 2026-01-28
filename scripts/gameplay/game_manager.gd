@@ -6,7 +6,8 @@ extends Node
 #Reférence à la scène map actuelle
 var current_map_scene: Node = null
 # Limites de la map
-const MAP_BOUNDS := Rect2(-1000, -1000, 2000, 2000)
+#const MAP_BOUNDS := Rect2(-1000, -1000, 2000, 2000)
+const MAP_BOUNDS := Rect2(-2040, -1587, 4079, 3174)
 # Durée de la nuit en secondes
 #const NIGHT_DURATION: float = 150.0  # 2 minutes 30 secondes
 const NIGHT_DURATION: float = 5.0  # 2 minutes 30 secondes
