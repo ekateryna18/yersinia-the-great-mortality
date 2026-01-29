@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d0j3hindseqx1"]
+
+[ext_resource type="Texture2D" uid="uid://cd88xbdyxduqq" path="res://pngs/map/Map nuit.png" id="1_7tjh5"]
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=394858962]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1277644790]
+texture = ExtResource("1_7tjh5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=275938353]
+polygon = PackedVector2Array(-1185, -492, -761, -653, -647, -619, -179, -837, -16, -776, 155, -833, 379, -733, 446, -740, 830, -579, 920, -542, 990, -1087, -12, -1438, -1757, -756, -1710, -175, -1616, -205, -1606, -265, -1239, -385, -1242, -469)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." unique_id=1214498692]
+polygon = PackedVector2Array(-1713, -166, -1717, -71, -1629, -12, -886, -335, -452, -107, -868, 73, -640, 209, -636, 576, -826, 655, -1084, 503, -1159, 557, -1886, 139)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=829172724]
+build_mode = 1
+polygon = PackedVector2Array(-625, 213, -314, 75, -78, 293, -78, 293, -78, 293, -194, 360, -154, 453, -261, 498, -345, 449, -674, 600)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="." unique_id=1405006009]
+polygon = PackedVector2Array(-340, 917, 131, 676, 527, 874)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="." unique_id=1960135385]
+polygon = PackedVector2Array(-1170, 549, 41, 1238, 1037, 684, 1236, 958, 57, 1518, -1218, 759)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="." unique_id=1325223374]
+polygon = PackedVector2Array(869, 673, 420, 451, 1109, 64, 704, -101, 695, -403, 927, -537, 1781, -123, 1051, 673, 962, 611)
