@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://hp1stspb2mgt"]
+
+[ext_resource type="Texture2D" uid="uid://5u33uyt5ks7y" path="res://assets/sprites/ennemies/Boss.png" id="1_d36rr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppvyt"]
+radius = 43.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hl3ms"]
+radius = 89.02247
+
+[node name="RatBoss" type="CharacterBody2D" unique_id=2144217848]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1514734459]
+position = Vector2(6, -43)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_d36rr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321523956]
+position = Vector2(7, 6)
+shape = SubResource("CircleShape2D_ppvyt")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=401184882]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1118284366]
+position = Vector2(-3, -20)
+shape = SubResource("CircleShape2D_hl3ms")
