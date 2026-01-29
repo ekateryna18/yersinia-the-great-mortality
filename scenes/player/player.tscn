@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://pbuaw38ob0uh"]
 
 [ext_resource type="Script" uid="uid://b2qvjee6altly" path="res://scripts/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://0gaki7cmt5e2" path="res://assets/sprites/player/player.png" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://bmlmqkj8u4tth" path="res://assets/sprites/player/player.png" id="2_dovo2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
-radius = 4.3333344
-height = 15.333335
+radius = 7.666667
+height = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 70.0
@@ -18,17 +18,16 @@ scale = Vector2(3, 3)
 collision_mask = 3
 script = ExtResource("1_8afob")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
+position = Vector2(0.6666666, -26.666668)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_dovo2")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
 modulate = Color(0.15, 0.15, 0.15, 1)
-position = Vector2(0.06666708, -0.03333378)
+position = Vector2(0.33333334, 0.33333337)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dovo2")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
-modulate = Color(0.687105, 0.39554548, 0.5341942, 1)
-position = Vector2(7.7333336, -21.033333)
-scale = Vector2(0.20000002, 0.20000002)
-texture = ExtResource("2_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=744076470]
 position_smoothing_enabled = true
