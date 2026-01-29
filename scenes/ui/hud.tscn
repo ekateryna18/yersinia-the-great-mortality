@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2w1uafphli8s" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
 [ext_resource type="Script" uid="uid://g11x0unwsuxg" path="res://scripts/npcs/dialog_layer.gd" id="2_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://dttm5re2k76uw" path="res://assets/textures/backgrund.png" id="2_oj5la"]
 [ext_resource type="Script" uid="uid://bbt2f2m01ffn2" path="res://addons/virtual_joystick/virtual_joystick.gd" id="3_136eg"]
 [ext_resource type="Texture2D" uid="uid://dlovdqua02ufe" path="res://addons/virtual_joystick/resources/textures/joystick_texture_2.png" id="4_136eg"]
 [ext_resource type="Texture2D" uid="uid://h4fgt60qc6us" path="res://addons/virtual_joystick/resources/textures/stick_texture_2.png" id="5_oj5la"]
@@ -43,27 +44,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Ennemis: 0/8"
 
-[node name="StartNightButton" type="Button" parent="." unique_id=2078896820]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -42.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.8245869, 0.938009, 0.3473881, 1)
-theme_override_font_sizes/font_size = 24
-text = "▶ Commencer la Nuit"
-
-[node name="TransitionOverlay" type="ColorRect" parent="." unique_id=98044908]
+[node name="TransitionOverlay" type="TextureRect" parent="." unique_id=1983690563]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 384.0
+offset_bottom = 376.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.75, 0.75)
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("2_oj5la")
 
 [node name="TransitionLabel" type="Label" parent="." unique_id=691195398]
 visible = false
@@ -78,7 +70,7 @@ offset_right = 48.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.04000002, 0.04000002, 1)
+theme_override_colors/font_color = Color(1, 0.45, 0.45, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 48
@@ -161,7 +153,7 @@ offset_top = -226.0
 offset_right = 212.0
 offset_bottom = -24.0
 grow_vertical = 0
-pivot_offset = Vector2(110, 110)
+pivot_offset = Vector2(101, 101)
 script = ExtResource("3_136eg")
 joystick_texture = ExtResource("4_136eg")
 stick_texture = ExtResource("5_oj5la")

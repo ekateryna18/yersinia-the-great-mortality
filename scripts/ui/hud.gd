@@ -4,10 +4,10 @@ extends CanvasLayer
 @onready var timer_label: Label = $VBoxContainer/TimerLabel
 @onready var player_stats_label: Label = $VBoxContainer/PlayerStatsLabel
 @onready var debug_button: Button = $VBoxContainer/DebugButton
-@onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
+#@onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
 @onready var enemy_count_label: Label = $VBoxContainer/EnemyCountLabel
 @onready var transition_label: Label = $TransitionLabel
-@onready var transition_overlay: ColorRect = $TransitionOverlay 
+@onready var transition_overlay: TextureRect = $TransitionOverlay 
 
 var player: CharacterBody2D = null
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	# Connecter les boutons
 	debug_button.pressed.connect(_on_debug_button_pressed)
-	start_night_button.pressed.connect(_on_start_night_button_pressed)
+	#start_night_button.pressed.connect(_on_start_night_button_pressed)
 	
 	# Cacher la transition au début
 	if transition_label:
@@ -46,7 +46,7 @@ func update_display() -> void:
 		phase_label.text = "Pas de run actif"
 		timer_label.text = ""
 		player_stats_label.text = ""
-		start_night_button.visible = false
+		#start_night_button.visible = false
 		return
 	
 	# === PHASE ET NUIT ===
@@ -89,17 +89,33 @@ func update_display() -> void:
 	if GameManager.is_night():
 		var enemies = get_tree().get_nodes_in_group("enemies")
 		var enemy_count = enemies.size()
-		var kills = 0
-		if GameManager.current_run:
-			kills = GameManager.current_run.stats_run.get("kills", 0)
 		
-		enemy_count_label.text = "Ennemis: %d | Kills: %d" % [enemy_count, kills]
+		var kills = 0
+		var kills_normal = 0
+		var kills_mutant = 0
+		var boss_killed = false
+		
+		if GameManager.current_run:
+			var stats = GameManager.current_run.stats_run
+			kills = stats.get("kills", 0)
+			kills_normal = stats.get("kills_normal", 0)
+			kills_mutant = stats.get("kills_mutant", 0)
+			boss_killed = stats.get("boss_killed", false)
+		
+		enemy_count_label.text = "Ennemis: %d | Kills: %d (N:%d M:%d) | Boss: %s" % [
+			enemy_count,
+			kills,
+			kills_normal,
+			kills_mutant,
+			"OK" if boss_killed else "--"
+		]
 		enemy_count_label.visible = true
 	else:
 		enemy_count_label.visible = false
+	#print(enemy_count_label)
 	# === BOUTON START NIGHT ===
 	# Visible uniquement en JOUR
-	start_night_button.visible = GameManager.is_day()
+	#start_night_button.visible = GameManager.is_day()
 
 func _on_phase_changed(_new_phase) -> void:
 	update_display()
@@ -117,11 +133,11 @@ func _on_debug_button_pressed() -> void:
 	else:
 		GameManager.transition_to_day()
 
-func _on_start_night_button_pressed() -> void:
-	# Démarrer la nuit uniquement si on est en JOUR
-	if GameManager.is_day():
-		print(">>> Joueur démarre la nuit manuellement! <<<")
-		GameManager.transition_to_night()
+#func _on_start_night_button_pressed() -> void:
+	## Démarrer la nuit uniquement si on est en JOUR
+	#if GameManager.is_day():
+		#print(">>> Joueur démarre la nuit manuellement! <<<")
+		#GameManager.transition_to_night()
 
 # ============================================
 # VICTOIRE / DÉFAITE
@@ -153,9 +169,10 @@ func show_victory() -> void:
 		transition_label.text = "🎉 VICTOIRE! 🎉\n\nVous avez survécu aux 5 nuits!\nGloire totale: %d" % total_gloire
 		transition_label.add_theme_color_override("font_color", Color.GOLD)
 		transition_label.visible = true
+		print(GameManager.current_run.stats_run)
 	
 	# Attendre 3 secondes
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(5.0).timeout
 	
 	# Cacher la transition
 	hide_transition()
@@ -172,9 +189,11 @@ func show_defeat_night5() -> void:
 		transition_label.text = "💀 DÉFAITE 💀\n\nVous n'avez pas survécu à la Nuit 5...\nRetour au Jour 5"
 		transition_label.add_theme_color_override("font_color", Color.RED)
 		transition_label.visible = true
+	print(GameManager.current_run.stats_run)
+	
 	
 	# Attendre 2 secondes
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(5.0).timeout
 	
 	# Cacher la transition
 	hide_transition()
@@ -194,7 +213,7 @@ func show_game_over() -> void:
 		transition_label.visible = true
 	
 	# Attendre 2 secondes
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(5.0).timeout
 	
 	# Cacher la transition
 	hide_transition()

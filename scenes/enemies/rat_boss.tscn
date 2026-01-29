@@ -1,14 +1,21 @@
-[gd_scene format=3 uid="uid://hp1stspb2mgt"]
+[gd_scene format=3 uid="uid://buwg3sx6dph4o"]
 
-[ext_resource type="Texture2D" uid="uid://5u33uyt5ks7y" path="res://assets/sprites/ennemies/Boss.png" id="1_d36rr"]
+[ext_resource type="Texture2D" uid="uid://bho0pc0x4brhv" path="res://assets/sprites/ennemies/Boss.png" id="1_d36rr"]
+[ext_resource type="Script" uid="uid://bf0a76dxv7hpw" path="res://scripts/enemies/rat.gd" id="1_ppvyt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ppvyt"]
-radius = 43.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ppvyt"]
+radius = 25.0
+height = 98.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hl3ms"]
 radius = 89.02247
 
 [node name="RatBoss" type="CharacterBody2D" unique_id=2144217848]
+scale = Vector2(3, 3)
+collision_mask = 3
+platform_floor_layers = 4294901760
+script = ExtResource("1_ppvyt")
+enemy_type = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1514734459]
 position = Vector2(6, -43)
@@ -17,7 +24,8 @@ texture = ExtResource("1_d36rr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321523956]
 position = Vector2(7, 6)
-shape = SubResource("CircleShape2D_ppvyt")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ppvyt")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=401184882]
 

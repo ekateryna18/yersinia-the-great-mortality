@@ -1,14 +1,21 @@
-[gd_scene format=3 uid="uid://btqh22rqe84pk"]
+[gd_scene format=3 uid="uid://bavtaa2v7drbu"]
 
-[ext_resource type="Texture2D" uid="uid://gpeccwhm22tl" path="res://assets/sprites/ennemies/rat_mutant.png" id="1_f1co2"]
+[ext_resource type="Texture2D" uid="uid://blajw3vtrap6u" path="res://assets/sprites/ennemies/rat_mutant.png" id="1_f1co2"]
+[ext_resource type="Script" uid="uid://bf0a76dxv7hpw" path="res://scripts/enemies/rat.gd" id="1_vwl6o"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f1co2"]
-radius = 23.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwl6o"]
+radius = 14.666667
+height = 56.666668
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwl6o"]
 radius = 65.0
 
 [node name="RatMutant" type="CharacterBody2D" unique_id=2144217848]
+scale = Vector2(3, 3)
+collision_mask = 3
+platform_floor_layers = 4294901760
+script = ExtResource("1_vwl6o")
+enemy_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1873468555]
 position = Vector2(-7, -42)
@@ -17,7 +24,8 @@ texture = ExtResource("1_f1co2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158743512]
 position = Vector2(6, 1)
-shape = SubResource("CircleShape2D_f1co2")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_vwl6o")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1215414824]
 
