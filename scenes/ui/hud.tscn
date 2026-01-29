@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://g11x0unwsuxg" path="res://scripts/npcs/dialog_layer.gd" id="2_hqnrr"]
 [ext_resource type="Texture2D" uid="uid://dttm5re2k76uw" path="res://assets/textures/backgrund.png" id="2_oj5la"]
 [ext_resource type="Script" uid="uid://bbt2f2m01ffn2" path="res://addons/virtual_joystick/virtual_joystick.gd" id="3_136eg"]
+[ext_resource type="Texture2D" uid="uid://buw242mqqfnkr" path="res://assets/textures/screen.png" id="3_gss2c"]
 [ext_resource type="Texture2D" uid="uid://dlovdqua02ufe" path="res://addons/virtual_joystick/resources/textures/joystick_texture_2.png" id="4_136eg"]
+[ext_resource type="Texture2D" uid="uid://br3tbaugyre12" path="res://assets/textures/Picto_gloire.png" id="4_h022r"]
 [ext_resource type="Texture2D" uid="uid://h4fgt60qc6us" path="res://addons/virtual_joystick/resources/textures/stick_texture_2.png" id="5_oj5la"]
 
 [node name="HUD" type="CanvasLayer" unique_id=282475024]
@@ -24,6 +26,8 @@ text = "JOUR 1"
 [node name="DebugButton" type="Button" parent="VBoxContainer" unique_id=184318949]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 text = "Passer NUIT/JOUR (DEBUG)"
 
 [node name="TimerLabel" type="Label" parent="VBoxContainer" unique_id=1785767576]
@@ -44,41 +48,269 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Ennemis: 0/8"
 
-[node name="TransitionOverlay" type="TextureRect" parent="." unique_id=1983690563]
+[node name="ScreenTemplate" type="Control" parent="." unique_id=326770978]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 384.0
-offset_bottom = 376.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.75, 0.75)
-mouse_filter = 2
-texture = ExtResource("2_oj5la")
-
-[node name="TransitionLabel" type="Label" parent="." unique_id=691195398]
-visible = false
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -11.5
-offset_right = 48.0
-offset_bottom = 11.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 950.0
+offset_bottom = 611.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.45, 0.45, 1)
+
+[node name="TransitionOverlay" type="TextureRect" parent="ScreenTemplate" unique_id=1983690563]
+layout_mode = 0
+offset_right = 1536.0
+offset_bottom = 1024.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+texture = ExtResource("2_oj5la")
+
+[node name="Screen" type="TextureRect" parent="ScreenTemplate" unique_id=1854706176]
+self_modulate = Color(1, 1, 1, 0.53333336)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -668.0
+offset_top = -700.5
+offset_right = 1266.0
+offset_bottom = 1514.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(8.42, 0)
+texture = ExtResource("3_gss2c")
+
+[node name="Nuit" type="Label" parent="ScreenTemplate" unique_id=267336331]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -535.0
+offset_top = -385.5
+offset_right = 211.0
+offset_bottom = -340.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 48
-text = "TRANSITION"
+theme_override_font_sizes/font_size = 32
+text = "Nuit X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TransitionLabel" type="Label" parent="ScreenTemplate" unique_id=691195398]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = -314.5
+offset_right = 214.0
+offset_bottom = -269.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Récapitulatif des rats tuer cette nuit!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rats" type="Label" parent="ScreenTemplate" unique_id=47488265]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -437.0
+offset_top = -217.5
+offset_right = -232.0
+offset_bottom = -172.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Rats"
+vertical_alignment = 1
+
+[node name="Rats Mutants" type="Label" parent="ScreenTemplate" unique_id=159474225]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -437.0
+offset_top = -58.5
+offset_right = -197.0
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Rats Mutants"
+vertical_alignment = 1
+
+[node name="Boss" type="Label" parent="ScreenTemplate" unique_id=628470491]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -437.0
+offset_top = -15.5
+offset_right = -232.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Boss"
+vertical_alignment = 1
+
+[node name="GloireMutant" type="Label" parent="ScreenTemplate" unique_id=1374089183]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -66.5
+offset_right = -118.0
+offset_bottom = -21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "x10"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GloireRat" type="Label" parent="ScreenTemplate" unique_id=183818957]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -217.5
+offset_right = -114.0
+offset_bottom = -172.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "x20"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_trim_flags = 128
+
+[node name="KillsBoss" type="Label" parent="ScreenTemplate" unique_id=67472907]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -437.0
+offset_top = -217.5
+offset_right = -232.0
+offset_bottom = -172.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Rats"
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ScreenTemplate" unique_id=1543786749]
+modulate = Color(11.594878, 11.594878, 11.594878, 1)
+layout_mode = 0
+offset_left = 741.99994
+offset_top = 219.99998
+offset_right = 1289.0
+offset_bottom = 756.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_h022r")
+
+[node name="TextureRect3" type="TextureRect" parent="ScreenTemplate" unique_id=1475274823]
+modulate = Color(11.594878, 11.594878, 11.594878, 1)
+layout_mode = 0
+offset_left = 745.0
+offset_top = 371.0
+offset_right = 1292.0
+offset_bottom = 907.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_h022r")
+
+[node name="GloireMutant2" type="Label" parent="ScreenTemplate" unique_id=132843303]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -60.5
+offset_right = 65.0
+offset_bottom = -15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "1.0k"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GloireMutant3" type="Label" parent="ScreenTemplate" unique_id=720891420]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -212.5
+offset_right = 63.0
+offset_bottom = -167.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "2.0k"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="DialogLayer" type="CanvasLayer" parent="." unique_id=295762571 groups=["dialog_layer"]]
+visible = false
 script = ExtResource("2_hqnrr")
 
 [node name="DialogBox" type="Panel" parent="DialogLayer" unique_id=1528363263]

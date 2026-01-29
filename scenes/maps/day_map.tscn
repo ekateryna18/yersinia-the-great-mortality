@@ -35,7 +35,7 @@ collision_layer = 2
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
 modulate = Color(1, 0.03529412, 1, 1)
-position = Vector2(417, -430)
+position = Vector2(380, -407)
 
 [node name="PillierPierre" parent="." unique_id=1465816809 instance=ExtResource("3_craqd")]
 position = Vector2(-1078, 651)
