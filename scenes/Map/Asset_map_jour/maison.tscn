@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://fs8bb7gjql5f"]
+
+[ext_resource type="Texture2D" uid="uid://dujjflu037wqc" path="res://pngs/map/détourage map jour/maison détouré.png" id="1_nf22j"]
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1049899658]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1361659604]
+position = Vector2(87, -482)
+texture = ExtResource("1_nf22j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=510893967]
+build_mode = 1
+polygon = PackedVector2Array(-49, 400, 837, -284, 194, -979, -380, -537, -692, -17)

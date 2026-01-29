@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dit7kw0kuo2u8"]
+
+[ext_resource type="PackedScene" uid="uid://cgeue1wsbomt7" path="res://scenes/maps/map_boss.tscn" id="1_eri5b"]
+[ext_resource type="PackedScene" uid="uid://doufhtd06sbss" path="res://scenes/maps/Asset_map_boss/pillier1.tscn" id="2_d807u"]
+[ext_resource type="PackedScene" uid="uid://tsmgm7467r2t" path="res://scenes/maps/Asset_map_boss/pillier2.tscn" id="3_6tm7i"]
+[ext_resource type="PackedScene" uid="uid://dn54ycw4en2g6" path="res://scenes/maps/Asset_map_boss/pillier3.tscn" id="4_kdgc3"]
+
+[node name="Node2D" type="Node2D" unique_id=1510212934]
+
+[node name="StaticBody2D" parent="." unique_id=2022060641 instance=ExtResource("1_eri5b")]
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=2140464452]
+modulate = Color(1, 0.03529412, 1, 1)
+position = Vector2(-671, -438)
+
+[node name="Pillier1" parent="." unique_id=66994393 instance=ExtResource("2_d807u")]
+position = Vector2(-1227, 620)
+scale = Vector2(0.3, 0.3)
+
+[node name="Pillier2" parent="." unique_id=1159924095 instance=ExtResource("3_6tm7i")]
+position = Vector2(-744, 818)
+scale = Vector2(0.35, 0.35)
+
+[node name="Pillier3" parent="." unique_id=517224624 instance=ExtResource("4_kdgc3")]
+position = Vector2(1030, 852)
+scale = Vector2(0.35, 0.35)

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://12ho6i21c2vi"]
+
+[ext_resource type="Texture2D" uid="uid://bna5h21m0spre" path="res://pngs/map/détourage map jour/pierre mileu de chemin détouré.png" id="1_sru80"]
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1310801870]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1979768910]
+position = Vector2(-301, -292)
+texture = ExtResource("1_sru80")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=819574340]
+position = Vector2(-301, -292)
+polygon = PackedVector2Array(305, 646, 691, 418, 750, 238, 511, 73, 74, 47, -415, -225, -547, -126, -522, 202, -128, 521)
