@@ -290,6 +290,7 @@ func load_night_map() -> void:
 func load_boss_map() -> void:
 	print("Loading Boss Map...")
 	change_scene("res://scenes/maps/boss_map.tscn")
+	
 func change_scene(scene_path: String) -> void:
 	print("=== Changing Scene ===")
 	print("From: ", current_map_scene.name if current_map_scene else "None")
@@ -370,18 +371,20 @@ func on_player_death() -> void:
 		print("Retour au Jour 5...")
 		
 		# Attendre l'écran de transition (2 secondes)
-		await get_tree().create_timer(2.0).timeout
+		#await get_tree().create_timer(2.0).timeout
 		
 		# Retourner au JOUR 5 (pas recommencer)
-		current_run.player_alive = true
-		current_run.stats_run["kills"] = 0
-		set_phase(GamePhase.DAY)
+		#current_run.player_alive = true
+		#current_run.stats_run["kills"] = 0
+		#set_phase(GamePhase.DAY)
+		start_new_run()
+		
 	else:
 		print("💀 Mort durant Nuit ", current_night)
 		print("Game Over - Restarting run in 2 seconds...")
 		
 		# Attendre l'écran de transition
-		await get_tree().create_timer(2.0).timeout
+		#await get_tree().create_timer(2.0).timeout
 		
 		# Game Over complet - Nouveau run
 		start_new_run()
