@@ -13,10 +13,11 @@
 script = ExtResource("1_lj3rd")
 
 [node name="map_jour" parent="." unique_id=615072872 instance=ExtResource("2_fdkvc")]
+collision_layer = 2
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
 modulate = Color(1, 0.03529412, 1, 1)
-position = Vector2(50, 150)
+position = Vector2(453, -471)
 
 [node name="PillierPierre" parent="." unique_id=1465816809 instance=ExtResource("3_craqd")]
 position = Vector2(-1078, 651)
@@ -50,12 +51,12 @@ position = Vector2(192, 200)
 npc_name = "Merchant"
 
 [node name="NPC2" parent="NPCs" unique_id=1029887369 instance=ExtResource("2_g8tqy")]
-position = Vector2(392, 32)
+position = Vector2(-851, 393)
 npc_type = 1
 npc_name = "Blacksmith"
 
 [node name="NPC3" parent="NPCs" unique_id=1526567549 instance=ExtResource("2_g8tqy")]
-position = Vector2(-40, -184)
+position = Vector2(-1076, -220)
 npc_type = 2
 npc_name = "Wizard"
 
@@ -65,9 +66,9 @@ npc_type = 3
 npc_name = "Sick"
 
 [node name="NPC5" parent="NPCs" unique_id=1677287738 instance=ExtResource("2_g8tqy")]
-position = Vector2(452, -383)
+position = Vector2(652, -236)
 npc_type = 4
 
 [node name="NPC6" parent="NPCs" unique_id=1533369597 instance=ExtResource("2_g8tqy")]
-position = Vector2(-655, 617)
+position = Vector2(-1053, 951)
 npc_type = 5
