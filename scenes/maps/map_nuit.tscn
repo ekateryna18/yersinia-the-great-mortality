@@ -13,20 +13,17 @@ polygon = PackedVector2Array(-1185, -492, -761, -653, -647, -619, -179, -837, -1
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." unique_id=1214498692]
 polygon = PackedVector2Array(-1713, -166, -1717, -71, -1629, -12, -886, -335, -452, -107, -868, 73, -640, 209, -636, 576, -826, 655, -1084, 503, -1159, 557, -1886, 139)
 
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=829172724]
-build_mode = 1
-polygon = PackedVector2Array(-625, 213, -314, 75, -78, 293, -78, 293, -78, 293, -194, 360, -154, 453, -261, 498, -345, 449, -674, 600)
-
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="." unique_id=1405006009]
-polygon = PackedVector2Array(-340, 917, 131, 676, 527, 874)
+polygon = PackedVector2Array(-340, 917, 131, 676, 527, 874, 49, 1140)
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="." unique_id=1960135385]
 polygon = PackedVector2Array(-1170, 549, 41, 1238, 1037, 684, 1236, 958, 57, 1518, -1218, 759)
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="." unique_id=1325223374]
-polygon = PackedVector2Array(869, 673, 420, 451, 1109, 64, 704, -101, 695, -403, 927, -537, 1781, -123, 1051, 673, 962, 611)
+polygon = PackedVector2Array(869, 673, 420, 451, 1109, 64, 697, -88, 695, -403, 927, -537, 1781, -123, 1051, 673, 962, 611)
 
-[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="." unique_id=1096862423]
-build_mode = 1
-polygon = PackedVector2Array(136, 190, 136, 190, 707, -83, 707, -83, 698, -405, 698, -411, 24, -691, 24, -691, -596, -433, 20, -117, -113, -10, -113, -10)
-disabled = true
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=1347773604]
+polygon = PackedVector2Array(143, 200, 693, -79, 693, -407, 10, -698, 10, -698, -605, -415, -19, -104, -91, -11)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="." unique_id=613127318]
+polygon = PackedVector2Array(-168, 361, -59, 288, -302, 78, -653, 204, -625, 580, -346, 446, -346, 446, -196, 487)
