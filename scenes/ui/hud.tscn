@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bchs8um1bxxbh"]
 
 [ext_resource type="Script" uid="uid://c2w1uafphli8s" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="Script" uid="uid://g11x0unwsuxg" path="res://scripts/npcs/dialog_layer.gd" id="2_hqnrr"]
 
 [node name="HUD" type="CanvasLayer" unique_id=282475024]
 script = ExtResource("1_0mwgc")
@@ -81,3 +82,68 @@ theme_override_font_sizes/font_size = 48
 text = "TRANSITION"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DialogLayer" type="CanvasLayer" parent="." unique_id=295762571 groups=["dialog_layer"]]
+script = ExtResource("2_hqnrr")
+
+[node name="DialogBox" type="Panel" parent="DialogLayer" unique_id=1528363263]
+anchors_preset = -1
+anchor_top = -0.08179013
+anchor_right = 0.9626736
+anchor_bottom = 0.17438272
+offset_left = 2.0
+offset_top = 491.0
+offset_right = 42.0
+offset_bottom = 531.0
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="Label" parent="DialogLayer/DialogBox" unique_id=1142965695]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Bonjour, je m'appelle Aline. Tu veux savoir qui sont les traitres ?"
+
+[node name="CloseButton" type="Button" parent="DialogLayer/DialogBox" unique_id=1634781578]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 59.0
+offset_right = 1082.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 14
+text = "Fermer"
+
+[node name="Reponse1Button" type="Button" parent="DialogLayer" unique_id=326249236]
+offset_left = 52.0
+offset_top = 542.0
+offset_right = 115.0
+offset_bottom = 563.0
+
+[node name="Reponse2Button" type="Button" parent="DialogLayer" unique_id=628226337]
+offset_left = 52.0
+offset_top = 570.0
+offset_right = 113.0
+offset_bottom = 590.0
+
+[node name="Reponse3Button" type="Button" parent="DialogLayer" unique_id=1217682284]
+offset_left = 52.0
+offset_top = 510.0
+offset_right = 115.0
+offset_bottom = 529.0
+
+[node name="Reponse4Button" type="Button" parent="DialogLayer" unique_id=841656793]
+offset_left = 52.0
+offset_top = 477.0
+offset_right = 116.0
+offset_bottom = 497.0
+
+[node name="ChoixDevinetteButton" type="Button" parent="DialogLayer" unique_id=104855458]
+offset_left = 39.0
+offset_top = 483.0
+offset_right = 47.0
+offset_bottom = 491.0
+
+[node name="ChoixAttaquerButton" type="Button" parent="DialogLayer" unique_id=1788318186]
+offset_left = 39.0
+offset_top = 511.0
+offset_right = 47.0
+offset_bottom = 519.0

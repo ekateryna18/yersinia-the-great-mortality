@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://0gaki7cmt5e2" path="res://assets/sprites/player/player.png" id="2_dovo2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
-radius = 11.0
-height = 22.0
+radius = 6.666666
+height = 26.000002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 70.0
@@ -14,17 +14,19 @@ radius = 70.0
 size = Vector2(160, 160)
 
 [node name="Player" type="CharacterBody2D" unique_id=169526855]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 script = ExtResource("1_8afob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
+modulate = Color(0.15, 0.15, 0.15, 1)
+position = Vector2(-6.6666675, 17.333334)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
 modulate = Color(0.687105, 0.39554548, 0.5341942, 1)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("2_dovo2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
-position = Vector2(-8, 17)
-shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=744076470]
 position_smoothing_enabled = true

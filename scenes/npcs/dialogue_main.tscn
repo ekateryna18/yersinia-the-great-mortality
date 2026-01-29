@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c3ydicufl77b6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1765076576]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1043659581]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1911010713]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1148948516]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Aline" type="Node2D" parent="." unique_id=1697229694]
+
+[node name="Sprite2D" type="Sprite2D" parent="Aline" unique_id=768227157]
+
+[node name="InteractArea" type="Area2D" parent="Aline" unique_id=1657778053]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aline/InteractArea" unique_id=1681777956]
+shape = SubResource("CircleShape2D_h2yge")
+
+[node name="DialogLayer" type="CanvasLayer" parent="." unique_id=1583590996 groups=["dialog_layer"]]
+
+[node name="TalkButton" type="Button" parent="DialogLayer" unique_id=426802927]
+offset_left = 1026.0
+offset_top = 459.0
+offset_right = 1081.0
+offset_bottom = 490.0
+text = "Parler"
+
+[node name="DialogBox" type="ColorRect" parent="DialogLayer" unique_id=240506515]
+anchors_preset = -1
+anchor_top = -0.08179013
+anchor_right = 0.9626736
+anchor_bottom = 0.17438272
+offset_left = 2.0
+offset_top = 491.0
+offset_right = 42.0
+offset_bottom = 531.0
+color = Color(0, 0, 0, 0.4745098)
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="Label" parent="DialogLayer/DialogBox" unique_id=548924610]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Bonjour, je m'appelle Aline. Tu veux savoir qui sont les traitres ?"
+
+[node name="CloseButton" type="Button" parent="DialogLayer/DialogBox" unique_id=1349842754]
+layout_mode = 0
+offset_left = 1065.0
+offset_top = 10.0
+offset_right = 1073.0
+offset_bottom = 18.0
+
+[node name="Reponse1Button" type="Button" parent="DialogLayer" unique_id=2097949347]
+offset_left = 52.0
+offset_top = 542.0
+offset_right = 115.0
+offset_bottom = 563.0
+
+[node name="Reponse2Button" type="Button" parent="DialogLayer" unique_id=1650582114]
+offset_left = 52.0
+offset_top = 570.0
+offset_right = 113.0
+offset_bottom = 590.0
+
+[node name="Reponse3Button" type="Button" parent="DialogLayer" unique_id=717893312]
+offset_left = 52.0
+offset_top = 510.0
+offset_right = 115.0
+offset_bottom = 529.0
+
+[node name="Reponse4Button" type="Button" parent="DialogLayer" unique_id=2037065574]
+offset_left = 52.0
+offset_top = 477.0
+offset_right = 116.0
+offset_bottom = 497.0
+
+[node name="ChoixDevinetteButton" type="Button" parent="DialogLayer" unique_id=829301950]
+offset_left = 39.0
+offset_top = 483.0
+offset_right = 47.0
+offset_bottom = 491.0
+
+[node name="ChoixAttaquerButton" type="Button" parent="DialogLayer" unique_id=1457882497]
+offset_left = 39.0
+offset_top = 511.0
+offset_right = 47.0
+offset_bottom = 519.0
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=1288708874]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Content" unique_id=1135606051]
+layout_mode = 2
+
+[connection signal="pressed" from="DialogLayer/TalkButton" to="DialogLayer" method="_on_talk_button_pressed"]
