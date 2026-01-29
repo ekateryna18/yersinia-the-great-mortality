@@ -1,95 +1,118 @@
 extends CharacterBody2D
 
-# Stats du joueur
 @export var speed: float = 300.0
 @export var max_health: float = 100.0
 @export var damage: float = 10.0
 @export var armor: float = 0.0
-@export var attack_cooldown: float = 0.2  # Attaque toutes les 0.5 secondes
+@export var attack_cooldown: float = 0.5
 
 var current_health: float
 var is_frozen: bool = false
 var last_attack_time: float = 0.0
 
-# Références
+# Mobile controls
+var joystick_input: Vector2 = Vector2.ZERO
+var joystick: Node = null
+
 @onready var attack_area: Area2D = $AttackArea
 
 func _ready() -> void:
 	current_health = max_health
 	add_to_group("player")
+	connect_to_joystick()
 	print("Player ready - HP: %d/%d | Damage: %d" % [current_health, max_health, damage])
 
+func connect_to_joystick() -> void:
+	await get_tree().process_frame
+	
+	var hud = get_tree().root.get_node_or_null("Main/HUD")
+	if hud and hud.has_node("MovementJoystick"):
+		joystick = hud.get_node("MovementJoystick")
+		
+		# ✅ Connecter au signal analogic_changed
+		if joystick.has_signal("analogic_changed"):
+			joystick.analogic_changed.connect(_on_joystick_moved)
+			print("✅ Virtual Joystick connected (analogic_changed)")
+		else:
+			print("⚠️ Signal analogic_changed not found")
+	else:
+		print("⚠️ Virtual Joystick not found")
+
+# Callback du joystick
+func _on_joystick_moved(value: Vector2, distance: float, angle: float, angle_clockwise: float, angle_not_clockwise: float) -> void:
+	# value est la direction du joystick (Vector2 normalisé)
+	joystick_input = value
+
 func _physics_process(delta: float) -> void:
-	# Si le joueur est gelé, ne pas bouger
 	if is_frozen:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 	
-	# Récupérer l'input (ZQSD ou flèches)
 	var input_vector := Vector2.ZERO
-	input_vector.x = Input.get_axis("ui_left", "ui_right")
-	input_vector.y = Input.get_axis("ui_up", "ui_down")
 	
-	# Normaliser pour éviter mouvement diagonal plus rapide
-	input_vector = input_vector.normalized()
+	# Input clavier (pour tester sur PC)
+	var keyboard_input := Vector2.ZERO
+	keyboard_input.x = Input.get_axis("ui_left", "ui_right")
+	keyboard_input.y = Input.get_axis("ui_up", "ui_down")
 	
-	# Appliquer le mouvement
+	# Combiner inputs (joystick prioritaire si actif)
+	if joystick_input.length() > 0.1:
+		input_vector = joystick_input
+	else:
+		input_vector = keyboard_input
+	
+	# Normaliser
+	if input_vector.length() > 1.0:
+		input_vector = input_vector.normalized()
+	
+	# Appliquer mouvement
 	velocity = input_vector * speed
-	
-	# Déplacer le personnage
 	move_and_slide()
 	
 	# Limiter à la map
-	if GameManager.is_within_bounds(global_position) == false:
+	if not GameManager.is_within_bounds(global_position):
 		global_position = GameManager.clamp_to_bounds(global_position)
 
 func _process(delta: float) -> void:
-	# Auto-attack en continu
 	auto_attack()
 
 func auto_attack() -> void:
-	# Vérifier le cooldown
 	var current_time = Time.get_ticks_msec() / 1000.0
 	if current_time - last_attack_time < attack_cooldown:
 		return
 	
-	# Vérifier qu'on est en nuit (pas d'attaque en jour)
 	if not GameManager.is_night():
 		return
 	
-	# Trouver tous les ennemis dans la zone d'attaque
 	if not attack_area:
 		return
 	
 	var enemies_in_range = attack_area.get_overlapping_bodies()
 	
 	if enemies_in_range.size() > 0:
-		# Attaquer le premier ennemi trouvé
 		for enemy in enemies_in_range:
 			if enemy.is_in_group("enemies"):
 				if enemy.has_method("take_damage"):
 					enemy.take_damage(damage)
 					last_attack_time = current_time
-					print("Player attacked enemy for ", damage, " damage")
-					# Feedback visuel simple
 					flash_attack()
-					break  # Attaquer un seul ennemi à la fois
+					break
 
 func flash_attack() -> void:
-	# Flash du sprite
-	if has_node("Sprite2D2"):
-		var sprite = get_node("Sprite2D2")
+	if has_node("Sprite2D"):
+		var sprite = get_node("Sprite2D")
 		sprite.modulate = Color.YELLOW
 		await get_tree().create_timer(0.1).timeout
-		sprite.modulate = Color.WHITE
+		if is_instance_valid(sprite):
+			sprite.modulate = Color.WHITE
 	
-	# Afficher l'effet d'attaque (si existe)
 	if has_node("AttackEffect"):
 		var effect = get_node("AttackEffect")
 		effect.visible = true
 		await get_tree().create_timer(0.15).timeout
-		effect.visible = false
+		if is_instance_valid(effect):
+			effect.visible = false
 
 func freeze() -> void:
 	is_frozen = true
@@ -114,14 +137,10 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	print("Player died!")
-	
-	# Désactiver immédiatement le joueur
 	set_physics_process(false)
 	set_process(false)
 	set_process_input(false)
 	visible = false
-	
-	# Notifier le GameManager immédiatement
 	GameManager.on_player_death()
 
 func get_health_percent() -> float:
