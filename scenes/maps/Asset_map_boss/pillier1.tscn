@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://doufhtd06sbss"]
+
+[ext_resource type="Texture2D" uid="uid://ba3df5375kdgr" path="res://pngs/map/détourage map boss final/poteau 1.png" id="1_h78lc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h78lc"]
+radius = 92.086914
+
+[node name="Pillier1" type="StaticBody2D" unique_id=66994393]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1970089066]
+position = Vector2(-12, -571)
+texture = ExtResource("1_h78lc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=662831265]
+shape = SubResource("CircleShape2D_h78lc")

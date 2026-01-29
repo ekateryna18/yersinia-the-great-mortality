@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cgeue1wsbomt7"]
+
+[ext_resource type="Texture2D" uid="uid://b306jks6s4r8g" path="res://pngs/map/map boss final.png" id="1_v6st6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v6st6"]
+a = Vector2(225, 114)
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=2022060641]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=755312141]
+texture = ExtResource("1_v6st6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=122055555]
+polygon = PackedVector2Array(-591, -589, -885, -427, -713, -193, -885, -193, -963, -188, -1022, -271, -1212, -232, -1354, -163, -1418, -12, -1437, 121, -1359, 204, -1344, 277, -1472, 297, -1286, 522, -1374, 683, -1888, 86, -987, -838, -258, -1068, 823, -951, 1611, -545, 2012, 306, 1934, 884, 1484, 1031, 1102, 918, 1156, 737, 1449, 879, 1645, 786, 1699, 615, 1660, 463, 1679, 355, 1611, 272, 1454, 326, 1190, 199, 1097, -21, 1097, -134, 937, -181, 1214, -481, 955, -633, 838, -555, 603, -364, 534, -427, 534, -569, 353, -609, 94, -657, -165, -633, -422, -590, -301, -448, -390, -398)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." unique_id=1674404707]
+polygon = PackedVector2Array(-597, 911, -909, 1288, -592, 1428, -269, 955, 102, 976, 463, 938, 727, 831, 861, 712, 1023, 868, -263, 1369, -613, 1595, -1227, 1321, -1227, 1321, -1221, 750, -1087, 621, -834, 766)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1775350992]
+position = Vector2(-1294, 515)
+shape = SubResource("SegmentShape2D_v6st6")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=1609825543]
+polygon = PackedVector2Array(868, 714, 1016, 631, 1160, 745, 1160, 745, 1039, 862)
