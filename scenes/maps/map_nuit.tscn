@@ -25,3 +25,8 @@ polygon = PackedVector2Array(-1170, 549, 41, 1238, 1037, 684, 1236, 958, 57, 151
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="." unique_id=1325223374]
 polygon = PackedVector2Array(869, 673, 420, 451, 1109, 64, 704, -101, 695, -403, 927, -537, 1781, -123, 1051, 673, 962, 611)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="." unique_id=1096862423]
+build_mode = 1
+polygon = PackedVector2Array(136, 190, 136, 190, 707, -83, 707, -83, 698, -405, 698, -411, 24, -691, 24, -691, -596, -433, 20, -117, -113, -10, -113, -10)
+disabled = true

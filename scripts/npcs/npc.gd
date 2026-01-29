@@ -11,13 +11,13 @@ enum NPCType {
 }
 
 const NPC_SPRITES = {
-	#NPCType.MERCHANT: "res://assets/sprites/npcs/merchant.png",
+	NPCType.MERCHANT: "res://assets/sprites/npcs/merchant.png",
 	NPCType.BLACKSMITH: "res://assets/sprites/npcs/blacksmith.png",
 	NPCType.WIZARD: "res://assets/sprites/npcs/wizard.png",
-	#NPCType.SICK: "res://assets/sprites/npcs/sick.png",
-	#NPCType.GENERIC_1: "res://assets/sprites/npcs/villager.png",
-	#NPCType.GENERIC_2: "res://assets/sprites/npcs/villager.png",
-	#NPCType.GENERIC_3: "res://assets/sprites/npcs/villager.png",
+	NPCType.SICK: "res://assets/sprites/npcs/sick.png",
+	NPCType.GENERIC_1: "res://assets/sprites/npcs/villager.png",
+	NPCType.GENERIC_2: "res://assets/sprites/npcs/villager.png",
+	NPCType.GENERIC_3: "res://assets/sprites/npcs/villager.png",
 }
 
 @export var npc_type: NPCType = NPCType.MERCHANT
@@ -123,13 +123,15 @@ func load_sprite() -> void:
 			# Échelle selon le type
 			match npc_type:
 				NPCType.MERCHANT:
-					sprite.scale = Vector2(0.6, 0.6)  # Si 144x233
+					sprite.scale = Vector2(0.3, 0.3)  # Si 144x233
 				NPCType.BLACKSMITH:
-					sprite.scale = Vector2(0.7, 0.7)  # Si plus petit
+					sprite.scale = Vector2(0.3, 0.3)  # Si plus petit
 				NPCType.WIZARD:
-					sprite.scale = Vector2(0.6, 0.6)  # Si plus grand
+					sprite.scale = Vector2(0.3, 0.3)  # Si plus grand
+				NPCType.SICK, NPCType.GENERIC_1, NPCType.GENERIC_2, NPCType.GENERIC_3:
+					sprite.scale = Vector2(0.3, 0.3)  # Si plus petit
 				_:
-					sprite.scale = Vector2(0.5, 0.5)  # Par défaut
+					sprite.scale = Vector2(0.3, 0.3)  # Par défaut
 			
 			print("Sprite loaded: ", sprite_path)
 		else:

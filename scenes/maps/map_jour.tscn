@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crroonlpuuqyn"]
 
-[ext_resource type="Texture2D" uid="uid://3y8ec41ycq61" path="res://pngs/map/map jour.png" id="1_uw2e1"]
+[ext_resource type="Texture2D" uid="uid://gf64ess1f8oq" path="res://pngs/map/map jour.png" id="1_uw2e1"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hics3"]
 a = Vector2(284, 77)
@@ -80,5 +80,5 @@ build_mode = 1
 polygon = PackedVector2Array(-833, 626, -797, 580, -848, 498, -924, 532, -921, 620, -882, 656)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=1270125138]
-position = Vector2(-48, 340)
+position = Vector2(-46, 353)
 shape = SubResource("CircleShape2D_ndp3g")

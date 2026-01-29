@@ -17,7 +17,7 @@ collision_layer = 2
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
 modulate = Color(1, 0.03529412, 1, 1)
-position = Vector2(453, -471)
+position = Vector2(417, -430)
 
 [node name="PillierPierre" parent="." unique_id=1465816809 instance=ExtResource("3_craqd")]
 position = Vector2(-1078, 651)
@@ -51,7 +51,7 @@ position = Vector2(192, 200)
 npc_name = "Merchant"
 
 [node name="NPC2" parent="NPCs" unique_id=1029887369 instance=ExtResource("2_g8tqy")]
-position = Vector2(-851, 393)
+position = Vector2(-598, 341)
 npc_type = 1
 npc_name = "Blacksmith"
 
