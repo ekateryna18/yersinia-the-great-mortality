@@ -8,6 +8,24 @@
 [ext_resource type="PackedScene" uid="uid://26is2yhvr8kw" path="res://scenes/maps/Asset_map_jour/trucmaron.tscn" id="5_ikcmc"]
 [ext_resource type="PackedScene" uid="uid://12ho6i21c2vi" path="res://scenes/maps/Asset_map_jour/centrePrierre.tscn" id="6_jcaub"]
 [ext_resource type="PackedScene" uid="uid://fs8bb7gjql5f" path="res://scenes/maps/Asset_map_jour/maison.tscn" id="7_bvlur"]
+[ext_resource type="Script" uid="uid://dqsq5ajlyn2dt" path="res://scripts/interactables/interactive_button.gd" id="9_skqp4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_craqd"]
+bg_color = Color(0.22601682, 0.51635766, 0.45007354, 0.59607846)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skqp4"]
+bg_color = Color(0.22745098, 0.5176471, 0.4509804, 0.59607846)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_craqd"]
+radius = 170.0
 
 [node name="DayMap" type="Node2D" unique_id=2097946091]
 script = ExtResource("1_lj3rd")
@@ -72,3 +90,27 @@ npc_type = 4
 [node name="NPC6" parent="NPCs" unique_id=1533369597 instance=ExtResource("2_g8tqy")]
 position = Vector2(-1053, 951)
 npc_type = 5
+
+[node name="InteractiveButton" type="Area2D" parent="." unique_id=940749331]
+script = ExtResource("9_skqp4")
+
+[node name="StartNightButton" type="Button" parent="InteractiveButton" unique_id=1637408497]
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -692.0
+offset_right = 113.0
+offset_bottom = -610.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8245869, 0.938009, 0.3473881, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_craqd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skqp4")
+text = "▶ Entrer"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveButton" unique_id=1963346961]
+position = Vector2(55, -649)
+shape = SubResource("CircleShape2D_craqd")
