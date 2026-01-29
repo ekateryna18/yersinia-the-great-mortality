@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://crroonlpuuqyn"]
+
+[ext_resource type="Texture2D" uid="uid://14q6sp8lb7sm" path="res://pngs/map/map jour.png" id="1_uw2e1"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hics3"]
+a = Vector2(284, 77)
+b = Vector2(419, -284)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k4eiu"]
+a = Vector2(29, 33)
+b = Vector2(314, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_msdy2"]
+a = Vector2(29, 33)
+b = Vector2(433, -354)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uw2e1"]
+a = Vector2(29, 33)
+b = Vector2(260, 145)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndp3g"]
+radius = 36.496574
+
+[node name="map_jour" type="StaticBody2D" unique_id=615072872]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=837180026]
+position = Vector2(-86, -3)
+texture = ExtResource("1_uw2e1")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=2073180153]
+build_mode = 1
+polygon = PackedVector2Array(97, -423, -75, -746, 466, -699, -384, -1046, -928, -749, -1029, -369, -691, -423, -433, -519)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." unique_id=473312832]
+position = Vector2(1083, 1182)
+build_mode = 1
+polygon = PackedVector2Array(-536, -385, 154, -1084, -557, -429, -870, -585, -744, -765, -948, -894, -1122, -750, -1075, -662)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=156196229]
+position = Vector2(1294, -198)
+build_mode = 1
+polygon = PackedVector2Array(-532, 74, -287, 289, 99, 333, -1059, -521, -997, -332, -576, -98, -400, 0)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="." unique_id=1564990338]
+position = Vector2(2166, 2364)
+build_mode = 1
+polygon = PackedVector2Array(-2155, -993, -1708, -1261, -2333, -1742, -2406, -1715, -2553, -1648, -2677, -1672, -2794, -1632, -3081, -1414, -2847, -1267)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=13918019]
+position = Vector2(142, 1023)
+shape = SubResource("SegmentShape2D_hics3")
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="." unique_id=897414638]
+position = Vector2(-1045, 1531)
+build_mode = 1
+polygon = PackedVector2Array(-496, -373, -347, -630, -395, -944, 82, -1146, -152, -1510, -213, -1777, 87, -1894, -771, -1793, -884, -736)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=199899235]
+position = Vector2(-1630, 1125)
+shape = SubResource("SegmentShape2D_k4eiu")
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="." unique_id=1592527320]
+build_mode = 1
+polygon = PackedVector2Array(-1180, 1024, -903, 1215, -923, 1305, -1070, 1395, -1070, 1395, -1334, 1211, -1324, 1064, -1324, 1064)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=295405242]
+position = Vector2(-900, 1472)
+shape = SubResource("SegmentShape2D_msdy2")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=2093452438]
+position = Vector2(-1082, 1362)
+shape = SubResource("SegmentShape2D_uw2e1")
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="." unique_id=133115428]
+build_mode = 1
+polygon = PackedVector2Array(65, 22, 171, 35, 279, 11, 281, -98, 218, -98, 125, -160, 84, -164, 36, -98, 31, -6)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="." unique_id=1580589794]
+build_mode = 1
+polygon = PackedVector2Array(-833, 626, -797, 580, -848, 498, -924, 532, -921, 620, -882, 656)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=1270125138]
+position = Vector2(-48, 340)
+shape = SubResource("CircleShape2D_ndp3g")

@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://cd6ylfdcvpw5k" path="res://scripts/maps/day_map.gd" id="1_lj3rd"]
 [ext_resource type="PackedScene" uid="uid://crroonlpuuqyn" path="res://scenes/maps/map_jour.tscn" id="2_fdkvc"]
 [ext_resource type="PackedScene" uid="uid://fe4l2lyp3obv" path="res://scenes/npcs/npc.tscn" id="2_g8tqy"]
+[ext_resource type="PackedScene" uid="uid://b0rido6lw0ori" path="res://scenes/maps/Asset_map_jour/pillier_pierre.tscn" id="3_craqd"]
+[ext_resource type="PackedScene" uid="uid://d2i3pfjqbkg4q" path="res://scenes/maps/Asset_map_jour/caillou.tscn" id="4_skqp4"]
+[ext_resource type="PackedScene" uid="uid://26is2yhvr8kw" path="res://scenes/maps/Asset_map_jour/trucmaron.tscn" id="5_ikcmc"]
+[ext_resource type="PackedScene" uid="uid://12ho6i21c2vi" path="res://scenes/maps/Asset_map_jour/centrePrierre.tscn" id="6_jcaub"]
+[ext_resource type="PackedScene" uid="uid://fs8bb7gjql5f" path="res://scenes/maps/Asset_map_jour/maison.tscn" id="7_bvlur"]
 
 [node name="DayMap" type="Node2D" unique_id=2097946091]
 script = ExtResource("1_lj3rd")
@@ -12,6 +17,31 @@ script = ExtResource("1_lj3rd")
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
 modulate = Color(1, 0.03529412, 1, 1)
 position = Vector2(50, 150)
+
+[node name="PillierPierre" parent="." unique_id=1465816809 instance=ExtResource("3_craqd")]
+position = Vector2(-1078, 651)
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+
+[node name="caillou" parent="." unique_id=1592953389 instance=ExtResource("4_skqp4")]
+position = Vector2(-726, 97.00001)
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+
+[node name="trucMaron" parent="." unique_id=448974212 instance=ExtResource("5_ikcmc")]
+position = Vector2(-587, -112)
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+
+[node name="centre" parent="." unique_id=1310801870 instance=ExtResource("6_jcaub")]
+position = Vector2(-191, 207)
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+
+[node name="maison" parent="." unique_id=1049899658 instance=ExtResource("7_bvlur")]
+position = Vector2(528, 602)
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
 
 [node name="NPCs" type="Node2D" parent="." unique_id=1934142312]
 
