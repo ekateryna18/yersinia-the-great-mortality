@@ -47,28 +47,28 @@ collision_layer = 2
 [node name="NPCs" type="Node2D" parent="." unique_id=1934142312]
 
 [node name="NPC1" parent="NPCs" unique_id=74848756 instance=ExtResource("2_g8tqy")]
-position = Vector2(192, 200)
+position = Vector2(-248, -531)
 npc_name = "Merchant"
 
 [node name="NPC2" parent="NPCs" unique_id=1029887369 instance=ExtResource("2_g8tqy")]
-position = Vector2(-598, 341)
+position = Vector2(-725, 94)
 npc_type = 1
 npc_name = "Blacksmith"
 
 [node name="NPC3" parent="NPCs" unique_id=1526567549 instance=ExtResource("2_g8tqy")]
-position = Vector2(-1076, -220)
+position = Vector2(-1106, -342)
 npc_type = 2
 npc_name = "Wizard"
 
 [node name="NPC4" parent="NPCs" unique_id=1107934524 instance=ExtResource("2_g8tqy")]
-position = Vector2(-96, 567)
+position = Vector2(18, 460)
 npc_type = 3
 npc_name = "Sick"
 
 [node name="NPC5" parent="NPCs" unique_id=1677287738 instance=ExtResource("2_g8tqy")]
-position = Vector2(652, -236)
+position = Vector2(669, -380)
 npc_type = 4
 
 [node name="NPC6" parent="NPCs" unique_id=1533369597 instance=ExtResource("2_g8tqy")]
-position = Vector2(-1053, 951)
+position = Vector2(-1083, 660)
 npc_type = 5
