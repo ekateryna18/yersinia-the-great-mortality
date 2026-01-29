@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://0gaki7cmt5e2" path="res://assets/sprites/player/player.png" id="2_dovo2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
-radius = 6.666666
-height = 26.000002
+radius = 4.3333344
+height = 15.333335
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 70.0
@@ -20,12 +20,13 @@ script = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=66502260]
 modulate = Color(0.15, 0.15, 0.15, 1)
-position = Vector2(-6.6666675, 17.333334)
+position = Vector2(0.06666708, -0.03333378)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
 modulate = Color(0.687105, 0.39554548, 0.5341942, 1)
+position = Vector2(7.7333336, -21.033333)
 scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("2_dovo2")
 
