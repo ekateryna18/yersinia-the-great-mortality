@@ -42,7 +42,7 @@ func find_player() -> void:
 func set_sprite_color() -> void:
 	match enemy_type:
 		EnemyType.RAT_NORMAL:
-			sprite.modulate = Color.RED
+			#sprite.modulate = Color.RED
 			speed = 150.0
 			max_health = 20.0
 			damage = 10.0
@@ -50,7 +50,7 @@ func set_sprite_color() -> void:
 			knockback_force = 200.0
 			stun_duration = 0.3
 		EnemyType.RAT_MUTANT:
-			sprite.modulate = Color.DARK_RED
+			#sprite.modulate = Color.DARK_RED
 			speed = 200.0
 			max_health = 40.0
 			damage = 15.0
@@ -58,8 +58,8 @@ func set_sprite_color() -> void:
 			knockback_force = 150.0  # Plus lourd, moins de knockback
 			stun_duration = 0.2  # Récupère plus vite
 		EnemyType.RAT_BOSS:
-			sprite.modulate = Color.PURPLE
-			sprite.scale = Vector2(2, 2)
+			#sprite.modulate = Color.PURPLE
+			#sprite.scale = Vector2(2, 2)
 			speed = 100.0
 			max_health = 200.0
 			damage = 25.0

@@ -43,18 +43,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Ennemis: 0/8"
 
-[node name="StartNightButton" type="Button" parent="." unique_id=2078896820]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -42.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.8245869, 0.938009, 0.3473881, 1)
-theme_override_font_sizes/font_size = 24
-text = "▶ Commencer la Nuit"
-
 [node name="TransitionOverlay" type="ColorRect" parent="." unique_id=98044908]
 visible = false
 anchors_preset = 15
@@ -161,7 +149,7 @@ offset_top = -226.0
 offset_right = 212.0
 offset_bottom = -24.0
 grow_vertical = 0
-pivot_offset = Vector2(110, 110)
+pivot_offset = Vector2(101, 101)
 script = ExtResource("3_136eg")
 joystick_texture = ExtResource("4_136eg")
 stick_texture = ExtResource("5_oj5la")

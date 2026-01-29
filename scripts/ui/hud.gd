@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var timer_label: Label = $VBoxContainer/TimerLabel
 @onready var player_stats_label: Label = $VBoxContainer/PlayerStatsLabel
 @onready var debug_button: Button = $VBoxContainer/DebugButton
-@onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
+#@onready var start_night_button: Button = $StartNightButton  # ← NOUVEAU
 @onready var enemy_count_label: Label = $VBoxContainer/EnemyCountLabel
 @onready var transition_label: Label = $TransitionLabel
 @onready var transition_overlay: ColorRect = $TransitionOverlay 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	# Connecter les boutons
 	debug_button.pressed.connect(_on_debug_button_pressed)
-	start_night_button.pressed.connect(_on_start_night_button_pressed)
+	#start_night_button.pressed.connect(_on_start_night_button_pressed)
 	
 	# Cacher la transition au début
 	if transition_label:
@@ -46,7 +46,7 @@ func update_display() -> void:
 		phase_label.text = "Pas de run actif"
 		timer_label.text = ""
 		player_stats_label.text = ""
-		start_night_button.visible = false
+		#start_night_button.visible = false
 		return
 	
 	# === PHASE ET NUIT ===
@@ -99,7 +99,7 @@ func update_display() -> void:
 		enemy_count_label.visible = false
 	# === BOUTON START NIGHT ===
 	# Visible uniquement en JOUR
-	start_night_button.visible = GameManager.is_day()
+	#start_night_button.visible = GameManager.is_day()
 
 func _on_phase_changed(_new_phase) -> void:
 	update_display()
@@ -117,11 +117,11 @@ func _on_debug_button_pressed() -> void:
 	else:
 		GameManager.transition_to_day()
 
-func _on_start_night_button_pressed() -> void:
-	# Démarrer la nuit uniquement si on est en JOUR
-	if GameManager.is_day():
-		print(">>> Joueur démarre la nuit manuellement! <<<")
-		GameManager.transition_to_night()
+#func _on_start_night_button_pressed() -> void:
+	## Démarrer la nuit uniquement si on est en JOUR
+	#if GameManager.is_day():
+		#print(">>> Joueur démarre la nuit manuellement! <<<")
+		#GameManager.transition_to_night()
 
 # ============================================
 # VICTOIRE / DÉFAITE
