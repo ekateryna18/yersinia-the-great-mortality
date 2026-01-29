@@ -3,16 +3,17 @@
 [ext_resource type="Script" uid="uid://di7cb6sgoqgf1" path="res://scripts/npcs/npc.gd" id="1_ivh6b"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f6fiw"]
-size = Vector2(32, 32)
+size = Vector2(60, 142)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ivh6b"]
-radius = 50.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivh6b"]
+radius = 31.0
+height = 132.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5fb5"]
 radius = 20.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ivh6b"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ejjj"]
+radius = 120.0
 
 [node name="NPC" type="Area2D" unique_id=74848756]
 script = ExtResource("1_ivh6b")
@@ -22,7 +23,9 @@ modulate = Color(0.43886128, 0.9793057, 0.93999046, 1)
 texture = SubResource("PlaceholderTexture2D_f6fiw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=878065832]
-shape = SubResource("CircleShape2D_ivh6b")
+position = Vector2(0, 101)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ivh6b")
 
 [node name="Label" type="Label" parent="." unique_id=1082028388]
 offset_top = -40.0
@@ -36,7 +39,16 @@ horizontal_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=784716333]
 shape = SubResource("CircleShape2D_m5fb5")
 
-[node name="InteractionIcon" type="Sprite2D" parent="." unique_id=1901011209]
+[node name="InteractArea" type="Area2D" parent="." unique_id=1480654768]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=792901193]
+shape = SubResource("CircleShape2D_5ejjj")
+
+[node name="TalkButton" type="Button" parent="." unique_id=409481791]
 visible = false
-position = Vector2(0, -60)
-texture = SubResource("PlaceholderTexture2D_ivh6b")
+offset_left = -36.0
+offset_top = -105.0
+offset_right = 36.0
+offset_bottom = -77.0
+theme_override_font_sizes/font_size = 12
+text = "💬 Parler"

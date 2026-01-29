@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b8ya4x85p2rfu"]
+
+[node name="Dialogue" type="Node2D" unique_id=1298995037]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=787649132]
+
+[node name="TalkButton" type="Button" parent="CanvasLayer" unique_id=1114583802]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="DialogBox" type="ColorRect" parent="CanvasLayer" unique_id=985837439]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogLabel" type="Label" parent="CanvasLayer/DialogBox" unique_id=533203343]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/DialogBox" unique_id=221066756]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Reponse1Button" type="Button" parent="CanvasLayer" unique_id=1827017489]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Reponse2Button" type="Button" parent="CanvasLayer" unique_id=1640584361]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Reponse3Button" type="Button" parent="CanvasLayer" unique_id=912508793]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Reponse4Button" type="Button" parent="CanvasLayer" unique_id=1214217212]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ChoixDevinetteButton" type="Button" parent="CanvasLayer" unique_id=11098441]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ChoixAttaquerButton" type="Button" parent="CanvasLayer" unique_id=1601145081]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=709569609]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Content" unique_id=288799181]
+layout_mode = 2
