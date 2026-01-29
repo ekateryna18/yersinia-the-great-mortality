@@ -21,6 +21,8 @@ var spawn_delay: float = 5.0
 var last_spawn_time: float = 0.0
 var is_spawning: bool = false
 var boss_spawned: bool = false
+var spawn_points: Array = []  
+var boss_spawn_point: Marker2D = null
 
 # Références
 var enemy_container: Node2D = null
@@ -45,6 +47,8 @@ func initialize(night: int, container: Node2D, player: CharacterBody2D) -> void:
 	else:
 		max_enemies = 50
 		spawn_delay = 3.0
+		
+	find_spawn_points()
 	
 	print("Wave Manager initialized for Night ", current_night)
 	print("Max enemies: ", max_enemies, " | Spawn delay: ", spawn_delay, "s")
@@ -56,6 +60,25 @@ func initialize(night: int, container: Node2D, player: CharacterBody2D) -> void:
 	# Démarrer le spawn normal
 	is_spawning = true
 	last_spawn_time = Time.get_ticks_msec() / 1000.0
+
+func find_spawn_points() -> void:
+	# Chercher le conteneur de spawn points dans la map
+	var map_scene = enemy_container.get_parent()
+	
+	if map_scene.has_node("EnemySpawnPoints"):
+		var spawn_container = map_scene.get_node("EnemySpawnPoints")
+		spawn_points = spawn_container.get_children()
+		print("Found ", spawn_points.size(), " spawn points")
+	else:
+		print("⚠️ No EnemySpawnPoints found! Using fallback")
+		spawn_points = []
+	
+	# Chercher le spawn point du boss
+	if map_scene.has_node("BossSpawnPoint"):
+		boss_spawn_point = map_scene.get_node("BossSpawnPoint")
+		print("Boss spawn point found at: ", boss_spawn_point.global_position)
+	else:
+		print("⚠️ No BossSpawnPoint found")
 
 func _process(delta: float) -> void:
 	if not is_spawning:
@@ -100,11 +123,9 @@ func spawn_enemy() -> void:
 	
 	# Créer l'ennemi
 	var enemy = rat_scene.instantiate()
-	
-	# Configurer le type
 	enemy.enemy_type = enemy_type
 	
-	# Position de spawn (autour du joueur, hors écran)
+	# ← MODIFIÉ: Position de spawn depuis un spawn point
 	var spawn_pos = get_random_spawn_position()
 	enemy.global_position = spawn_pos
 	
@@ -112,8 +133,32 @@ func spawn_enemy() -> void:
 	enemy_container.add_child(enemy)
 	
 	alive_enemies += 1
-	print("Enemy spawned (", alive_enemies, "/", max_enemies, ")")
+	print("Enemy spawned at ", spawn_pos, " (", alive_enemies, "/", max_enemies, ")")
 
+# ← FONCTION MODIFIÉE
+func get_random_spawn_position() -> Vector2:
+	# Si on a des spawn points, en choisir un aléatoirement
+	if spawn_points.size() > 0:
+		var random_point = spawn_points[randi() % spawn_points.size()]
+		return random_point.global_position
+	
+	# Fallback: spawner autour du joueur (ancien système)
+	if not player_ref:
+		return Vector2.ZERO
+	
+	var spawn_distance = randf_range(300, 500)
+	var spawn_angle = randf_range(0, TAU)
+	
+	var offset = Vector2(
+		cos(spawn_angle) * spawn_distance,
+		sin(spawn_angle) * spawn_distance
+	)
+	
+	var spawn_pos = player_ref.global_position + offset
+	spawn_pos = GameManager.clamp_to_bounds(spawn_pos)
+	
+	return spawn_pos
+	
 func get_enemy_type_for_night() -> int:
 	# Nuits 1-2: Que des rats normaux
 	if current_night <= 2:
@@ -135,26 +180,6 @@ func get_enemy_type_for_night() -> int:
 		return 1  # RAT_MUTANT (40%)
 	else:
 		return 2  # RAT_BOSS (10%)
-
-func get_random_spawn_position() -> Vector2:
-	if not player_ref:
-		return Vector2.ZERO
-	
-	# Spawner autour du joueur, à une distance aléatoire
-	var spawn_distance = randf_range(300, 500)  # Distance du joueur
-	var spawn_angle = randf_range(0, TAU)  # Angle aléatoire (0 à 2π)
-	
-	var offset = Vector2(
-		cos(spawn_angle) * spawn_distance,
-		sin(spawn_angle) * spawn_distance
-	)
-	
-	var spawn_pos = player_ref.global_position + offset
-	
-	# S'assurer que c'est dans les limites de la map
-	spawn_pos = GameManager.clamp_to_bounds(spawn_pos)
-	
-	return spawn_pos
 
 func stop_spawning() -> void:
 	is_spawning = false
@@ -183,9 +208,17 @@ func spawn_boss() -> void:
 	var boss = rat_scene.instantiate()
 	boss.enemy_type = 2  # RAT_BOSS
 	
-	# Position: En face du joueur, à distance
-	var spawn_pos = player_ref.global_position + Vector2(0, -400)
-	spawn_pos = GameManager.clamp_to_bounds(spawn_pos)
+	# ← MODIFIÉ: Position depuis BossSpawnPoint si existe
+	var spawn_pos: Vector2
+	if boss_spawn_point:
+		spawn_pos = boss_spawn_point.global_position
+		print("Boss spawning at BossSpawnPoint: ", spawn_pos)
+	else:
+		# Fallback: devant le joueur
+		spawn_pos = player_ref.global_position + Vector2(0, -400)
+		spawn_pos = GameManager.clamp_to_bounds(spawn_pos)
+		print("Boss spawning at fallback position: ", spawn_pos)
+	
 	boss.global_position = spawn_pos
 	
 	# Ajouter à la scène
@@ -194,4 +227,4 @@ func spawn_boss() -> void:
 	boss_spawned = true
 	alive_enemies += 1
 	
-	print("Boss spawned at: ", spawn_pos)
+	print("Boss spawned!")

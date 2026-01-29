@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgeue1wsbomt7"]
 
-[ext_resource type="Texture2D" uid="uid://b306jks6s4r8g" path="res://pngs/map/map boss final.png" id="1_v6st6"]
+[ext_resource type="Texture2D" uid="uid://dm7jr81bix1j0" path="res://pngs/map/map boss final.png" id="1_v6st6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_v6st6"]
 a = Vector2(225, 114)
@@ -22,3 +22,32 @@ shape = SubResource("SegmentShape2D_v6st6")
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="." unique_id=1609825543]
 polygon = PackedVector2Array(868, 714, 1016, 631, 1160, 745, 1160, 745, 1039, 862)
+
+[node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=2082095894]
+
+[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawnPoints" unique_id=1482240084]
+position = Vector2(-97, -544)
+
+[node name="SpawnPoint2" type="Marker2D" parent="EnemySpawnPoints" unique_id=1036855955]
+position = Vector2(-452, 1033)
+
+[node name="SpawnPoint3" type="Marker2D" parent="EnemySpawnPoints" unique_id=1879123374]
+position = Vector2(-1163, 118)
+
+[node name="SpawnPoint4" type="Marker2D" parent="EnemySpawnPoints" unique_id=340447848]
+position = Vector2(-1023, 404)
+
+[node name="SpawnPoint5" type="Marker2D" parent="EnemySpawnPoints" unique_id=1912084763]
+position = Vector2(926, -344)
+
+[node name="SpawnPoint6" type="Marker2D" parent="EnemySpawnPoints" unique_id=775323600]
+position = Vector2(1485, 495)
+
+[node name="SpawnPoint7" type="Marker2D" parent="EnemySpawnPoints" unique_id=1730127822]
+position = Vector2(651, 710)
+
+[node name="SpawnPoint8" type="Marker2D" parent="EnemySpawnPoints" unique_id=425650423]
+position = Vector2(16, 883)
+
+[node name="BossSpawnPoint" type="Marker2D" parent="." unique_id=871244757]
+position = Vector2(5, 188)
