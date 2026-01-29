@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://dit7kw0kuo2u8"]
 
+[ext_resource type="Script" uid="uid://d3kklb5pd01kx" path="res://scripts/maps/boss_map.gd" id="1_6tm7i"]
 [ext_resource type="PackedScene" uid="uid://cgeue1wsbomt7" path="res://scenes/maps/map_boss.tscn" id="1_eri5b"]
 [ext_resource type="PackedScene" uid="uid://doufhtd06sbss" path="res://scenes/maps/Asset_map_boss/pillier1.tscn" id="2_d807u"]
 [ext_resource type="PackedScene" uid="uid://tsmgm7467r2t" path="res://scenes/maps/Asset_map_boss/pillier2.tscn" id="3_6tm7i"]
 [ext_resource type="PackedScene" uid="uid://dn54ycw4en2g6" path="res://scenes/maps/Asset_map_boss/pillier3.tscn" id="4_kdgc3"]
 
-[node name="Node2D" type="Node2D" unique_id=1510212934]
+[node name="BossMap" type="Node2D" unique_id=1510212934]
+script = ExtResource("1_6tm7i")
 
 [node name="StaticBody2D" parent="." unique_id=2022060641 instance=ExtResource("1_eri5b")]
 
@@ -24,3 +26,32 @@ scale = Vector2(0.35, 0.35)
 [node name="Pillier3" parent="." unique_id=517224624 instance=ExtResource("4_kdgc3")]
 position = Vector2(1030, 852)
 scale = Vector2(0.35, 0.35)
+
+[node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=927611364]
+
+[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawnPoints" unique_id=635280589]
+position = Vector2(-97, -544)
+
+[node name="SpawnPoint2" type="Marker2D" parent="EnemySpawnPoints" unique_id=1256639503]
+position = Vector2(-452, 1033)
+
+[node name="SpawnPoint3" type="Marker2D" parent="EnemySpawnPoints" unique_id=190630177]
+position = Vector2(-1163, 118)
+
+[node name="SpawnPoint4" type="Marker2D" parent="EnemySpawnPoints" unique_id=1600512087]
+position = Vector2(-1023, 404)
+
+[node name="SpawnPoint5" type="Marker2D" parent="EnemySpawnPoints" unique_id=887443258]
+position = Vector2(926, -344)
+
+[node name="SpawnPoint6" type="Marker2D" parent="EnemySpawnPoints" unique_id=1993374354]
+position = Vector2(1485, 495)
+
+[node name="SpawnPoint7" type="Marker2D" parent="EnemySpawnPoints" unique_id=1747057114]
+position = Vector2(651, 710)
+
+[node name="SpawnPoint8" type="Marker2D" parent="EnemySpawnPoints" unique_id=884301049]
+position = Vector2(16, 883)
+
+[node name="BossSpawnPoint" type="Marker2D" parent="." unique_id=2024799332]
+position = Vector2(5, 188)

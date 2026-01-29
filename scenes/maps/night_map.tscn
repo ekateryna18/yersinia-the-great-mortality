@@ -11,3 +11,21 @@ collision_layer = 2
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
 position = Vector2(623, -611)
+
+[node name="EnemySpawnPoints" type="Node2D" parent="." unique_id=669876401]
+
+[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawnPoints" unique_id=896290322]
+
+[node name="SpawnPoint2" type="Marker2D" parent="EnemySpawnPoints" unique_id=761227468]
+
+[node name="SpawnPoint3" type="Marker2D" parent="EnemySpawnPoints" unique_id=316092540]
+
+[node name="SpawnPoint4" type="Marker2D" parent="EnemySpawnPoints" unique_id=790348815]
+
+[node name="SpawnPoint5" type="Marker2D" parent="EnemySpawnPoints" unique_id=789686334]
+
+[node name="SpawnPoint6" type="Marker2D" parent="EnemySpawnPoints" unique_id=1708434589]
+
+[node name="SpawnPoint7" type="Marker2D" parent="EnemySpawnPoints" unique_id=481452532]
+
+[node name="SpawnPoint8" type="Marker2D" parent="EnemySpawnPoints" unique_id=1165702752]

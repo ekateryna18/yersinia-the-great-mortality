@@ -10,7 +10,7 @@ var current_map_scene: Node = null
 const MAP_BOUNDS := Rect2(-2040, -1587, 4079, 3174)
 # Durée de la nuit en secondes
 #const NIGHT_DURATION: float = 150.0  # 2 minutes 30 secondes
-const NIGHT_DURATION: float = 5.0  # 2 minutes 30 secondes
+const NIGHT_DURATION: float = 50.0  # 2 minutes 30 secondes
 var player_ref: CharacterBody2D = null 
 var is_transitioning: bool = false
 var victory_in_progress: bool = false 
@@ -119,6 +119,9 @@ func initialize_npcs(npc_nodes: Array) -> void:
 # PHASE MANAGEMENT
 # ============================================
 func set_phase(new_phase: GamePhase) -> void:
+	#if current_phase == new_phase and not is_transitioning:
+		#print("⚠️ Already in phase ", new_phase, ", ignoring...")
+		#return
 	current_phase = new_phase
 	
 	if new_phase == GamePhase.DAY:
@@ -128,7 +131,10 @@ func set_phase(new_phase: GamePhase) -> void:
 	elif new_phase == GamePhase.NIGHT:
 		print("--- NIGHT ", current_run.night, " STARTED ---")
 		current_run.night_elapsed_sec = 0.0
-		load_night_map()  # ← AJOUTER cette ligne
+		if current_run.night == 5:
+			load_boss_map()
+		else:
+			load_night_map()
 	
 	phase_changed.emit(new_phase)
 
@@ -261,6 +267,9 @@ func load_night_map() -> void:
 	print("Loading Night Map...")
 	change_scene("res://scenes/maps/night_map.tscn")
 
+func load_boss_map() -> void:
+	print("Loading Boss Map...")
+	change_scene("res://scenes/maps/boss_map.tscn")
 func change_scene(scene_path: String) -> void:
 	print("=== Changing Scene ===")
 	print("From: ", current_map_scene.name if current_map_scene else "None")
