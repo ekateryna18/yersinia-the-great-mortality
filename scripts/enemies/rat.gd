@@ -184,7 +184,7 @@ func die() -> void:
 	
 	if GameManager.current_run:
 		GameManager.current_run.stats_run["kills"] = GameManager.current_run.stats_run.get("kills", 0) + 1
-	
+	GameManager.register_enemy_kill(enemy_type)
 	queue_free()
 
 func clamp_to_map_bounds() -> void:

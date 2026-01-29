@@ -5,6 +5,9 @@ extends Node
 # ============================================
 #Reférence à la scène map actuelle
 var current_map_scene: Node = null
+# In GameManager.gd (top-level)
+enum EnemyType { RAT_NORMAL, RAT_MUTANT, RAT_BOSS }
+
 # Limites de la map
 #const MAP_BOUNDS := Rect2(-1000, -1000, 2000, 2000)
 const MAP_BOUNDS := Rect2(-2040, -1587, 4079, 3174)
@@ -87,6 +90,12 @@ func start_new_run() -> void:
 	current_run.enemies_wave = []
 	current_run.day_elapsed_sec = 0.0
 	current_run.night_elapsed_sec = 0.0
+	current_run.stats_run = {
+		"kills": 0,
+		"kills_normal": 0,
+		"kills_mutant": 0,
+		"boss_killed": false,
+	}
 	
 	# Démarrer en Jour 1
 	set_phase(GamePhase.DAY)
@@ -212,6 +221,12 @@ func start_new_run_with_progression(previous_gloire: int) -> void:
 	current_run.enemies_wave = []
 	current_run.day_elapsed_sec = 0.0
 	current_run.night_elapsed_sec = 0.0
+	current_run.stats_run = {
+		"kills": 0,
+		"kills_normal": 0,
+		"kills_mutant": 0,
+		"boss_killed": false,
+	}
 	
 	# Démarrer en Jour 1
 	set_phase(GamePhase.DAY)
@@ -226,6 +241,11 @@ func display_night_stats() -> void:
 	var time_survived = current_run.night_elapsed_sec
 	var minutes = int(time_survived) / 60
 	var seconds = int(time_survived) % 60
+	
+	current_run.stats_run["kills"] = 0
+	current_run.stats_run["kills_normal"] = 0
+	current_run.stats_run["kills_mutant"] = 0
+	current_run.stats_run["boss_killed"] = false
 	
 	print("Kills: ", kills)
 	print("Time survived: %d:%02d" % [minutes, seconds])
@@ -373,3 +393,26 @@ func get_current_night() -> int:
 	if current_run:
 		return current_run.night
 	return 1  # Par défaut nuit 1
+	
+func register_enemy_kill(enemy_type: int) -> void:
+	if current_run == null:
+		return
+	
+	current_run.stats_run["kills"] += 1
+	
+	match enemy_type:
+		EnemyType.RAT_NORMAL:
+			current_run.stats_run["kills_normal"] += 1
+		EnemyType.RAT_MUTANT:
+			current_run.stats_run["kills_mutant"] += 1
+		EnemyType.RAT_BOSS:
+			current_run.stats_run["boss_killed"] = true
+			print("Boss killed!")
+	
+	# Optionnel: debug
+	print(
+		"Kills total: ", current_run.stats_run["kills"],
+		" | Normal: ", current_run.stats_run["kills_normal"],
+		" | Mutant: ", current_run.stats_run["kills_mutant"],
+		" | Boss: ", current_run.stats_run["boss_killed"]
+	)
