@@ -1,7 +1,114 @@
 [gd_scene format=3 uid="uid://pbuaw38ob0uh"]
 
 [ext_resource type="Script" uid="uid://b2qvjee6altly" path="res://scripts/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://bmlmqkj8u4tth" path="res://assets/sprites/player/player.png" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://0gaki7cmt5e2" path="res://assets/sprites/player/player.png" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://biv5j3weg83mo" path="res://assets/sprites/player/player_E.png" id="2_h17s1"]
+[ext_resource type="Texture2D" uid="uid://sgql03wx2u2r" path="res://assets/sprites/player/player_N.png" id="3_je7p5"]
+[ext_resource type="Texture2D" uid="uid://cjmqxxgvhjjdt" path="res://assets/sprites/player/player_NE.png" id="4_fm80t"]
+[ext_resource type="Texture2D" uid="uid://jsfqq3c8owbr" path="res://assets/sprites/player/player_NW.png" id="5_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://c4fds2lveceg3" path="res://assets/sprites/player/player_S.png" id="6_ugbui"]
+[ext_resource type="Texture2D" uid="uid://bcrrcya7orvjy" path="res://assets/sprites/player/player_SE.png" id="7_fcs02"]
+[ext_resource type="Texture2D" uid="uid://dbsvl5xqbdwlr" path="res://assets/sprites/player/player_SW.png" id="8_myrg7"]
+[ext_resource type="Texture2D" uid="uid://o4atgd57aat8" path="res://assets/sprites/player/player_W.png" id="9_kvlxm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf5tr"]
+atlas = ExtResource("2_h17s1")
+region = Rect2(0, 0, 826, 1037)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgqa7"]
+atlas = ExtResource("3_je7p5")
+region = Rect2(0, 0, 826, 1042)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ydkj"]
+atlas = ExtResource("4_fm80t")
+region = Rect2(0, 0, 826, 1041)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j4b4"]
+atlas = ExtResource("5_gx1jg")
+region = Rect2(0, 0, 826, 1040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj68g"]
+atlas = ExtResource("6_ugbui")
+region = Rect2(0, 0, 826, 1045)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
+atlas = ExtResource("7_fcs02")
+region = Rect2(0, 0, 826, 1043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnsyf"]
+atlas = ExtResource("8_myrg7")
+region = Rect2(0, 0, 823, 1043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
+atlas = ExtResource("9_kvlxm")
+region = Rect2(0, 0, 826, 1040)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cv16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uf5tr")
+}],
+"loop": true,
+"name": &"idle_E",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgqa7")
+}],
+"loop": true,
+"name": &"idle_N",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ydkj")
+}],
+"loop": true,
+"name": &"idle_NE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j4b4")
+}],
+"loop": true,
+"name": &"idle_NW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj68g")
+}],
+"loop": true,
+"name": &"idle_S",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioxgp")
+}],
+"loop": true,
+"name": &"idle_SE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnsyf")
+}],
+"loop": true,
+"name": &"idle_SW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_007i1")
+}],
+"loop": true,
+"name": &"idle_W",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
 radius = 7.666667
@@ -18,7 +125,13 @@ scale = Vector2(3, 3)
 collision_mask = 3
 script = ExtResource("1_8afob")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=317413117]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6cv16")
+animation = &"idle_SE"
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=12959731]
+visible = false
 position = Vector2(0.6666666, -26.666668)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_dovo2")

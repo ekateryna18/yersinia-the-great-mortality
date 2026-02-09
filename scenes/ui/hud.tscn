@@ -310,7 +310,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="DialogLayer" type="CanvasLayer" parent="." unique_id=295762571 groups=["dialog_layer"]]
-visible = false
 script = ExtResource("2_hqnrr")
 
 [node name="DialogBox" type="Panel" parent="DialogLayer" unique_id=1528363263]

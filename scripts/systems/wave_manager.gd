@@ -10,9 +10,9 @@ var rat_boss_scene: PackedScene = preload("res://scenes/enemies/rat_boss.tscn")
 
 # Configuration par nuit
 var wave_config = {
-	1: { "max_enemies": 8, "spawn_delay": 5.0 },
+	1: { "max_enemies": 10, "spawn_delay": 3.0 },
 	2: { "max_enemies": 15, "spawn_delay": 3.0 },
-	3: { "max_enemies": 25, "spawn_delay": 3.0 },
+	3: { "max_enemies": 25, "spawn_delay": 2.0 },
 	4: { "max_enemies": 35, "spawn_delay": 1.0 },
 	5: { "max_enemies": 50, "spawn_delay": 1.0 }
 }

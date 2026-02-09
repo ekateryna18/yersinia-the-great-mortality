@@ -31,6 +31,7 @@ radius = 240.0
 script = ExtResource("1_lj3rd")
 
 [node name="map_jour" parent="." unique_id=615072872 instance=ExtResource("2_fdkvc")]
+z_index = -100
 collision_layer = 2
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1205327444]
@@ -58,6 +59,7 @@ scale = Vector2(0.3, 0.3)
 collision_layer = 2
 
 [node name="maison" parent="." unique_id=1049899658 instance=ExtResource("7_bvlur")]
+z_index = 100
 position = Vector2(528, 602)
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
