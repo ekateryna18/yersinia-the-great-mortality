@@ -13,7 +13,7 @@ enum EnemyType { RAT_NORMAL, RAT_MUTANT, RAT_BOSS }
 const MAP_BOUNDS := Rect2(-2040, -1587, 4079, 3174)
 # Durée de la nuit en secondes
 #const NIGHT_DURATION: float = 150.0  # 2 minutes 30 secondes
-const NIGHT_DURATION: float = 50.0  # 2 minutes 30 secondes
+const NIGHT_DURATION: float = 150.0  # 2 minutes 30 secondes
 var player_ref: CharacterBody2D = null 
 var is_transitioning: bool = false
 var victory_in_progress: bool = false 
