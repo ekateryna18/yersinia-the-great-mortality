@@ -2,9 +2,116 @@
 
 [ext_resource type="Texture2D" uid="uid://blajw3vtrap6u" path="res://assets/sprites/ennemies/rat_mutant.png" id="1_f1co2"]
 [ext_resource type="Script" uid="uid://bf0a76dxv7hpw" path="res://scripts/enemies/rat.gd" id="1_vwl6o"]
+[ext_resource type="Texture2D" uid="uid://breq1ql8e4p2r" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_E.png" id="2_oj1kp"]
+[ext_resource type="Texture2D" uid="uid://cn4twmxi6ul71" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_N.png" id="3_evj3x"]
+[ext_resource type="Texture2D" uid="uid://sichmjdthhsk" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_NE.png" id="4_ngymx"]
+[ext_resource type="Texture2D" uid="uid://slpldc2hvpdc" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_NW.png" id="5_ld1yu"]
+[ext_resource type="Texture2D" uid="uid://d33rrphochb53" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_S.png" id="6_kxbeh"]
+[ext_resource type="Texture2D" uid="uid://b5p07x20yivft" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_SE.png" id="7_8m608"]
+[ext_resource type="Texture2D" uid="uid://d23n0gx3se5a2" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_SW.png" id="8_dsqub"]
+[ext_resource type="Texture2D" uid="uid://dfq5b0klpqpcs" path="res://assets/sprites/enemies/rat_mutant/rat_mutant_W.png" id="9_5ih78"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s063q"]
+atlas = ExtResource("2_oj1kp")
+region = Rect2(0, 0, 826, 1041)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjit1"]
+atlas = ExtResource("3_evj3x")
+region = Rect2(0, 0, 826, 1042)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pikt"]
+atlas = ExtResource("4_ngymx")
+region = Rect2(0, 0, 826, 1042)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5aff"]
+atlas = ExtResource("5_ld1yu")
+region = Rect2(0, 0, 826, 1040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88004"]
+atlas = ExtResource("6_kxbeh")
+region = Rect2(0, 0, 826, 1043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xflag"]
+atlas = ExtResource("7_8m608")
+region = Rect2(0, 0, 826, 1037)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xkle"]
+atlas = ExtResource("8_dsqub")
+region = Rect2(0, 0, 826, 1045)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcjt8"]
+atlas = ExtResource("9_5ih78")
+region = Rect2(0, 0, 823, 1043)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6abkp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s063q")
+}],
+"loop": true,
+"name": &"idle_E",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjit1")
+}],
+"loop": true,
+"name": &"idle_N",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pikt")
+}],
+"loop": true,
+"name": &"idle_NE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5aff")
+}],
+"loop": true,
+"name": &"idle_NW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88004")
+}],
+"loop": true,
+"name": &"idle_S",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xflag")
+}],
+"loop": true,
+"name": &"idle_SE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xkle")
+}],
+"loop": true,
+"name": &"idle_SW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcjt8")
+}],
+"loop": true,
+"name": &"idle_W",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwl6o"]
-radius = 14.666667
+radius = 10.666668
 height = 56.666668
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwl6o"]
@@ -17,18 +124,25 @@ platform_floor_layers = 4294901760
 script = ExtResource("1_vwl6o")
 enemy_type = 1
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=963407092]
+position = Vector2(-0.33333302, -0.33333397)
+scale = Vector2(0.11, 0.11)
+sprite_frames = SubResource("SpriteFrames_6abkp")
+animation = &"idle_S"
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1873468555]
+visible = false
 position = Vector2(-7, -42)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_f1co2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1158743512]
-position = Vector2(6, 1)
+position = Vector2(5.6666665, 23.333334)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_vwl6o")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1215414824]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=100389513]
-position = Vector2(-1, -12)
+position = Vector2(0.33333325, -0.6666666)
 shape = SubResource("CircleShape2D_vwl6o")

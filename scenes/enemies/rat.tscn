@@ -1,7 +1,114 @@
 [gd_scene format=3 uid="uid://drx67qgnndds1"]
 
 [ext_resource type="Script" uid="uid://bf0a76dxv7hpw" path="res://scripts/enemies/rat.gd" id="1_4agul"]
+[ext_resource type="Texture2D" uid="uid://c0old14pojvel" path="res://assets/sprites/enemies/rat_normal/rat_E.png" id="2_fffwg"]
 [ext_resource type="Texture2D" uid="uid://cjmo7btjj5kev" path="res://assets/sprites/ennemies/rat.png" id="2_qn0ow"]
+[ext_resource type="Texture2D" uid="uid://b8y5idgkdb0jn" path="res://assets/sprites/enemies/rat_normal/rat_N.png" id="3_ac66d"]
+[ext_resource type="Texture2D" uid="uid://ce8fythntgd3i" path="res://assets/sprites/enemies/rat_normal/rat_NE.png" id="4_hajvu"]
+[ext_resource type="Texture2D" uid="uid://bd64xrh8hxe0j" path="res://assets/sprites/enemies/rat_normal/rat_NW.png" id="5_ujef0"]
+[ext_resource type="Texture2D" uid="uid://bifg24suge7on" path="res://assets/sprites/enemies/rat_normal/rat_S.png" id="6_h50a5"]
+[ext_resource type="Texture2D" uid="uid://d4ivyewhyuefn" path="res://assets/sprites/enemies/rat_normal/rat_SE.png" id="7_1spx8"]
+[ext_resource type="Texture2D" uid="uid://o17oml8kpiad" path="res://assets/sprites/enemies/rat_normal/rat_SW.png" id="8_hclp1"]
+[ext_resource type="Texture2D" uid="uid://c2agod5u52cvm" path="res://assets/sprites/enemies/rat_normal/rat_W.png" id="9_ur0id"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ars0e"]
+atlas = ExtResource("2_fffwg")
+region = Rect2(0, 0, 826, 1037)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph0bb"]
+atlas = ExtResource("3_ac66d")
+region = Rect2(0, 0, 826, 1042)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vaeb"]
+atlas = ExtResource("4_hajvu")
+region = Rect2(0, 0, 826, 1041)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8n63"]
+atlas = ExtResource("5_ujef0")
+region = Rect2(0, 0, 826, 1042)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t678g"]
+atlas = ExtResource("6_h50a5")
+region = Rect2(0, 0, 826, 1045)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw7qc"]
+atlas = ExtResource("7_1spx8")
+region = Rect2(0, 0, 826, 1043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vour6"]
+atlas = ExtResource("8_hclp1")
+region = Rect2(0, 0, 823, 1043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oimh3"]
+atlas = ExtResource("9_ur0id")
+region = Rect2(0, 0, 826, 1040)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svdo7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ars0e")
+}],
+"loop": true,
+"name": &"idle_E",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph0bb")
+}],
+"loop": true,
+"name": &"idle_N",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vaeb")
+}],
+"loop": true,
+"name": &"idle_NE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8n63")
+}],
+"loop": true,
+"name": &"idle_NW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t678g")
+}],
+"loop": true,
+"name": &"idle_S",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw7qc")
+}],
+"loop": true,
+"name": &"idle_SE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vour6")
+}],
+"loop": true,
+"name": &"idle_SW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oimh3")
+}],
+"loop": true,
+"name": &"idle_W",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qn0ow"]
 
@@ -14,7 +121,13 @@ collision_mask = 3
 platform_floor_layers = 4294967040
 script = ExtResource("1_4agul")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=6759865]
+scale = Vector2(0.06, 0.06)
+sprite_frames = SubResource("SpriteFrames_svdo7")
+animation = &"idle_SE"
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2109432511]
+visible = false
 position = Vector2(-14, -9)
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("2_qn0ow")
