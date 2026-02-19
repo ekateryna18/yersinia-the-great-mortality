@@ -21,8 +21,17 @@ var player_ref: CharacterBody2D = null
 var last_attack_time: float = 0.0
 var is_stunned: bool = false  # ← NOUVEAU
 
+# Direction pour l'animation
+var current_direction: Vector2 = Vector2.DOWN
+
+# Bob walking effect (plus subtil que le player)
+var walk_timer: float = 0.0
+var walk_speed: float = 12.0  # Vitesse du balancement
+var walk_bob_y: float = 3.0   # Balancement vertical (plus petit que player)
+var walk_tilt: float = 0.05   # Inclinaison (plus subtile que player)
+
 # Références
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var attack_area: Area2D = $AttackArea
 
@@ -30,7 +39,12 @@ func _ready() -> void:
 	current_health = max_health
 	add_to_group("enemies")
 	find_player()
-	set_sprite_color()
+	set_stats_by_type()
+
+	# Animation par défaut
+	if animated_sprite:
+		animated_sprite.play("idle_S")
+
 	print("Enemy spawned: ", EnemyType.keys()[enemy_type], " HP:", current_health)
 
 func find_player() -> void:
@@ -39,10 +53,9 @@ func find_player() -> void:
 		player_ref = players[0]
 		print("Enemy found player automatically")
 
-func set_sprite_color() -> void:
+func set_stats_by_type() -> void:
 	match enemy_type:
 		EnemyType.RAT_NORMAL:
-			#sprite.modulate = Color.RED
 			speed = 150.0
 			max_health = 20.0
 			damage = 10.0
@@ -50,7 +63,6 @@ func set_sprite_color() -> void:
 			knockback_force = 200.0
 			stun_duration = 0.3
 		EnemyType.RAT_MUTANT:
-			#sprite.modulate = Color.DARK_RED
 			speed = 200.0
 			max_health = 40.0
 			damage = 15.0
@@ -58,29 +70,33 @@ func set_sprite_color() -> void:
 			knockback_force = 150.0  # Plus lourd, moins de knockback
 			stun_duration = 0.2  # Récupère plus vite
 		EnemyType.RAT_BOSS:
-			#sprite.modulate = Color.PURPLE
-			#sprite.scale = Vector2(2, 2)
 			speed = 100.0
 			max_health = 200.0
 			damage = 25.0
 			attack_rate = 0.5
 			knockback_force = 50.0  # Très lourd, presque pas de knockback
 			stun_duration = 0.1  # Récupère très vite
-	
+
 	current_health = max_health
 
 func _physics_process(delta: float) -> void:
 	if player_ref == null or not is_instance_valid(player_ref):
 		find_player()
-	
+
 	# Si stunné, ne pas poursuivre le joueur
 	if not is_stunned:
 		if player_ref and is_instance_valid(player_ref):
 			chase_player()
-	
+
 	# Toujours déplacer (pour appliquer le knockback)
 	move_and_slide()
-	
+
+	# Mettre à jour l'animation basée sur la vélocité
+	update_animation(velocity if velocity.length() > 10 else Vector2.ZERO)
+
+	# Effet de bobbing quand le rat marche
+	animate_walking(velocity, delta)
+
 	clamp_to_map_bounds()
 	check_despawn_distance()
 
@@ -91,7 +107,89 @@ func _process(delta: float) -> void:
 
 func chase_player() -> void:
 	var direction = (player_ref.global_position - global_position).normalized()
+	current_direction = direction
 	velocity = direction * speed
+
+# ─══════════════════════════════════════════════════════════════════
+# ─── ANIMATION SYSTEM (8 DIRECTIONS) ───
+# ─══════════════════════════════════════════════════════════════════
+
+func update_animation(movement: Vector2) -> void:
+	if not animated_sprite:
+		return
+
+	# Nom de l'animation
+	var animation_name: String = "idle_"
+
+	# Direction à utiliser (mouvement actuel ou dernière direction connue)
+	var direction_to_use = movement if movement.length() > 0.1 else current_direction
+
+	# Calculer l'angle
+	var angle = direction_to_use.angle()
+
+	# ─── DÉTERMINER LA DIRECTION (8 AXES) ───
+	# -PI à PI → 8 secteurs de 45° (PI/4)
+
+	if angle >= -PI/8 and angle < PI/8:
+		animation_name += "E"  # → Droite
+	elif angle >= PI/8 and angle < 3*PI/8:
+		animation_name += "SE"  # ↘ Bas-Droite
+	elif angle >= 3*PI/8 and angle < 5*PI/8:
+		animation_name += "S"  # ↓ Bas
+	elif angle >= 5*PI/8 and angle < 7*PI/8:
+		animation_name += "SW"  # ↙ Bas-Gauche
+	elif angle >= 7*PI/8 or angle < -7*PI/8:
+		animation_name += "W"  # ← Gauche
+	elif angle >= -7*PI/8 and angle < -5*PI/8:
+		animation_name += "NW"  # ↖ Haut-Gauche
+	elif angle >= -5*PI/8 and angle < -3*PI/8:
+		animation_name += "N"  # ↑ Haut
+	elif angle >= -3*PI/8 and angle < -PI/8:
+		animation_name += "NE"  # ↗ Haut-Droite
+
+	# Jouer l'animation si elle existe
+	if animated_sprite.sprite_frames.has_animation(animation_name):
+		if animated_sprite.animation != animation_name:
+			animated_sprite.play(animation_name)
+	else:
+		# Fallback sur idle_S si l'animation n'existe pas
+		if animated_sprite.sprite_frames.has_animation("idle_S"):
+			if animated_sprite.animation != "idle_S":
+				animated_sprite.play("idle_S")
+
+func animate_walking(movement: Vector2, delta: float) -> void:
+	if not animated_sprite:
+		return
+
+	var is_moving = movement.length() > 10
+
+	if is_moving:
+		walk_timer += delta * walk_speed
+
+		# ── BALANCEMENT VERTICAL (haut/bas) ── Plus subtil que le player
+		var bob_offset = sin(walk_timer) * (walk_bob_y * 0.1)
+		animated_sprite.offset.y = bob_offset
+
+		# ── INCLINAISON (gauche/droite) ── Très subtile
+		var tilt_angle = cos(walk_timer) * walk_tilt
+		animated_sprite.rotation = tilt_angle
+
+		# ── SQUASH & STRETCH ── Très léger pour les rats
+		var base_scale = 0.1  # Ajuste selon ton scale de base
+		var squash = base_scale * (1.0 + (sin(walk_timer * 2) * 0.03))  # 3% au lieu de 5%
+		var stretch = base_scale * (1.0 - (sin(walk_timer * 2) * 0.03))
+		animated_sprite.scale = Vector2(squash, stretch)
+
+	else:
+		# ── RETOUR À LA NORMALE ──
+		animated_sprite.offset.y = lerp(animated_sprite.offset.y, 0.0, delta * 10.0)
+		animated_sprite.rotation = lerp(animated_sprite.rotation, 0.0, delta * 10.0)
+
+		# Retour au scale de base
+		var base_scale = Vector2(0.1, 0.1)  # Ajuste selon ton scale de base
+		animated_sprite.scale = lerp(animated_sprite.scale, base_scale, delta * 10.0)
+
+		walk_timer = 0.0
 
 func attack_player() -> void:
 	if not player_ref or not is_instance_valid(player_ref):
@@ -116,9 +214,11 @@ func attack_player() -> void:
 				break
 
 func flash_attack() -> void:
-	sprite.modulate = Color.WHITE
-	await get_tree().create_timer(0.1).timeout
-	set_sprite_color()
+	if animated_sprite:
+		animated_sprite.modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout
+		if is_instance_valid(animated_sprite):
+			animated_sprite.modulate = Color.WHITE
 
 # ============================================
 # KNOCKBACK ET DAMAGE
@@ -164,16 +264,16 @@ func end_stun() -> void:
 	is_stunned = false
 
 func start_damage_flash() -> void:
-	# Sauvegarder la couleur actuelle
-	var original_color = sprite.modulate
-	
-	# Flash blanc
-	sprite.modulate = Color.WHITE
-	
+	if not animated_sprite:
+		return
+
+	# Flash blanc (plus visible que la couleur originale)
+	animated_sprite.modulate = Color.WHITE * 2
+
 	# Restaurer après 0.1s
 	get_tree().create_timer(0.1).timeout.connect(func():
-		if is_instance_valid(self):
-			sprite.modulate = original_color
+		if is_instance_valid(self) and animated_sprite:
+			animated_sprite.modulate = Color.WHITE
 	)
 
 # ============================================
