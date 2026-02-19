@@ -11,9 +11,9 @@ var is_frozen: bool = false
 var last_attack_time: float = 0.0
 
 var walk_timer: float = 0.0
-var walk_speed: float = 15.0  # Plus élevé = plus rapide
-var walk_bob_y: float = 5.0   # Balancement vertical (haut/bas)
-var walk_tilt: float = 0.1    # Inclinaison (rotation légère)
+var walk_speed: float = 12.0  # Vitesse du balancement (plus subtil)
+var walk_bob_y: float = 3.0   # Balancement vertical (plus subtil)
+var walk_tilt: float = 0.05   # Inclinaison (plus subtile)
 
 # Direction actuelle (pour l'animation)
 var current_direction: Vector2 = Vector2.DOWN
@@ -128,11 +128,11 @@ func animate_walking(movement: Vector2, delta: float) -> void:
 		var tilt_angle = cos(walk_timer) * walk_tilt
 		animated_sprite.rotation = tilt_angle
 		
-		# ── SQUASH & STRETCH ──
+		# ── SQUASH & STRETCH ── Plus subtil (3% au lieu de 5%)
 		# Applique sur le scale de BASE (0.1)
 		var base_scale = 0.1  # ← TON SCALE DE BASE
-		var squash = base_scale * (1.0 + (sin(walk_timer * 2) * 0.05))
-		var stretch = base_scale * (1.0 - (sin(walk_timer * 2) * 0.05))
+		var squash = base_scale * (1.0 + (sin(walk_timer * 2) * 0.03))
+		var stretch = base_scale * (1.0 - (sin(walk_timer * 2) * 0.03))
 		animated_sprite.scale = Vector2(squash, stretch)
 		
 	else:
